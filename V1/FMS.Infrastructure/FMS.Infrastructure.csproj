@@ -1,0 +1,159 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{E85A8C24-E519-4524-A7EF-DE2141CE0DB2}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>FMS.Infrastructure</RootNamespace>
+    <AssemblyName>FMS.Infrastructure</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="FMSDbContext.cs" />
+    <Compile Include="Migrations\201804291815593_UserInfo.cs" />
+    <Compile Include="Migrations\201804291815593_UserInfo.Designer.cs">
+      <DependentUpon>201804291815593_UserInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804291819330_OwnerInfo.cs" />
+    <Compile Include="Migrations\201804291819330_OwnerInfo.Designer.cs">
+      <DependentUpon>201804291819330_OwnerInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804291820183_WorkerInfo.cs" />
+    <Compile Include="Migrations\201804291820183_WorkerInfo.Designer.cs">
+      <DependentUpon>201804291820183_WorkerInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804291821118_RatingWorker.cs" />
+    <Compile Include="Migrations\201804291821118_RatingWorker.Designer.cs">
+      <DependentUpon>201804291821118_RatingWorker.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804291821503_RatingOwner.cs" />
+    <Compile Include="Migrations\201804291821503_RatingOwner.Designer.cs">
+      <DependentUpon>201804291821503_RatingOwner.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804291822375_WorkerSkill.cs" />
+    <Compile Include="Migrations\201804291822375_WorkerSkill.Designer.cs">
+      <DependentUpon>201804291822375_WorkerSkill.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804291823299_EducationalBackground.cs" />
+    <Compile Include="Migrations\201804291823299_EducationalBackground.Designer.cs">
+      <DependentUpon>201804291823299_EducationalBackground.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804291824091_WorkHistory.cs" />
+    <Compile Include="Migrations\201804291824091_WorkHistory.Designer.cs">
+      <DependentUpon>201804291824091_WorkHistory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804291824524_skill.cs" />
+    <Compile Include="Migrations\201804291824524_skill.Designer.cs">
+      <DependentUpon>201804291824524_skill.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804291825307_skillCategory.cs" />
+    <Compile Include="Migrations\201804291825307_skillCategory.Designer.cs">
+      <DependentUpon>201804291825307_skillCategory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804291828298_PostAProject.cs" />
+    <Compile Include="Migrations\201804291828298_PostAProject.Designer.cs">
+      <DependentUpon>201804291828298_PostAProject.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804291829409_PostAProject2.cs" />
+    <Compile Include="Migrations\201804291829409_PostAProject2.Designer.cs">
+      <DependentUpon>201804291829409_PostAProject2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FMS.Core.Entities\FMS.Core.Entities.csproj">
+      <Project>{65490711-2535-4e29-8098-16a5fd6758b2}</Project>
+      <Name>FMS.Core.Entities</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201804291815593_UserInfo.resx">
+      <DependentUpon>201804291815593_UserInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804291819330_OwnerInfo.resx">
+      <DependentUpon>201804291819330_OwnerInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804291820183_WorkerInfo.resx">
+      <DependentUpon>201804291820183_WorkerInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804291821118_RatingWorker.resx">
+      <DependentUpon>201804291821118_RatingWorker.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804291821503_RatingOwner.resx">
+      <DependentUpon>201804291821503_RatingOwner.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804291822375_WorkerSkill.resx">
+      <DependentUpon>201804291822375_WorkerSkill.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804291823299_EducationalBackground.resx">
+      <DependentUpon>201804291823299_EducationalBackground.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804291824091_WorkHistory.resx">
+      <DependentUpon>201804291824091_WorkHistory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804291824524_skill.resx">
+      <DependentUpon>201804291824524_skill.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804291825307_skillCategory.resx">
+      <DependentUpon>201804291825307_skillCategory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804291828298_PostAProject.resx">
+      <DependentUpon>201804291828298_PostAProject.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804291829409_PostAProject2.resx">
+      <DependentUpon>201804291829409_PostAProject2.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
