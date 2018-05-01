@@ -36,6 +36,9 @@ namespace FMS.Core.Entities
     [Required]
     public int Members { get; set; }
 
+    //[Required]
+    //public int Flag { get; set; }
+
 
 
 

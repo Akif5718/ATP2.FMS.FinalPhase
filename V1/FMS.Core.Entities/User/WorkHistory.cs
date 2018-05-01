@@ -10,8 +10,11 @@ namespace FMS.Core.Entities
 {
   public  class WorkHistory
     {
-       
-            [Key]
+
+        [Key]
+      public int WorkHistoryId { get; set; }
+
+        [Required]
             public int UserId { get; set; }
            
       [ForeignKey("UserId")]

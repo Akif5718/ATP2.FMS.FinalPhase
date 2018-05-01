@@ -9,8 +9,11 @@ using System.Threading.Tasks;
 namespace FMS.Core.Entities
 {
   public  class OwnerInfo
-    {  
+    {
+
         [Key]
+         public int OwnerInfoId { get; set; }
+        [Required]
         public int UserId { get; set; }
 
         [ForeignKey("UserId")]

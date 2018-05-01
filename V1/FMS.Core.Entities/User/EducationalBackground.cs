@@ -11,6 +11,9 @@ namespace FMS.Core.Entities
   public  class EducationalBackground
     {
         [Key]
+      public int EducationalBackgroundId { get; set; }
+
+        [Required]
         public int UserId{ get; set; }
         [ForeignKey("UserId")]
         public UserInfo UserInfo;

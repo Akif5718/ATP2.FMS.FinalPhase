@@ -115,12 +115,14 @@ namespace FMS.Core.Service
 
                if (ValidationHelper.IsIntValid(key))
                {
-                   query = query.Where(q => q.PostId == Int32.Parse(key));
+                   var a = Int32.Parse(key);
+                   query = query.Where(q => q.PostId == a);
                }
 
                if (ValidationHelper.IsStringValid(key))
                {
-                   query = query.Where(q => q.WUserId.Equals(Int32.Parse(key)));
+                   var a = Int32.Parse(key);
+                   query = query.Where(q => q.WUserId == a);
 
                }
 
@@ -132,7 +134,8 @@ namespace FMS.Core.Service
 
                if (ValidationHelper.IsStringValid(key))
                {
-                   query = query.Where(q => q.Price.Equals(Int32.Parse(key)));
+                   var a = float.Parse(key);
+                   query = query.Where(q => q.Price == a);
 
                }
 
@@ -155,7 +158,8 @@ namespace FMS.Core.Service
 
                if (ValidationHelper.IsStringValid(key))
                {
-                   query = query.Where(q => q.Members.Equals(Int32.Parse(key)));
+                   var a = Int32.Parse(key);
+                   query = query.Where(q => q.Members == a);
 
                }
 

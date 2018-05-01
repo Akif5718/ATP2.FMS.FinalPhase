@@ -11,7 +11,9 @@ namespace FMS.Core.Entities
    public class WorkerInfo
    {
        [Key]
+       public int WorkerInfoId { get; set; }
       
+       [Required]
        public int UserId { get; set; }
       
        [ForeignKey("UserId")]

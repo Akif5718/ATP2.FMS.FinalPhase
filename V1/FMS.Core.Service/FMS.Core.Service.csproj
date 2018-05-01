@@ -83,7 +83,7 @@
       <Name>FrameWork</Name>
     </ProjectReference>
     <ProjectReference Include="..\FMS.Infrastructure\FMS.Infrastructure.csproj">
-      <Project>{F20E4620-2BBE-4A75-8D7A-F0117D4B3C43}</Project>
+      <Project>{19599FD5-A0C6-4D31-B577-EFD5555ED0B8}</Project>
       <Name>FMS.Infrastructure</Name>
     </ProjectReference>
   </ItemGroup>
