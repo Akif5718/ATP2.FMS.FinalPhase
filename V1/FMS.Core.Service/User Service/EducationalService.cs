@@ -55,31 +55,7 @@ namespace FMS.Core.Service
 
         public bool IsValid(EducationalBackground obj, Result<EducationalBackground> result)
         {
-            if (!ValidationHelper.IsStringValid(obj.School))
-            {
-                result.HasError = true;
-                result.Message = "Invalid School";
-                return false;
-            }
-            if (!ValidationHelper.IsStringValid(obj.Collage))
-            {
-                result.HasError = true;
-                result.Message = "Invalid Collage";
-                return false;
-            }
-
-            if (!ValidationHelper.IsStringValid(obj.UniversityPost))
-            {
-                result.HasError = true;
-                result.Message = "Invalid UniversityPost";
-                return false;
-            }
-            if (!ValidationHelper.IsStringValid(obj.UniversityUnder))
-            {
-                result.HasError = true;
-                result.Message = "Invalid UniversityUnder";
-                return false;
-            }
+           
 
 
             return true;

@@ -56,24 +56,24 @@ namespace FMS.Core.Service
 
       public bool IsValid(WorkHistory obj, Result<WorkHistory> result)
       {
-          if (!ValidationHelper.IsStringValid(obj.CompanyName))
-          {
-              result.HasError = true;
-              result.Message = "Invalid CompanyName";
-              return false;
-          }
-          if (!ValidationHelper.IsStringValid(obj.Position))
-          {
-              result.HasError = true;
-              result.Message = "Invalid Position";
-              return false;
-          }
-          if (!ValidationHelper.IsStringValid(obj.Experience))
-          {
-              result.HasError = true;
-              result.Message = "Invalid Experience";
-              return false;
-          }
+          //if (!ValidationHelper.IsStringValid(obj.CompanyName))
+          //{
+          //    result.HasError = true;
+          //    result.Message = "Invalid CompanyName";
+          //    return false;
+          //}
+          //if (!ValidationHelper.IsStringValid(obj.Position))
+          //{
+          //    result.HasError = true;
+          //    result.Message = "Invalid Position";
+          //    return false;
+          //}
+          //if (!ValidationHelper.IsStringValid(obj.Experience))
+          //{
+          //    result.HasError = true;
+          //    result.Message = "Invalid Experience";
+          //    return false;
+          //}
 
 
           return true;

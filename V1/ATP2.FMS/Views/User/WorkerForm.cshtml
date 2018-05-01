@@ -1,0 +1,76 @@
+﻿
+@{
+    ViewBag.Title = "WorkerForm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div>
+    @using (Html.BeginForm("WorkerForm", "User"))
+    {
+        <div class="row">
+
+            <div class="col-md-3"></div>
+            <div class="col-md-4">
+
+
+                <form class="form-horizontal">
+                    <fieldset>
+                        <i><h3 align="center">LanceBucket</h3></i>
+                        <hr />
+                        <div class="form-group">
+                            <label for="inputUserName" class="col-lg-2 control-label"></label>
+                            <div class="col-lg-10">
+                                <input class="form-control" name="UserId" id="inputUserName" placeholder="Id" type="text">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="inputUserName" class="col-lg-2 control-label"></label>
+                            <div class="col-lg-10">
+                                <input class="form-control" name="EarnedMoney" id="inputUserName" placeholder="Earned Money" type="text">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="inputUserName" class="col-lg-2 control-label"></label>
+                            <div class="col-lg-10">
+                                <input class="form-control" name="RatePerHour" id="inputUserName" placeholder="Rate Per Hour" type=" text">
+                            </div>
+                        </div>
+
+
+
+
+
+
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" value=" Submit  " class="btn btn-default btn-block" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div align="right">
+
+                                <button type="reset" class="btn btn-primary" onclick="">Next</button>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+                <hr>
+                Already a Lance Bucket.com member?@Html.ActionLink("Login", "Login", "LogIn")
+            </div>
+
+
+            <div class="col-md-4"></div>
+        </div>
+
+    }
+</div>
+
+
+
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+

@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using FMS.Core.Entities;
 using FMS.Core.Service.Interfaces;
+using Newtonsoft.Json;
 
 namespace ATP2.FMS.Controllers
 {
@@ -16,13 +18,13 @@ namespace ATP2.FMS.Controllers
         {
             _service = service;
         }
-        public ActionResult LogInForm()
+        public ActionResult LogIn()
         {
             return View();
         }
 
         [HttpPost]
-        public ActionResult LoginForm(UserInfo userInfo)
+        public ActionResult LogIn(UserInfo userInfo)
         {
             try
             {
@@ -31,25 +33,25 @@ namespace ATP2.FMS.Controllers
                 if (result.HasError)
                 {
                     ViewBag.Message = result.Message;
-                    return View("LoginForm", userInfo);
+                    return View("Login", userInfo);
                 }
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
-
-            //var jasonUserInfo = JsonConvert.SerializeObject(obj.Data);
-            //FormsAuthentication.SetAuthCookie(jasonUserInfo, false);
-            //CurrentUser.User = obj.Data;
-
             var obj = _service.GetByEmail(userInfo.Email);
+
+            var jasonUserInfo = JsonConvert.SerializeObject(obj.Data);
+            FormsAuthentication.SetAuthCookie(jasonUserInfo, false);
+           // CurrentUser.User = obj.Data;
+
             if (obj.Data.UserType.Equals("Owner"))
-                return RedirectToAction("RegisterForm","User");
+                return RedirectToAction("OwnerForm","User");
 
             else
             {
-                return RedirectToAction("LoginForm");
+                return RedirectToAction("Login");
 
             }
         }
