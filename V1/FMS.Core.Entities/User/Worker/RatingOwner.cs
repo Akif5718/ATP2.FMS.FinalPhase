@@ -11,7 +11,9 @@ namespace FMS.Core.Entities
   public  class RatingOwner
     {
         [Key]
-       
+      public int RatingOwnerId { get; set; }
+
+        [Required]
         public int UserId { get; set; }
        
       [ForeignKey("UserId")]

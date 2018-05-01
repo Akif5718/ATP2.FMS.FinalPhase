@@ -25,7 +25,7 @@ namespace FMS.Core.Service
            var result = new Result<ResponseToaJob>();
            try
            {
-               var objtosave = _context.responseToaJobs.FirstOrDefault(u => u.PostId == userinfo.PostId);
+               var objtosave = _context.responseToaJobs.FirstOrDefault(u => u.WUserId == userinfo.WUserId);
                if (objtosave == null)
                {
                    objtosave = new ResponseToaJob();
@@ -33,7 +33,7 @@ namespace FMS.Core.Service
                }
                objtosave.WUserId = userinfo.WUserId;
                objtosave.FixedPrice = userinfo.FixedPrice;
-               objtosave.SubmissionTime = userinfo.SubmissionTime;
+              
 
 
                if (!IsValid(objtosave, result))
@@ -60,22 +60,7 @@ namespace FMS.Core.Service
            }
 
 
-           if (!ValidationHelper.IsStringValid(obj.FixedPrice.ToString()))
-           {
-               result.HasError = true;
-               result.Message = "Invalid FixedPrice";
-               return false;
-           }
-
-           if (ValidationHelper.IsStringValid(obj.SubmissionTime))
-           {
-               result.HasError = true;
-               result.Message = "Invalid SubmissionTime";
-               return false;
-
-
-           }
-
+           
            return true;
 
        }
@@ -90,26 +75,25 @@ namespace FMS.Core.Service
 
                if (ValidationHelper.IsIntValid(key))
                {
-                   query = query.Where(q => q.PostId == Int32.Parse(key));
+                   var a = Int32.Parse(key);
+                   query = query.Where(q => q.PostId == a);
                }
 
-               if (ValidationHelper.IsStringValid(key))
-               {
-                   query = query.Where(q => q.WUserId.Equals(Int32.Parse(key)));
+               //if (ValidationHelper.IsStringValid(key))
+               //{
+               //    var a = Int32.Parse(key);
+               //    query = query.Where(q => q.WUserId == a);
 
-               }
+               //}
 
-               if (ValidationHelper.IsStringValid(key))
-               {
-                   query = query.Where(q => q.FixedPrice.Equals(Int32.Parse(key)));
+               //if (ValidationHelper.IsStringValid(key))
+               //{
+               //    var a = float.Parse(key);
+               //    query = query.Where(q => q.FixedPrice == a);
 
-               }
+               //}
 
-               if (ValidationHelper.IsStringValid(key))
-               {
-                   query = query.Where(q => q.SubmissionTime.Contains(key));
-
-               }
+              
 
 
 

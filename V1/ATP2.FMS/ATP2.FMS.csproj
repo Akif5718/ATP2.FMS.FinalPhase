@@ -160,6 +160,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UnityDependencyResolver.cs" />
     <Compile Include="ViewModel\PostProjectModel.cs" />
+    <Compile Include="ViewModel\RequestedMemberModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-cyborg.css" />
@@ -205,6 +206,8 @@
     <Content Include="Views\User\EducationForm.cshtml" />
     <Content Include="Views\User\WorkHistoryForm.cshtml" />
     <Content Include="Views\Project\CreateProject.cshtml" />
+    <Content Include="Views\Project\ProjectDetails.cshtml" />
+    <Content Include="Views\Project\RequestedMember.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -236,10 +239,6 @@
     <ProjectReference Include="..\FMS.FrameWork\FrameWork.csproj">
       <Project>{63C4AA56-1200-443D-8B86-3A41CF08F35A}</Project>
       <Name>FrameWork</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\FMS.Infrastructure\FMS.Infrastructure.csproj">
-      <Project>{9835FA87-6DF9-4DC5-9FE6-06D372290A54}</Project>
-      <Name>FMS.Infrastructure</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

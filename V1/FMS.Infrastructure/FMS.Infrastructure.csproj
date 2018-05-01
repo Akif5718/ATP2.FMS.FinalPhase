@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{9835FA87-6DF9-4DC5-9FE6-06D372290A54}</ProjectGuid>
+    <ProjectGuid>{F20E4620-2BBE-4A75-8D7A-F0117D4B3C43}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>FMS.Infrastructure</RootNamespace>
@@ -49,9 +49,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FMSDbContext.cs" />
-    <Compile Include="Migrations\201805010717566_init.cs" />
-    <Compile Include="Migrations\201805010717566_init.Designer.cs">
-      <DependentUpon>201805010717566_init.cs</DependentUpon>
+    <Compile Include="Migrations\201805011426220_init.cs" />
+    <Compile Include="Migrations\201805011426220_init.Designer.cs">
+      <DependentUpon>201805011426220_init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -67,8 +67,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201805010717566_init.resx">
-      <DependentUpon>201805010717566_init.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201805011426220_init.resx">
+      <DependentUpon>201805011426220_init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

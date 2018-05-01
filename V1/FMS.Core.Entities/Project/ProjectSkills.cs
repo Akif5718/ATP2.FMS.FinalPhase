@@ -12,14 +12,18 @@ namespace FMS.Core.Entities
    public class ProjectSkills
     {
        [Key]
-       public int PostID { get; set; }
+       public int ProjectSkillId { get; set; }
+
+
+       [Required]
+       public int PostId { get; set; }
       
        [ForeignKey("PostId")]
        public PostAProject PostAProject;
 
-       public int SkillID { get; set; }
+       public int SkillId { get; set; }
 
-       [ForeignKey("SkillID")]
+       [ForeignKey("SkillId")]
        public Skill Skill;
     }
 }

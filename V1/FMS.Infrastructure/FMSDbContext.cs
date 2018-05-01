@@ -10,11 +10,12 @@ namespace FMS.Infrastructure
 {
    public class FMSDbContext:DbContext
     {
-        public FMSDbContext()
-            : base("FMSDbConnection2")
+      public FMSDbContext()
+           : base("FMSDbConnection3")
         {
 
         }
+
         public DbSet<UserInfo> userInfos { get; set; }
         public DbSet<OwnerInfo> ownerInfos { get; set; }
         public DbSet<WorkerInfo> workerInfos { get; set; }

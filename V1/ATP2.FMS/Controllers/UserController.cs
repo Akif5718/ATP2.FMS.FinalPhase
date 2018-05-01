@@ -7,7 +7,6 @@ using System.Web.Security;
 using FMS.Core.Entities;
 using FMS.Core.Service;
 using FMS.Core.Service.Interfaces;
-using FMS.Infrastructure;
 using Newtonsoft.Json;
 
 namespace ATP2.FMS.Controllers

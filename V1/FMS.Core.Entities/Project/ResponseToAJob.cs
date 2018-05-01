@@ -10,24 +10,27 @@ namespace FMS.Core.Entities
 {
    public class ResponseToaJob
     {
+
         [Key]
+        public int ResponseId { get; set; }
+
+        [Required]
         public int PostId { get; set; }
        
-       [ForeignKey("PostId")]
+        [ForeignKey("PostId")]
         public PostAProject PostAProject;
 
         [Required]
         public int WUserId { get; set; }
        
-       [ForeignKey("UserId")]
+        [ForeignKey("UserId")]
         public UserInfo UserInfo;
 
 
         [Required]
         public float FixedPrice { get; set; }
 
-        [Required]
-        public string SubmissionTime { get; set; }
+       
 
 
 

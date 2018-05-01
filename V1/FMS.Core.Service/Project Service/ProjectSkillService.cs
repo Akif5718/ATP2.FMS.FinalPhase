@@ -25,13 +25,13 @@ namespace FMS.Core.Service
            var result = new Result<ProjectSkills>();
            try
            {
-               var objtosave = _context.projectSkillses.FirstOrDefault(u => u.PostID == userinfo.PostID);
+               var objtosave = _context.projectSkillses.FirstOrDefault(u => u.PostId == userinfo.PostId);
                if (objtosave == null)
                {
                    objtosave = new ProjectSkills();
                    _context.projectSkillses.Add(objtosave);
                }
-               objtosave.SkillID = userinfo.SkillID;
+               objtosave.SkillId = userinfo.SkillId;
 
 
                if (!IsValid(objtosave, result))
@@ -50,7 +50,7 @@ namespace FMS.Core.Service
 
        public bool IsValid(ProjectSkills obj, Result<ProjectSkills> result)
        {
-           if (!ValidationHelper.IsStringValid(obj.SkillID.ToString()))
+           if (!ValidationHelper.IsStringValid(obj.SkillId.ToString()))
            {
                result.HasError = true;
                result.Message = "Invalid SkillID";
@@ -72,12 +72,12 @@ namespace FMS.Core.Service
 
                if (ValidationHelper.IsIntValid(key))
                {
-                   query = query.Where(q => q.PostID == Int32.Parse(key));
+                   query = query.Where(q => q.PostId == Int32.Parse(key));
                }
 
                if (ValidationHelper.IsStringValid(key))
                {
-                   query = query.Where(q => q.SkillID.Equals(Int32.Parse(key)));
+                   query = query.Where(q => q.SkillId.Equals(Int32.Parse(key)));
 
                }
 
@@ -102,7 +102,7 @@ namespace FMS.Core.Service
 
            try
            {
-               var obj = _context.projectSkillses.FirstOrDefault(c => c.PostID == id);
+               var obj = _context.projectSkillses.FirstOrDefault(c => c.SkillId == id);
                if (obj == null)
                {
                    result.HasError = true;
@@ -129,7 +129,7 @@ namespace FMS.Core.Service
 
            try
            {
-               var objtodelete = _context.projectSkillses.FirstOrDefault(c => c.PostID == id);
+               var objtodelete = _context.projectSkillses.FirstOrDefault(c => c.PostId == id);
                if (objtodelete == null)
                {
                    result.HasError = true;

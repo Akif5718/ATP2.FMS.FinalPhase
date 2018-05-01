@@ -14,7 +14,7 @@ namespace FMS.Core.Entities
      [Key]
      public int SkillId { get; set; }
      
-        [Required]
+     [Required]
      public string SkillName{ get; set; }
 
      public int CategoryId { get; set; }
