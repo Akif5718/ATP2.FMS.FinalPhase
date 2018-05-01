@@ -7,8 +7,8 @@
     <ProjectGuid>{63C4AA56-1200-443D-8B86-3A41CF08F35A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>FMS.FrameWork</RootNamespace>
-    <AssemblyName>FMS.FrameWork</AssemblyName>
+    <RootNamespace>FrameWork</RootNamespace>
+    <AssemblyName>FrameWork</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

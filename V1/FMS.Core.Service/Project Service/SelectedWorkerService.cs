@@ -6,8 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using FMS.Core.Entities;
 using FMS.Core.Service.Interfaces;
+using FMS.FrameWork;
 using FMS.Infrastructure;
-using Framework;
 
 
 namespace FMS.Core.Service

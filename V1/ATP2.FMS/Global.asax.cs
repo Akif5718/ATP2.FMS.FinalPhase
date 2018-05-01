@@ -5,6 +5,11 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using Microsoft.Practices.Unity;
+using Unity;
+using FMS.Core.Entities;
+using FMS.Core.Service.Interfaces;
+using FMS.Core.Service;
 
 namespace ATP2.FMS
 {
@@ -16,8 +21,8 @@ namespace ATP2.FMS
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-
-            IUnityContainer container = new IUnityContainer();
+           
+            IUnityContainer container = new UnityContainer();
             container.RegisterType<IOwnerService, OwnerService>();
             container.RegisterType<IRatingWorkerService, RatingWorkerService>();
             container.RegisterType<IRatingOwnerService, RatingOwnerService>();
@@ -27,10 +32,9 @@ namespace ATP2.FMS
             container.RegisterType<IUserInfoService, UserInfoService>();
             container.RegisterType<IWorkHistoryService, WorkHistoryService>();
             container.RegisterType<IAuthenticationService, AuthenticationService>();
-            container.RegisterType<IReportService, ReportService>();
-            container.RegisterType<IService, Service>();
+           // container.RegisterType<IReportService, ReportService>();
             container.RegisterType<ICategoryService, CategoryService>();
-            container.RegisterType<IskillService, skillService>();
+            container.RegisterType<IskillService, SkillService>();
             container.RegisterType<IComentSectionService, ComentSectionService>();
             container.RegisterType<IPostAProjectService, PostAProjectService>();
             container.RegisterType<IProjectSectionService, ProjectSectionService>();

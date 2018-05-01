@@ -97,6 +97,10 @@
     <Compile Include="Migrations\201804291829409_PostAProject2.Designer.cs">
       <DependentUpon>201804291829409_PostAProject2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201805010616488_test.cs" />
+    <Compile Include="Migrations\201805010616488_test.Designer.cs">
+      <DependentUpon>201805010616488_test.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -146,6 +150,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201804291829409_PostAProject2.resx">
       <DependentUpon>201804291829409_PostAProject2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805010616488_test.resx">
+      <DependentUpon>201805010616488_test.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

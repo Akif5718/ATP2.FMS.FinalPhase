@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using FMS.Core.Entities;
-using Framework;
+using FMS.FrameWork;
 
 namespace FMS.Core.Service.Interfaces
 {
