@@ -12,5 +12,7 @@ namespace FMS.Core.Service.Interfaces
    public interface IAuthenticationService
    {
        Result<UserInfo> Login(string email, string password);
+       Result<UserInfo> GetByEmail(string email);
+
    }
 }

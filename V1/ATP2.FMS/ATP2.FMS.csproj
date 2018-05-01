@@ -43,6 +43,15 @@
       <HintPath>..\packages\Unity.5.8.6\lib\net45\CommonServiceLocator.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -139,6 +148,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LogInController.cs" />
     <Compile Include="Controllers\OwnerController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\WorkerController.cs" />
@@ -185,12 +195,13 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <Content Include="Views\User\RegisterForm.cshtml" />
+    <Content Include="Views\LogIn\LogInForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
     <Folder Include="Views\Owner\" />
-    <Folder Include="Views\User\" />
     <Folder Include="Views\Worker\" />
   </ItemGroup>
   <ItemGroup>
@@ -216,6 +227,10 @@
     <ProjectReference Include="..\FMS.FrameWork\FrameWork.csproj">
       <Project>{63C4AA56-1200-443D-8B86-3A41CF08F35A}</Project>
       <Name>FrameWork</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FMS.Infrastructure\FMS.Infrastructure.csproj">
+      <Project>{9835FA87-6DF9-4DC5-9FE6-06D372290A54}</Project>
+      <Name>FMS.Infrastructure</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

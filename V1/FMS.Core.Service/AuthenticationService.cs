@@ -43,5 +43,32 @@ namespace FMS.Core.Service
             }
             return result;
         }
+
+        public Result<UserInfo> GetByEmail(string email)
+        {
+            var result = new Result<UserInfo>();
+
+            try
+            {
+                var obj = _context.userInfos.FirstOrDefault(c => c.Email == email);
+                if (obj == null)
+                {
+                    result.HasError = true;
+                    result.Message = "Invalid UserID";
+                    return result;
+
+
+                }
+                result.Data = obj;
+            }
+            catch (Exception e)
+            {
+                result.HasError = true;
+                result.Message = e.Message;
+
+
+            }
+            return result;
+        }
     }
 }

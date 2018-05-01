@@ -80,10 +80,6 @@
       <Project>{63c4aa56-1200-443d-8b86-3a41cf08f35a}</Project>
       <Name>FrameWork</Name>
     </ProjectReference>
-    <ProjectReference Include="..\FMS.Infrastructure\FMS.Infrastructure.csproj">
-      <Project>{E85A8C24-E519-4524-A7EF-DE2141CE0DB2}</Project>
-      <Name>FMS.Infrastructure</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

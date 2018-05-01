@@ -10,6 +10,7 @@ namespace FMS.Core.Entities
 {
    public class WorkReport
     {
+       [Key]
        [Required]
        public int PostId { get; set; }
 

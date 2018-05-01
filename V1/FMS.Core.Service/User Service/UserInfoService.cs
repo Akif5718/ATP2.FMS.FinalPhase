@@ -99,11 +99,6 @@ namespace FMS.Core.Service
                 result.HasError = true;
                 result.Message = "Invalid JoinDate";
                 return false;
-            } if (!ValidationHelper.IsStringValid(obj.ProPic))
-            {
-                result.HasError = true;
-                result.Message = "Invalid ProPic";
-                return false;
             } if (!ValidationHelper.IsStringValid(obj.City))
             {
                 result.HasError = true;
@@ -123,11 +118,6 @@ namespace FMS.Core.Service
             {
                 result.HasError = true;
                 result.Message = "Invalid UserType";
-                return false;
-            } if (!ValidationHelper.IsStringValid(obj.Balance.ToString()))
-            {
-                result.HasError = true;
-                result.Message = "Invalid Balance";
                 return false;
             }
 
