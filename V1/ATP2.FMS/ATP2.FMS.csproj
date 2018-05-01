@@ -160,6 +160,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UnityDependencyResolver.cs" />
     <Compile Include="ViewModel\PostProjectModel.cs" />
+    <Compile Include="ViewModel\Profile.cs" />
     <Compile Include="ViewModel\ProjectListModel.cs" />
     <Compile Include="ViewModel\RequestedMemberModel.cs" />
   </ItemGroup>
@@ -212,6 +213,10 @@
     <Content Include="Views\Owner\ProjectList.cshtml" />
     <Content Include="Views\Worker\ProjectList.cshtml" />
     <Content Include="Views\Worker\ProjectDetails.cshtml" />
+    <Content Include="Views\Shared\AfterLoginOwner.cshtml" />
+    <Content Include="Views\Shared\AfterLoginWorker.cshtml" />
+    <Content Include="Views\Owner\Profile.cshtml" />
+    <Content Include="Views\Owner\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using ATP2.FMS.ViewModel;
 using FMS.Core.Entities;
 using FMS.Core.Service.Interfaces;
+using FMS.FrameWork;
+using Newtonsoft.Json;
 
 namespace ATP2.FMS.Controllers
 {
@@ -17,16 +20,19 @@ namespace ATP2.FMS.Controllers
         private IProjectSkillService _proskillservice;
         private IResponseToAJobService _responseservice;
         private IUserInfoService _userservice;
+        private IOwnerService _ownerService;
+        private IRatingOwnerService _ratingOwnerService;
 
 
-        public OwnerController(IPostAProjectService postservice, IskillService skillservice, IProjectSkillService proskillservice, IResponseToAJobService responseservice, IUserInfoService userservice)
+        public OwnerController(IPostAProjectService postservice, IskillService skillservice, IProjectSkillService proskillservice, IResponseToAJobService responseservice, IUserInfoService userservice, IOwnerService ownerService, IRatingOwnerService ratingOwnerService)
         {
             _postservice = postservice;
             _skillservice = skillservice;
             _proskillservice = proskillservice;
             _responseservice = responseservice;
             _userservice = userservice;
-
+            _ownerService = ownerService;
+            _ratingOwnerService = ratingOwnerService;
 
         }
 
@@ -119,5 +125,44 @@ namespace ATP2.FMS.Controllers
             }
             return RedirectToAction("CreateProject", "Project");
         }
+        public ActionResult Profile()
+        {
+            var user = _userservice.GetByID(1);
+            var ownerInfo = _ownerService.GetByID(1);
+            var posedtProjects = _postservice.GetAll().Data.Where(d=> d.WUserId==1).ToList();
+            List<RatingOwner> ratings = _ratingOwnerService.GetAll().Data.Where(d => d.UserId == 1).ToList();
+            var profileVM = new Profile();
+            profileVM = profileVM.creation(user.Data, ownerInfo.Data, ratings, posedtProjects);
+            
+            return View(profileVM);
+        }
+
+        public ActionResult Edit()
+        {
+            var user = _userservice.GetByID(1);
+            var ownerInfo = _ownerService.GetByID(1);
+            var profileVM = new Profile();
+            profileVM = profileVM.creation(user.Data,ownerInfo.Data,new List<RatingOwner>(), new List<PostAProject>());
+            return View(profileVM);
+        }
+        [HttpPost]
+        public ActionResult Edit(Profile profile)
+        {
+            var user = _userservice.GetByID(1);
+            var obj = profile.EditUserInfo(profile, user.Data);
+            var u = _userservice.Save(obj);
+            var ownerInfo = _ownerService.GetByID(1);
+            var obj1 = profile.EditOwnerInfo(profile, ownerInfo.Data);
+            var owner = _ownerService.Save(obj1);
+            if (u.HasError || owner.HasError)
+            {
+                return View();
+            }
+            else
+            {
+                return Redirect("Profile");
+            }
+        }
+        
     }
 }

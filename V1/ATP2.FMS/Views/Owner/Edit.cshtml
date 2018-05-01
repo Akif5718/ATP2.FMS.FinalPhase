@@ -1,0 +1,131 @@
+﻿@model ATP2.FMS.ViewModel.Profile
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/AfterLoginOwner.cshtml";
+}
+
+<div class="container">
+    <br />
+    <br /><br />
+    <br /><br />
+
+    <fieldset>
+        <legend>Edit Profile</legend>
+        @using (Html.BeginForm("Edit", "Owner"))
+        {
+
+
+            <div class="form-group">
+                <label for="inputEmail" class="col-lg-2 control-label">First Name</label>
+                <div class="col-lg-10">
+                    <input class="form-control" name="FristName" value="@Model.FristName" id="inputName" placeholder="First Name" type="text">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="inputEmail" class="col-lg-2 control-label">Last Name</label>
+                <div class="col-lg-10">
+                    <input class="form-control" name="LastName" value="@Model.LastName" id="inputName" placeholder="Last Name" type="text">
+                </div>
+            </div>
+
+            @*<div class="form-group">
+                    <label for="inputEmail" class="col-lg-2 control-label">Email</label>
+                    <div class="col-lg-10">
+                        <input class="form-control" value="aksk5718@gmail.com" id="inputEmail" placeholder="Email" type="text">
+                    </div>
+                </div>*@
+
+            <div class="form-group">
+                <label for="inputUserName" class="col-lg-2 control-label">City</label>
+                <div class="col-lg-10">
+                    <input class="form-control" name="City" value="@Model.City" id="inputUserName" placeholder="City" type="text">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="inputUserName" class="col-lg-2 control-label">State</label>
+                <div class="col-lg-10">
+                    <input class="form-control" id="inputUserName" name="State" value="@Model.State" placeholder="State" type=" text">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="inputUserName" class="col-lg-2 control-label">Country</label>
+                <div class="col-lg-10">
+                    <input class="form-control" id="inputUserName" name="Country" value="@Model.Country" placeholder="Country" type=" text">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="inputUserName" class="col-lg-2 control-label">Company Name</label>
+                <div class="col-lg-10">
+                    <input class="form-control" id="inputUserName" name="CompanyName" value="@Model.CompanyName" placeholder="Company Name" type=" text">
+                </div>
+            </div>
+
+
+
+            <div class="form-group">
+                <label for="inputUserName" class="col-lg-2 control-label">Company Code</label>
+                <div class="col-lg-10">
+                    <input class="form-control" id="inputUserName" name="CompanyCode" value="@Model.CompanyCode" placeholder="Company Code" type=" text">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputUserName" class="col-lg-2 control-label">Company Address</label>
+                <div class="col-lg-10">
+                    <input class="form-control" id="inputUserName" name="CompanyAddress" value="@Model.CompanyAddress" placeholder="Company Address" type=" text">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="inputUserName" class="col-lg-2 control-label">Position</label>
+                <div class="col-lg-10">
+                    <input class="form-control" id="inputUserName" name="Position" value="@Model.Position" placeholder="Position" type=" text">
+                </div>
+            </div>
+
+
+
+
+
+
+            <div class="form-group">
+                <label for="inputUserName" class="col-lg-2 control-label">Password</label>
+                <div class="col-lg-10">
+                    <input class="form-control" id="inputUserName" name="Password" value="" placeholder="Password" type=" text">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="inputUserName" class="col-lg-2 control-label">Confirm Password</label>
+                <div class="col-lg-10">
+                    <input class="form-control" id="inputUserName" name="ConfirmPassword" value="" placeholder="Confirm Password" type=" text">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-lg-10 col-lg-offset-2">
+
+                    <input class="btn btn-primary" value="Save" type="submit" />
+
+
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-lg-10 col-lg-offset-2">
+
+                    <a href="@Url.Action("Deleteacount", "Owner")" class="btn btn-danger" value="Delete" type="submit">
+                        Delete
+                    </a>
+
+                </div>
+            </div>
+        }
+    </fieldset>
+
+</div>
+
+

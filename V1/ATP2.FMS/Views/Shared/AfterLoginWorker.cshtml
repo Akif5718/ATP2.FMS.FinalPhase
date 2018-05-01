@@ -1,0 +1,104 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+    <script type="text/javascript">
+// Load google charts
+google.charts.load('current', {'packages':['corechart']});
+google.charts.setOnLoadCallback(drawChart);
+
+// Draw the chart and set the chart values
+function drawChart() {
+  var data = google.visualization.arrayToDataTable([
+  ['Task', 'Hours per Day'],
+  ['Reliability', 8],
+  ['Behavior', 2],
+  ['On word', 4],
+  ['Comunicaton Skill', 2],
+  ['Sleep', 8]
+]);
+
+  // Optional; add a title and set the width and height of the chart
+  var options = {'title':'', 'width':550, 'height':400};
+
+  // Display the chart inside the <div> element with id="piechart"
+  var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+  chart.draw(data, options);
+}
+    </script>
+    <script>
+        $(document).ready(function() {
+            $('#slider').slider({
+                range: true
+            });
+        });
+    </script>
+    <style>
+        .dropdown:hover > .dropdown-menu {
+            display: block;
+        }
+    </style>
+
+
+</head>
+<body>
+
+    <div class="navbar navbar-inverse navbar-fixed-top" style="background-color: #132542">
+        <div class="container">
+
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle " data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+
+            </div>
+
+            <div class="navbar-collapse collapse" id=".navbar-collapse">
+                <ul class="nav navbar-nav">
+
+                    <li><a href=" @Url.Action("Index", "Home") "><span class=" glyphicon glyphicon-home"></span></a></li>
+
+                    <li class="nav-item dropdown">
+                    <li>@Html.ActionLink("LanceBucket", "Index", "Home")</li>
+                    <li>@Html.ActionLink("JobTImeLine", "About", "Home")</li>
+
+
+                </ul>
+                <ul class="nav navbar-nav navbar-right " style="right: 30px">
+
+                    <li><a href="#"><span class="glyphicon glyphicon-user"> Profile </span></a></li>
+                    <li style=""><a href="Open.html"><span class="glyphicon glyphicon-log-in"> LogOut</span></a></li>
+
+
+                    <li style=""><a href=""> </a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
