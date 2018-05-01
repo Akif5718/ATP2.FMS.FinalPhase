@@ -16,17 +16,21 @@ namespace ATP2.FMS.Controllers
         private IProjectSkillService _proskillservice;
         private IResponseToAJobService _responseservice;
         private IUserInfoService _userservice;
+        private IWorkerService _workerService;
+        private ISelectedWorkerService _selectedWorkerService;
+        private IRatingWorkerService _ratingWorkerService;
 
 
-        public WorkerController(IPostAProjectService postservice, IskillService skillservice, IProjectSkillService proskillservice, IResponseToAJobService responseservice, IUserInfoService userservice)
+        public WorkerController(IPostAProjectService postservice, IskillService skillservice, IProjectSkillService proskillservice, IResponseToAJobService responseservice, IUserInfoService userservice, IWorkerService workerService, ISelectedWorkerService selectedWorkerService, IRatingWorkerService ratingWorkerService)
         {
             _postservice = postservice;
             _skillservice = skillservice;
             _proskillservice = proskillservice;
             _responseservice = responseservice;
             _userservice = userservice;
-
-
+            _workerService = workerService;
+            _selectedWorkerService = selectedWorkerService;
+            _ratingWorkerService = ratingWorkerService;
         }
 
         public ActionResult ProjectList()
@@ -118,7 +122,49 @@ namespace ATP2.FMS.Controllers
             }
             return RedirectToAction("CreateProject", "Project");
         }
+        public ActionResult Profile()
+        {
+            var user = _userservice.GetByID(2);
+            var workerInfo = _workerService.GetByID(2);
+            var Selected = _selectedWorkerService.GetAll().Data.Where(d=>d.UserId == 2).ToList();
+            var projects = new List<PostAProject>();
+            foreach (var v in Selected)
+            {
+                projects.Add(_postservice.GetByID(v.PostId).Data);
+            }
+            List<RatingWorker> ratings = _ratingWorkerService.GetAll().Data.Where(d => d.UserId == 2).ToList();
+            var profileVM = new ProfileWorker();
+            profileVM = profileVM.creation(user.Data, workerInfo.Data, ratings, projects);
 
+            return View(profileVM);
+        }
+
+        public ActionResult Edit()
+        {
+            var user = _userservice.GetByID(2);
+            var workerInfo = _workerService.GetByID(2);
+            var profileVM = new ProfileWorker();
+            profileVM = profileVM.creation(user.Data, workerInfo.Data, new List<RatingWorker>(), new List<PostAProject>());
+            return View(profileVM);
+        }
+        [HttpPost]
+        public ActionResult Edit(ProfileWorker profile)
+        {
+            var user = _userservice.GetByID(2);
+            var obj = profile.EditUserInfo(profile, user.Data);
+            var u = _userservice.Save(obj);
+            var ownerInfo = _workerService.GetByID(2);
+            var obj1 = profile.EditWorkerInfo(profile, ownerInfo.Data);
+            var owner = _workerService.Save(obj1);
+            if (u.HasError || owner.HasError)
+            {
+                return View();
+            }
+            else
+            {
+                return Redirect("Profile");
+            }
+        }
 
     }
 }
