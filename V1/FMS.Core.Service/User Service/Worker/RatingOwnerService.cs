@@ -37,6 +37,7 @@ namespace FMS.Core.Service
               objtosave.Reliability = userinfo.Reliability;
               objtosave.OnWord = userinfo.OnWord;
               objtosave.Behaviour = userinfo.Behaviour;
+              objtosave.UserId = userinfo.UserId;
 
 
               if (!IsValid(objtosave, result))

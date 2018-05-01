@@ -73,65 +73,7 @@ namespace ATP2.FMS.Controllers
             return RedirectToAction("ProjectDetails", "Project");
         }
 
-        public ActionResult ProjectDetails()
-        {
-            //postid
-            var result = _postservice.GetByID(1);
-            PostProjectModel postProjectModel = new PostProjectModel();
-
-            postProjectModel.ProjectName = result.Data.ProjectName;
-            postProjectModel.Description = result.Data.Description;
-            postProjectModel.Price = result.Data.Price;
-            postProjectModel.StartTime = result.Data.StartTime;
-            postProjectModel.EndTime = result.Data.EndTime;
-            postProjectModel.WUserId = result.Data.WUserId;
-            postProjectModel.PostId = result.Data.PostId;
-
-            var result2 = _proskillservice.GetAll(result.Data.PostId+"");
-            foreach (var skillid in result2.Data)
-            {
-                var result3 = _skillservice.GetByID(skillid.SkillId);
-
-                postProjectModel.SkillName.Add(result3.Data.SkillName);
-
-            }
-
-            var result4 = _userservice.GetByID(result.Data.WUserId);
-            postProjectModel.UFirstName = result4.Data.FristName;
-            postProjectModel.ULastName = result4.Data.LastName;
-
-
-            return View(postProjectModel);
-        }
-
-        [HttpPost]
-        public ActionResult ProjectDetails(PostProjectModel PostProjectModel)
-        {
-
-
-
-
-            try
-            {
-
-                ResponseToaJob responseto = new ResponseToaJob();
-                responseto.PostId = PostProjectModel.PostId;
-                //responseto.WUserId = CurrentUser.User.UserId;
-                responseto.WUserId = 9;
-                var result = _responseservice.Save(responseto);
-
-                if (result.HasError)
-                {
-                    ViewBag.Message = result.Message;
-                    return View("ProjectDetails", PostProjectModel);
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-            return RedirectToAction("CreateProject", "Project");
-        }
+       
 
         public ActionResult RequestedMember()
         {

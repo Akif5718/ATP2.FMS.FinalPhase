@@ -33,6 +33,7 @@ namespace FMS.Core.Service
                    _context.workerInfos.Add(objtosave);
                }
                objtosave.EarnedMoney = userinfo.EarnedMoney;
+               objtosave.UserId = userinfo.UserId;
                objtosave.RatePerHour = userinfo.RatePerHour;
 
 

@@ -37,6 +37,7 @@ namespace FMS.Core.Service
               objtosave.CompanyName = userinfo.CompanyName;
               objtosave.Position = userinfo.Position;
               objtosave.Experience = userinfo.Experience;
+              objtosave.UserId = userinfo.UserId;
 
 
 

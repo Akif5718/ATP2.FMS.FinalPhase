@@ -207,15 +207,16 @@
     <Content Include="Views\User\EducationForm.cshtml" />
     <Content Include="Views\User\WorkHistoryForm.cshtml" />
     <Content Include="Views\Project\CreateProject.cshtml" />
-    <Content Include="Views\Project\ProjectDetails.cshtml" />
+    <Content Include="Views\Owner\ProjectDetails.cshtml" />
     <Content Include="Views\Project\RequestedMember.cshtml" />
     <Content Include="Views\Owner\ProjectList.cshtml" />
+    <Content Include="Views\Worker\ProjectList.cshtml" />
+    <Content Include="Views\Worker\ProjectDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
     <Folder Include="Views\Skill\" />
-    <Folder Include="Views\Worker\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

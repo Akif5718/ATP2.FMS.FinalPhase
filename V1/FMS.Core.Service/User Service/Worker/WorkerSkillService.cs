@@ -33,6 +33,7 @@ namespace FMS.Core.Service
                     _context.workerSkills.Add(objtosave);
                 }
                 objtosave.SkillId = Entity.SkillId;
+                objtosave.UserId = Entity.UserId;
 
 
 

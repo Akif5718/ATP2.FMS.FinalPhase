@@ -92,7 +92,7 @@ namespace ATP2.FMS.Controllers
             {
                 Console.WriteLine(ex.Message);
             }
-            return RedirectToAction("RegisterForm", "User");
+            return RedirectToAction("ProjectList", "Owner");
 
         }
 
@@ -119,7 +119,7 @@ namespace ATP2.FMS.Controllers
             {
                 Console.WriteLine(ex.Message);
             }
-            return RedirectToAction("OwnerForm", "User");
+            return RedirectToAction("ProjectList", "Worker");
 
         }
 

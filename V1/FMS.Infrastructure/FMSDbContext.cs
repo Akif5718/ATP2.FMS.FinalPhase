@@ -10,6 +10,7 @@ namespace FMS.Infrastructure
 {
     public class FMSDbContext:DbContext
     {
+
         public FMSDbContext()
             : base("FMSDbConnection4")
         {

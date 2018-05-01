@@ -37,6 +37,7 @@ namespace FMS.Core.Service
                 objtosave.UniversityPost = userinfo.UniversityPost;
                 objtosave.UniversityUnder = userinfo.UniversityUnder;
                 objtosave.Others = userinfo.Others;
+                objtosave.UserId = userinfo.UserId;
 
 
                 if (!IsValid(objtosave, result))

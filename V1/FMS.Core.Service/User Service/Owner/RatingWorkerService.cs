@@ -37,6 +37,7 @@ namespace FMS.Core.Service
               objtosave.OnBudget = userinfo.OnBudget;
               objtosave.Behaviour = userinfo.Behaviour;
               objtosave.Completeness = userinfo.Completeness;
+              objtosave.UserId = userinfo.UserId;
 
 
               if (!IsValid(objtosave, result))
