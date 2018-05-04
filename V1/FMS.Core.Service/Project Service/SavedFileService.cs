@@ -9,6 +9,7 @@ using FMS.Core.Service.Interfaces;
 using FMS.FrameWork;
 using FMS.Infrastructure;
 
+
 namespace FMS.Core.Service
 {
   public  class SavedFileService:ISavedFileService
@@ -151,28 +152,9 @@ namespace FMS.Core.Service
           return true;
       }
 
-      public Result<List<SavedFile>> DownloadZip(string key)
-      {
-          var result = new Result<List<SavedFile>>() { Data = new List<SavedFile>() };
-          try
-          {
-              IQueryable<SavedFile> query = _context.savedFiles;
-
-              if (ValidationHelper.IsIntValid(key))
-              {
-                  query = query.Where(q => q.PostId == Int32.Parse(key));
-              }
-              result.Data = query.ToList();
-          }
-          catch (Exception e)
-          {
-              result.HasError = true;
-              result.Message = e.Message;
-
-
-          }
-          return result;
-
-      }
+        public void DownloadZip(List<SavedFile> files)
+        {
+           
+        }
     }
 }

@@ -1,7 +1,10 @@
-﻿
+﻿@model FMS.Core.Entities.EducationalBackground
+
+
 @{
     ViewBag.Title = "EducationForm";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
 }
 
 <br />
@@ -22,59 +25,74 @@
                     <hr />
 
                     <div class="form-group">
-                        <label for="inputUserName" class="col-lg-2 control-label"></label>
-                        <div class="col-lg-10">
+                        <label for="inputUserName" class="col-lg-4 control-label">UserId</label>
+                        <div class="col-lg-8">
                             <input class="form-control" name="UserId" id="inputUserName" placeholder="Id" type="text">
+                            @Html.ValidationMessageFor(m => m.UserId)
+
                         </div>
+
                     </div>
+                    <br />
                     <div class="form-group">
-                        <label for="inputUserName" class="col-lg-2 control-label"></label>
-                        <div class="col-lg-10">
+                        <label for="inputUserName" class="col-lg-4 control-label">School</label>
+                        <div class="col-lg-8">
                             <input class="form-control" name="School" id="inputUserName" placeholder="School" type="text">
+                            @Html.ValidationMessageFor(m => m.School)
                         </div>
-                    </div>
 
+                    </div>
+                    <br />
                     <div class="form-group">
-                        <label for="inputUserName" class="col-lg-2 control-label"></label>
-                        <div class="col-lg-10">
+                        <label for="inputUserName" class="col-lg-4 control-label">Collage</label>
+                        <div class="col-lg-8">
                             <input class="form-control" name="Collage" id="inputUserName" placeholder="Collage" type=" text">
+                            @Html.ValidationMessageFor(m => m.Collage)
                         </div>
-                    </div>
 
+                    </div>
+                    <br />
 
 
                     <div class="form-group">
-                        <label for="inputUserName" class="col-lg-2 control-label"></label>
-                        <div class="col-lg-10">
+                        <label for="inputUserName" class="col-lg-4 control-label">PostGraduate</label>
+                        <div class="col-lg-8">
                             <input class="form-control" name="UniversityPost" id="inputUserName" placeholder="Post Graduate" type=" text">
+                            @Html.ValidationMessageFor(m => m.UniversityPost)
                         </div>
+
                     </div>
-
-
+                    <br />
 
                     <div class="form-group">
-                        <label for="inputUserName" class="col-lg-2 control-label"></label>
-                        <div class="col-lg-10">
+                        <label for="inputUserName" class="col-lg-4 control-label">UnderGraduate</label>
+                        <div class="col-lg-8">
                             <input class="form-control" name="UniversityUnder" id="inputUserName" placeholder="Under Graduate" type=" text">
+                            @Html.ValidationMessageFor(m => m.UniversityUnder)
                         </div>
-                    </div>
 
+                    </div>
+                    <br />
 
                     <div class="form-group">
-                        <label for="inputUserName" class="col-lg-2 control-label"></label>
-                        <div class="col-lg-10">
+                        <label for="inputUserName" class="col-lg-4 control-label">Others</label>
+                        <div class="col-lg-8">
                             <input class="form-control" name="Others" id="inputUserName" placeholder="Others" type=" text">
+                            @Html.ValidationMessageFor(m => m.Others)
                         </div>
+
                     </div>
 
-
-
+                    <br />
+                    <br />
 
                     <div class="form-group">
-                        <div class="col-md-offset-2 col-md-10">
+                        <div class="col-md-offset-2 col-md-9">
                             <input type="submit" value=" Submit  " class="btn btn-default btn-block" />
                         </div>
+
                     </div>
+                    <br />
                     <div class="form-group">
                         <div align="right">
 

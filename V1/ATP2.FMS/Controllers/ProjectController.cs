@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using ATP2.FMS.ViewModel;
 using FMS.Core.Entities;
 using FMS.Core.Service.Interfaces;
+using FMS.FrameWork;
 
 namespace ATP2.FMS.Controllers
 {
@@ -17,8 +18,11 @@ namespace ATP2.FMS.Controllers
         private IskillService _skillservice;
         private IUserInfoService _userservice;
         private IResponseToAJobService _responseservice;
+        private ISelectedWorkerService _selectedWorkerService;
+        private IComentSectionService _comentSectionService;
+        private ISavedFileService _savedFileService;
 
-        public ProjectController(IPostAProjectService postservice, IProjectSectionService sectionservice, IProjectSkillService proskillservice, IskillService skillservice, IUserInfoService userservice, IResponseToAJobService responseservice)
+        public ProjectController(IPostAProjectService postservice, IProjectSectionService sectionservice, IProjectSkillService proskillservice, IskillService skillservice, IUserInfoService userservice, IResponseToAJobService responseservice, ISelectedWorkerService selectedWorkerService, IComentSectionService comentSectionService, ISavedFileService savedFileService)
         {
             _postservice = postservice;
             _sectionservice = sectionservice;
@@ -26,6 +30,9 @@ namespace ATP2.FMS.Controllers
             _skillservice = skillservice;
             _userservice = userservice;
             _responseservice = responseservice;
+            _selectedWorkerService = selectedWorkerService;
+            _comentSectionService = comentSectionService;
+            _savedFileService = savedFileService;
         }
 
         public ActionResult CreateProject()
@@ -116,6 +123,47 @@ namespace ATP2.FMS.Controllers
         //    }
         //    return RedirectToAction("OwnerProfile", "Owner");
         //}
+        public ActionResult WorkProgressOwner(int id)
+        {
+            var post = _postservice.GetByID(id);
+            var selectedWorkers = _selectedWorkerService.GetAll().Data.Where(d => d.PostId == id).ToList();
+            List<UserInfo> workers = new List<UserInfo>();
+            foreach (var v in selectedWorkers)
+            {
+                workers.Add(_userservice.GetByID(v.UserId).Data);
+            }
+
+            List<int> sectionIDs = new List<int>();
+            var projectSections = _sectionservice.GetAll().Data.Where(d => d.PostId == id).ToList();
+            foreach (var v in projectSections)
+            {
+                sectionIDs.Add(v.ProjectSectionId);
+            }
+
+            var commentsAll = _comentSectionService.GetAll().Data.ToList();
+            var comments = new List<COMMENTSEC>();
+            foreach (var v in commentsAll)
+            {
+                foreach (var x in sectionIDs)
+                {
+                    if (v.ProjectSectionId == x)
+                    {
+                        comments.Add(v);
+                    }
+                }
+            }
+
+            var files = _savedFileService.GetAll().Data.Where(d => d.PostId == id).ToList();
+            var VM = new WorkerProgress();
+            VM = VM.creation(post, workers, projectSections, comments, files);
+            return View(VM);
+
+        }
+        [HttpPost]
+        public ActionResult WorkProgressOwner(object obj)
+        {
+            return null;
+        }
         
     }
 }

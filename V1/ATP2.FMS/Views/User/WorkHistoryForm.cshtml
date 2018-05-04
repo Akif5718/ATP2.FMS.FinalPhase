@@ -1,4 +1,4 @@
-﻿
+﻿@model FMS.Core.Entities.WorkHistory
 @{
     ViewBag.Title = "WorkHistoryForm";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -21,42 +21,43 @@
                         <i><h3 align="center">LanceBucket</h3></i>
                         <hr />
                         <div class="form-group">
-                            <label for="inputUserName" class="col-lg-2 control-label"></label>
-                            <div class="col-lg-10">
+                            <label for="inputUserName" class="col-lg-4 control-label">UserId</label>
+                            <div class="col-lg-8">
                                 <input class="form-control" name="UserId" id="inputUserName" placeholder="Id" type="text">
+                                @Html.ValidationMessageFor(m => m.UserId)
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label for="inputUserName" class="col-lg-2 control-label"></label>
-                            <div class="col-lg-10">
+                            <label for="inputUserName" class="col-lg-4 control-label">CompanyName</label>
+                            <div class="col-lg-8">
                                 <input class="form-control" name="CompanyName" id="inputUserName" placeholder="Company Name" type="text">
+                                @Html.ValidationMessageFor(m => m.CompanyName)
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label for="inputUserName" class="col-lg-2 control-label"></label>
-                            <div class="col-lg-10">
+                            <label for="inputUserName" class="col-lg-4 control-label">Position</label>
+                            <div class="col-lg-8">
                                 <input class="form-control" name="Position" id="inputUserName" placeholder="Position" type=" text">
+                                @Html.ValidationMessageFor(m => m.Position)
                             </div>
                         </div>
 
 
 
                         <div class="form-group">
-                            <label for="inputUserName" class="col-lg-2 control-label"></label>
-                            <div class="col-lg-10">
+                            <label for="inputUserName" class="col-lg-4 control-label">Experience</label>
+                            <div class="col-lg-8">
                                 <input class="form-control" name="Experience" id="inputUserName" placeholder="Experience" type=" text">
+                                @Html.ValidationMessageFor(m => m.Experience)
                             </div>
                         </div>
 
 
 
-
-
-
                         <div class="form-group">
-                            <div class="col-md-offset-2 col-md-10">
+                            <div class="col-md-offset-2 col-md-9">
                                 <input type="submit" value=" Submit  " class="btn btn-default btn-block" />
                             </div>
                         </div>

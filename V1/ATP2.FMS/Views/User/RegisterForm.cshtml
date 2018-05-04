@@ -1,4 +1,4 @@
-﻿
+﻿@model FMS.Core.Entities.UserInfo
 @{
     ViewBag.Title = "RegisterForm";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -11,85 +11,94 @@
             <div class="col-md-3"></div>
             <div class="col-md-4">
                 <form class="form-horizontal">
-                    <h3 align="center">LanceBucket</h3><
+                    <h3 align="center">LanceBucket</h3>
                     <hr />
                     <h6 align="center"> Sign Up for Free Today!</h6>
 
                     <hr />
                     <div class="form-group">
-                        <label for="inputName" class="col-lg-2 control-label"></label>
-                        <div class="col-lg-10">
-                            <input class="form-control" name="FristName" id="inputFName" placeholder=" FristName" type="text">
+                        <label for="inputName" class="col-lg-4 control-label">First Name</label>
+                        <div class="col-lg-8">
+                            <input class="form-control" name="FristName" id="inputFName" placeholder=" FirstName" type="text">
+                            @Html.ValidationMessageFor(m => m.FristName)
                         </div>
 
                     </div>
 
 
                     <div class="form-group">
-                        <label for="inputName" class="col-lg-2 control-label"></label>
-                        <div class="col-lg-10">
+                        <label for="inputName" class="col-lg-4 control-label">Last Name</label>
+                        <div class="col-lg-8">
                             <input class="form-control" name="LastName" id="inputLName" placeholder=" LastName" type="text">
+                            @Html.ValidationMessageFor(m => m.LastName)
                         </div>
 
                     </div>
 
                     <div class="form-group">
-                        <label for="inputUserName" class="col-lg-2 control-label"></label>
-                        <div class="col-lg-10">
+                        <label for="inputUserName" class="col-lg-4 control-label">Email</label>
+                        <div class="col-lg-8">
                             <input class="form-control" name="Email" id="inputUserName" placeholder="Email" type="email">
+                            @Html.ValidationMessageFor(m => m.Email)
                         </div>
                     </div>
 
 
                     <div class="form-group">
-                        <label for="inputPassword" class="col-lg-2 control-label"></label>
-                        <div class="col-lg-10">
+                        <label for="inputPassword" class="col-lg-4 control-label">Password</label>
+                        <div class="col-lg-8">
                             <input class="form-control" name="Password" id="inputPassword" placeholder="Password" type="password">
+                            @Html.ValidationMessageFor(m => m.Password)
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="inputConfirmPassword" class="col-lg-2 control-label"></label>
-                        <div class="col-lg-10">
+                        <label for="inputConfirmPassword" class="col-lg-4 control-label">ConfirmPassword</label>
+                        <div class="col-lg-8">
                             <input class="form-control" id="inputConfirmPassword" placeholder="Confirm Password" type="password">
+
                         </div>
                     </div>
 
 
                     <div>
                         <div class="form-group">
-                            <label for="inputName" class="col-lg-2 control-label"></label>
-                            <div class="col-lg-10">
+                            <label for="inputName" class="col-lg-4 control-label">DateOfBirth</label>
+                            <div class="col-lg-8">
                                 <input class="form-control" id="inputName1" name="DateofBrith" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" placeholder="DateofBrith">
+                                @Html.ValidationMessageFor(m => m.DateofBrith)
                             </div>
 
                         </div>
 
                     </div>
                     <div class="form-group">
-                        <label for="inputName" class="col-lg-2 control-label"></label>
-                        <div class="col-lg-10">
+                        <label for="inputName" class="col-lg-4 control-label">Join Date</label>
+                        <div class="col-lg-8">
                             <input class="form-control" id="inputName2" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" name="JoinDate" placeholder="Join Date">
+                            @Html.ValidationMessageFor(m => m.JoinDate)
                         </div>
 
                     </div>
 
                     <div class="form-group">
-                        <label for="inputName" class="col-lg-2 control-label"></label>
-                        <div class="col-lg-10">
+                        <label for="inputName" class="col-lg-4 control-label">State</label>
+                        <div class="col-lg-8">
                             <input class="form-control" name="State" id="inputName" placeholder="State" type="text">
+                            @Html.ValidationMessageFor(m => m.State)
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="inputName" class="col-lg-2 control-label"></label>
-                        <div class="col-lg-10">
+                        <label for="inputName" class="col-lg-4 control-label">City</label>
+                        <div class="col-lg-8">
                             <input class="form-control" name="City" id="inputName" placeholder=" City" type="text">
+                            @Html.ValidationMessageFor(m => m.City)
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="inputName" class="col-lg-2 control-label"></label>
-                        <div class="col-lg-10">
+                        <label for="inputName" class="col-lg-4 control-label">Country</label>
+                        <div class="col-lg-8">
                             <input class="form-control" id="inputName" list="countries" name="Country" placeholder=" Country">
                             <datalist id="countries">
                                 <option value="Bangladesh">
@@ -98,14 +107,16 @@
                                 <option value="Brazil">
                                 <option value=" Cambodia">
                             </datalist>
+
+                            @Html.ValidationMessageFor(m => m.Country)
                         </div>
 
                     </div>
 
 
                     <div class="">
-                        <label class="col-lg-2 control-label"></label>
-                        <div class="col-lg-10">
+                        <label class="col-lg-4 control-label">UserType</label>
+                        <div class="col-lg-8">
                             <div class="radio">
 
                                 <input name="UserType" id="optionsRadios1" value="Owner" checked="" type="radio">
@@ -116,6 +127,7 @@
                                 <input name="UserType" id="optionsRadios2" value="Worker" type="radio">
                                 Worker
                             </div>
+
                         </div>
                     </div>
 
@@ -130,7 +142,7 @@
 
                 </form>
                 <hr>
-                Already a Lance Bucket.com member?@Html.ActionLink("Login", "LogInForm", "User")
+                Already a Lance Bucket.com member?@Html.ActionLink("Login", "LogIn", "Login")
             </div>
 
 

@@ -1,0 +1,362 @@
+﻿@model ATP2.FMS.ViewModel.WorkerProgress
+@{
+    ViewBag.Title = "WorkProgressOwner";
+    Layout = "~/Views/Shared/AfterLoginOwner.cshtml";
+    int i = 1;
+}
+
+
+<h2 align="Center">WorkerProgress</h2><hr /><hr /><br /><br />
+<div class="row">
+
+    <div class="col-md-6">
+        <div class="panel panel-primary">
+
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-10">
+                        <h4>
+                            @Model.PostName
+                        </h4>
+                        <p>@Model.Description</p>
+                    </div>
+                    <div class="col-md-1"></div>
+                    <div class="col-md-1"></div>
+                </div>
+                <h3>Project Members</h3>
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4>Name</h4>
+                        @foreach (var v in Model.workers)
+                        {
+                            <h5><a href="ProfileView.html">@v.FristName @v.LastName</a></h5>
+                        }
+
+
+                    </div>
+
+                    <hr>
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">Project Files</h3>
+            </div>
+            <div class="panel-body">
+                @foreach (var v in Model.SavedFiles)
+                {
+                    <span class="fa fa-folder"></span> <a href="#">@v.FileLink <span class="sr-only">(current)</span></a><br />
+                }
+
+                @*<span class="fa fa-folder"></span> <a href="#">FMS_Entities <span class="sr-only">(current)</span></a><br />
+                    <span class="fa fa-folder"></span> <a href="#">FMS_Framework <span class="sr-only">(current)</span></a><br />
+                    <span class="fa fa-folder"></span> <a href="#">FMS_Model <span class="sr-only">(current)</span></a><br />
+                    <span class="fa fa-folder"></span> <a href="#">FMS_Repository<span class="sr-only">(current)</span></a><br />
+                    <span class="fa fa-folder"></span> <a href="#">FMS_Web.Mvc <span class="sr-only">(current)</span></a><br />*@
+                <div class="row">
+                    <div class="col-md-9"></div>
+                    <div class="col-md-3">
+                        <i class="fa fa-file-archive-o" aria-hidden="true"></i>
+                        <a href="#">Download ZIP <span class="sr-only">(current)</span></a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="progress">
+        <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+            60%
+        </div>
+    </div>
+</div><br />
+@foreach (var v in Model.ProjectSections)
+{
+    <div class="container" ng-controller="CommentController" ng-init="Init(@v.ProjectSectionId)">
+        <div class="panel-group">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" href="#@v.ProjectSectionId">@v.SectionName</a>
+                    </h4>
+                </div>
+                <div id="@v.ProjectSectionId" class="panel-collapse collapse">
+                    <div class="panel-body"><h2>Work Details</h2></div>
+                    <label for="changeRate">
+                        <input type="checkbox" id="chkPassport" onclick="ShowHideDiv(this)" />
+                        Change Parcentage and price
+                    </label>
+                    <hr />
+                    <div id="dvPassport@i++" style="display: none">
+                        Set percentage:
+                        <input type="text" id="txtPercentage" />&nbsp &nbsp &nbsp
+                        Set price:
+                        <input type="text" id="txtPrice" />&nbsp &nbsp &nbsp
+                        <button class="btn btn-primary" type="button">Save</button>
+                    </div>
+                    <div class="row">
+
+                        <div class="col-md-5">
+                            <h4>Comments</h4>
+                            @*@foreach (var cmm in Model.Comments)
+                            {
+                                if (cmm.ProjectSectionId == v.ProjectSectionId)
+                                {
+                                    foreach (var worker in Model.workers)
+                                    {
+                                        if (worker.UserId == cmm.UserId)
+                                        {
+                                            <h6>@worker.FristName @worker.LastName:</h6>
+                                            break;
+                                        }
+
+                                    }
+                                    <label>@cmm.Commt</label><br />
+                                }
+                            }*@
+                            <div ng-repeat="com in Comments">
+                                <h6>{{com.UserId}}</h6>
+                                <label>{{com.Commt}}</label><br />
+                            </div>
+                            <input type="text" name="comment" ng-model="Message" />
+                            <button ng-click="NewComment()">Comment</button>
+                        </div>
+                        <div class="col-md-3">
+                            <h4>Time</h4>
+                            <h6>3 days</h6>
+                        </div>
+                        <div class="col-md-2" style="border-right: 2px Solid #00ffff">
+                            <h4>Price</h4>
+                            <h6>@v.Price$</h6>
+                            <br /><br /><br /><br /><br /><br /><br />
+                        </div>
+                        <div class="col-md-2">
+                            <br /><br />
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 45%">
+                                    <span class="sr-only">45% Complete</span>
+                                </div>
+                            </div>
+                            <div>
+                                &nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;
+                                <a class="btn  btn-success" data-toggle="modal" data-target=".bootstrapmodal">view</a>
+
+                                <div class="modal fade bootstrapmodal">
+                                    <div class="modal-dialog">
+
+
+                                        <div class="modal-content">
+
+
+                                            <div class="modal-header">
+                                                <button data-dismiss="modal" class="close">
+                                                    <span>&times;</span>
+                                                </button>
+                                                <h3>Rating Chart</h3>
+
+                                            </div>
+                                            <div class="modal-title">
+
+                                            </div>
+
+                                            <div class="modal-body">
+                                                <div id="piechart"></div>
+                                            </div>
+                                            <div class="modal-footer">
+
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                            @foreach (var file in Model.SavedFiles)
+                            {
+                                if (v.ProjectSectionId == file.ProjectSectionId)
+                                {
+                                    <a href="#">@file.FileLink</a> <span>20%</span> <br />
+                                }
+
+                            }
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+
+
+@*<div class="container">
+    <div class="panel-group">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" href="#collapse2">Step 2</a>
+                </h4>
+            </div>
+            <div id="collapse2" class="panel-collapse collapse">
+                <div class="panel-body"><h2>Work Details</h2></div>
+                <label for="changeRate">
+                    <input type="checkbox" id="chkPassport1" onclick="ShowHideDiv1(this)" />
+                    Change Parcentage and price
+                </label>
+                <hr />
+                <div id="dvPassport1" style="display: none">
+                    Set percentage:
+                    <input type="text" id="txtPercentage1" />&nbsp &nbsp &nbsp
+                    Set price:
+                    <input type="text" id="txtPrice1" />&nbsp &nbsp &nbsp
+                    <button class="btn btn-primary" type="button">Save</button>
+                </div>
+                <div class="row">
+                    <div class="col-md-5">
+                        <h4>Work</h4>
+                        <h6>Work 1</h6>
+                        <h6>Worker 1:</h6><label>Comment 1......</label><br />
+                        <h6>Worker 2:</h6><label>Comment 2......</label><br />
+                        <input type="text" name="comment" />
+                        <button>Comment</button>
+                    </div>
+                    <div class="col-md-3">
+                        <h4>Time</h4>
+                        <h6>3 days</h6>
+                    </div>
+                    <div class="col-md-2" style="border-right:2px Solid #00ffff">
+                        <h4>Price</h4>
+                        <h6>100$</h6>
+                        <br /><br /><br /><br /><br /><br /><br /><br />
+                    </div>
+                    <div class="col-md-2">
+                        <button>Upload Documents</button>
+                        <br /><br />
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 45%">
+                                <span class="sr-only">45% Complete</span>
+                            </div>
+                        </div>
+                        <a href="#">Work1.doc</a> 20%<br />
+                        <a href="#">Work2.doc</a> 30%
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="panel-group">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" href="#collapse3">Step 3</a>
+                </h4>
+            </div>
+            <div id="collapse3" class="panel-collapse collapse">
+                <div class="panel-body"><h2>Work Details</h2></div>
+                <label for="changeRate">
+                    <input type="checkbox" id="chkPassport2" onclick="ShowHideDiv2(this)" />
+                    Change Parcentage and price
+                </label>
+                <hr />
+                <div id="dvPassport2" style="display: none">
+                    Set percentage:
+                    <input type="text" id="txtPercentage2" />&nbsp &nbsp &nbsp
+                    Set price:
+                    <input type="text" id="txtPrice2" />&nbsp &nbsp &nbsp
+                    <button class="btn btn-primary" type="button">Save</button>
+                </div>
+                <div class="row">
+                    <div class="col-md-5">
+                        <h4>Work</h4>
+                        <h6>Work 1</h6>
+                        <h6>Worker 1:</h6><label>Comment 1......</label><br />
+                        <h6>Worker 2:</h6><label>Comment 2......</label><br />
+                        <input type="text" name="comment" />
+                        <button>Comment</button>
+                    </div>
+                    <div class="col-md-3">
+                        <h4>Time</h4>
+                        <h6>3 days</h6>
+                    </div>
+                    <div class="col-md-2" style="border-right:2px Solid #00ffff">
+                        <h4>Price</h4>
+                        <h6>100$</h6>
+                        <br /><br /><br /><br /><br /><br /><br /><br />
+                    </div>
+                    <div class="col-md-2">
+                        <button>Upload Documents</button>
+                        <br /><br />
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 45%">
+                                <span class="sr-only">45% Complete</span>
+                            </div>
+                        </div>
+                        <a href="#">Work1.doc</a> 20%<br />
+                        <a href="#">Work2.doc</a> 30%
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>*@
+<a href="WorkerList.html" class="btn btn-success">Approve</a><br /><br/>
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="js/bootstrap.min.js"></script>
+
+    @for (int j=1; j<=Model.ProjectSections.Count ; j++)
+    {
+        <script type="text/javascript">
+            function ShowHideDiv(chkPassport) {
+                var dvPassport = document.getElementById("dvPassport"+@j);
+                dvPassport.style.display = chkPassport.checked ? "block" : "none";
+            }
+
+
+           
+
+        </script>
+    }
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+<script type="text/javascript">
+    // Load google charts
+    google.charts.load('current', { 'packages': ['corechart'] });
+    google.charts.setOnLoadCallback(drawChart);
+
+    // Draw the chart and set the chart values
+    function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+            ['Worker1', 'Hours per Day'],
+            ['Worker2', 8],
+            ['Worker3', 2],
+            ['Worker4', 4],
+            ['Worker5', 2],
+            ['Worker6', 8]
+        ]);
+
+        // Optional; add a title and set the width and height of the chart
+        var options = { 'title': '', 'width': 550, 'height': 400 };
+
+        // Display the chart inside the <div> element with id="piechart"
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+        chart.draw(data, options);
+    }
+</script>

@@ -8,6 +8,7 @@ using ATP2.FMS.ViewModel;
 using FMS.Core.Entities;
 using FMS.Core.Service.Interfaces;
 using FMS.FrameWork;
+using Ionic.Zip;
 using Newtonsoft.Json;
 
 namespace ATP2.FMS.Controllers
@@ -133,6 +134,20 @@ namespace ATP2.FMS.Controllers
             List<RatingOwner> ratings = _ratingOwnerService.GetAll().Data.Where(d => d.UserId == 1).ToList();
             var profileVM = new Profile();
             profileVM = profileVM.creation(user.Data, ownerInfo.Data, ratings, posedtProjects);
+            //string s1 = " ~/Files/1SignIn.PNG";
+            //string s2 = " ~/Files/2SignUp.PNG";
+            //string s3 = " ~/Files/3AfterSignUp.PNG";
+            //var file1 = new SavedFile();
+            //file1.FileLink = s1;
+            //var file2 = new SavedFile();
+            //file2.FileLink = s2;
+            //var file3 = new SavedFile();
+            //file3.FileLink = s3;
+            //var files = new List<SavedFile>();
+            //files.Add(file1);
+            //files.Add(file2);
+            //files.Add(file3);
+            //SaveFiles(files);
             
             return View(profileVM);
         }
@@ -161,6 +176,20 @@ namespace ATP2.FMS.Controllers
             else
             {
                 return Redirect("Profile");
+            }
+        }
+
+        public void SaveFiles(List<SavedFile> files)
+        {
+            Response.ContentType = "application/zip";
+            Response.AddHeader("content-disposition","attachment; filename=myZipFile.zip");
+            using (ZipFile zip = new ZipFile())
+            {
+                foreach (var v in files)
+                {
+                    zip.AddFile(Server.MapPath(v.FileLink), String.Empty);
+                }
+                zip.Save(Response.OutputStream);
             }
         }
         

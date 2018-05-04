@@ -10,7 +10,8 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+   
+   
 
     <script type="text/javascript">
 // Load google charts
@@ -81,7 +82,7 @@ function drawChart() {
                 <ul class="nav navbar-nav navbar-right " style="right: 30px">
 
                     <li><a href="#"><span class="glyphicon glyphicon-user"> Profile </span></a></li>
-                    <li style=""><a href="Open.html"><span class="glyphicon glyphicon-log-in"> LogOut</span></a></li>
+                    <li style=""><a href="@Url.Action("Logout","User")"><span class="glyphicon glyphicon-log-in"> LogOut</span></a></li>
 
 
                     <li style=""><a href=""> </a></li>
@@ -99,6 +100,10 @@ function drawChart() {
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="~/Scripts/angular.min.js"></script>
+    <script src="~/Scripts/ANGULAR/app.js"></script>
+    <script src="~/Scripts/ANGULAR/allController.js"></script>
     @RenderSection("scripts", required: false)
 </body>
 </html>

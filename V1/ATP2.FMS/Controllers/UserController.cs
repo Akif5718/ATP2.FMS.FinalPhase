@@ -37,7 +37,10 @@ namespace ATP2.FMS.Controllers
         [HttpPost]
         public ActionResult RegisterForm(UserInfo userInfo)
         {
-
+            if (!ModelState.IsValid)
+            {
+                return View(userInfo);
+            }
 
             try
             {
@@ -77,7 +80,10 @@ namespace ATP2.FMS.Controllers
         [HttpPost]
         public ActionResult OwnerForm(OwnerInfo ownerInfo)
         {
-
+            if (!ModelState.IsValid)
+            {
+                return View(ownerInfo);
+            }
             try
             {
                 var result = _oservice.Save(ownerInfo);
@@ -104,7 +110,10 @@ namespace ATP2.FMS.Controllers
         [HttpPost]
         public ActionResult WorkerForm(WorkerInfo workerInfo)
         {
-
+            if (!ModelState.IsValid)
+            {
+                return View(workerInfo);
+            }
             try
             {
                 var result = _wservice.Save(workerInfo);
@@ -132,6 +141,12 @@ namespace ATP2.FMS.Controllers
         public ActionResult EducationForm(EducationalBackground educationalBackground)
         {
 
+            if (!ModelState.IsValid)
+            {
+                return View(educationalBackground);
+            }
+
+
             try
             {
                 var result = _eservice.Save(educationalBackground);
@@ -158,7 +173,10 @@ namespace ATP2.FMS.Controllers
         [HttpPost]
         public ActionResult WorkHistoryForm(WorkHistory workHistory)
         {
-
+            if (!ModelState.IsValid)
+            {
+                return View(workHistory);
+            }
             try
             {
                 var result = _whservice.Save(workHistory);
@@ -177,6 +195,10 @@ namespace ATP2.FMS.Controllers
 
         }
 
-
+        public ActionResult Logout()
+        {
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Index", "Home");
+        }
     }
 }

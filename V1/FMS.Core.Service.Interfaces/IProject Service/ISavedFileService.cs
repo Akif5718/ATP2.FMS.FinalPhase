@@ -11,6 +11,6 @@ namespace FMS.Core.Service.Interfaces
 {
    public interface ISavedFileService:IService<SavedFile>
    {
-       Result<List<SavedFile>> DownloadZip(string key);
+       void DownloadZip(List<SavedFile> files);
    }
 }
