@@ -153,7 +153,7 @@
                         <hr class="my-4">
                         <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
                         <p class="lead">
-                            <a class="btn btn-primary btn-lg"  href="@Url.Action("CreateProject","ProjectPost")" role=" button">Create Job</a>
+                            <a class="btn btn-primary btn-lg"  href="@Url.Action("CreateProject","Project")" role=" button">Create Job</a>
                         </p>
                     </div>
                     <div style=" border-width: 0px;  overflow: hidden;">
@@ -162,7 +162,7 @@
                             <div class="list-group">
                                 @foreach (var p in Model.PostAProject)
                                 {
-                                    <a href='' class="list-group-item list-group-item-action flex-column align-items-start active">
+                                    <a href='@Url.Action("WorkProgressOwner","Project")/@p.PostId' class="list-group-item list-group-item-action flex-column align-items-start active">
                                         <div class="d-flex w-100 justify-content-between">
                                             <h5 class="mb-1">@p.ProjectName</h5>
                                             <small>@p.StartTime</small>
@@ -170,7 +170,7 @@
                                         <p class="mb-1">@p.Description</p>
 
                                     </a>
-                                    @Html.ActionLink("Requests", "RequestedMember", new { Controller = "ProjectPost", id = @p.PostId }, new { @class = "btn btn-info" })<br/>
+                                    @Html.ActionLink("Requests", "RequestedMember", new { Controller = "Project", id = @p.PostId }, new { @class = "btn btn-info" })<br/>
                                 }
 
 

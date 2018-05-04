@@ -204,6 +204,33 @@ namespace FMS.Core.Service
            return result;
        }
 
+       public Result<PostAProject> GetLastId()
+       {
+           var result = new Result<PostAProject>();
+
+           try
+           {
+               var obj = _context.postAProjects.OrderByDescending(m=>m.PostId).FirstOrDefault();
+               if (obj == null)
+               {
+                   result.HasError = true;
+                   result.Message = "Invalid PostId";
+                   return result;
+
+
+               }
+               result.Data = obj;
+           }
+           catch (Exception e)
+           {
+               result.HasError = true;
+               result.Message = e.Message;
+
+
+           }
+           return result;
+       }
+
        public Result<bool> Delete(int id)
        {
            var result = new Result<bool>();

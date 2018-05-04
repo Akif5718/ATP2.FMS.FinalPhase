@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using ATP2.FMS.Web.Framework;
 using FMS.Core.Entities;
 using FMS.Core.Service;
 using FMS.Core.Service.Interfaces;
@@ -55,11 +56,10 @@ namespace ATP2.FMS.Controllers
             {
                 Console.WriteLine(ex.Message);
             }
-            var jasonUserInfo = JsonConvert.SerializeObject(userInfo);
-            //FormsAuthentication.SignOut();
-            FormsAuthentication.SetAuthCookie(jasonUserInfo, false);
+            var obj = _uservice.GetByEmail(userInfo.Email);
 
-            //CurrentUser.User = userInfo;
+            var jasonUserInfo = JsonConvert.SerializeObject(obj.Data);
+            FormsAuthentication.SetAuthCookie(jasonUserInfo, false);
             if (userInfo.UserType.Equals("Owner"))
                 return RedirectToAction("OwnerForm", "User");
 
@@ -86,6 +86,7 @@ namespace ATP2.FMS.Controllers
             }
             try
             {
+                ownerInfo.UserId=HttpUtil.CurrentUser.UserId;
                 var result = _oservice.Save(ownerInfo);
 
                 if (result.HasError)
@@ -116,12 +117,13 @@ namespace ATP2.FMS.Controllers
             }
             try
             {
+                workerInfo.UserId = HttpUtil.CurrentUser.UserId;
                 var result = _wservice.Save(workerInfo);
 
                 if (result.HasError)
                 {
                     ViewBag.Message = result.Message;
-                    return View("RegisterForm", workerInfo);
+                    return View("RegisterForm");
                 }
             }
             catch (Exception ex)
@@ -149,12 +151,14 @@ namespace ATP2.FMS.Controllers
 
             try
             {
+                educationalBackground.UserId = HttpUtil.CurrentUser.UserId;
+
                 var result = _eservice.Save(educationalBackground);
 
                 if (result.HasError)
                 {
                     ViewBag.Message = result.Message;
-                    return View("RegisterForm", educationalBackground);
+                    return View("RegisterForm");
                 }
             }
             catch (Exception ex)
@@ -179,12 +183,14 @@ namespace ATP2.FMS.Controllers
             }
             try
             {
+                workHistory.UserId = HttpUtil.CurrentUser.UserId;
+
                 var result = _whservice.Save(workHistory);
 
                 if (result.HasError)
                 {
                     ViewBag.Message = result.Message;
-                    return View("RegisterForm", workHistory);
+                    return View("RegisterForm");
                 }
             }
             catch (Exception ex)

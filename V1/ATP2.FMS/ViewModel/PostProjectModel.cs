@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using ATP2.FMS.Web.Framework;
 using FMS.Core.Entities;
 
 namespace ATP2.FMS.ViewModel
@@ -50,7 +51,7 @@ namespace ATP2.FMS.ViewModel
         {
             var postAProject = new PostAProject();
             //postAProject.WUserId = CurrentUser.User.UserId;
-            postAProject.WUserId = 1;
+            postAProject.WUserId = HttpUtil.CurrentUser.UserId;
             postAProject.ProjectName = postProjectModel.ProjectName;
             postAProject.Description = postProjectModel.Description;
             postAProject.Price = postProjectModel.Price;

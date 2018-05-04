@@ -20,6 +20,7 @@ namespace FMS.Core.Service
         {
             _context = context;
         }
+
         public Result<OwnerInfo> Save(OwnerInfo userinfo)
         {
             var result = new Result<OwnerInfo>();

@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 using ATP2.FMS.ViewModel;
+using ATP2.FMS.Web.Framework;
 using FMS.Core.Entities;
 using FMS.Core.Service.Interfaces;
 using FMS.FrameWork;
@@ -67,10 +68,10 @@ namespace ATP2.FMS.Controllers
             return View(projectListModel);
         }
 
-        public ActionResult ProjectDetails()
+        public ActionResult ProjectDetails(int id)
         {
             //postid
-            var result = _postservice.GetByID(1);
+            var result = _postservice.GetByID(id);
             PostProjectModel postProjectModel = new PostProjectModel();
 
             postProjectModel.ProjectName = result.Data.ProjectName;
@@ -111,7 +112,7 @@ namespace ATP2.FMS.Controllers
                 ResponseToaJob responseto = new ResponseToaJob();
                 responseto.PostId = PostProjectModel.PostId;
                 //responseto.WUserId = CurrentUser.User.UserId;
-                responseto.WUserId = 9;
+                responseto.WUserId = HttpUtil.CurrentUser.UserId;
                 var result = _responseservice.Save(responseto);
 
                 if (result.HasError)
@@ -128,10 +129,10 @@ namespace ATP2.FMS.Controllers
         }
         public ActionResult Profile()
         {
-            var user = _userservice.GetByID(1);
-            var ownerInfo = _ownerService.GetByID(1);
-            var posedtProjects = _postservice.GetAll().Data.Where(d=> d.WUserId==1).ToList();
-            List<RatingOwner> ratings = _ratingOwnerService.GetAll().Data.Where(d => d.UserId == 1).ToList();
+            var user = _userservice.GetByID(HttpUtil.CurrentUser.UserId);
+            var ownerInfo = _ownerService.GetByID(HttpUtil.CurrentUser.UserId);
+            var posedtProjects = _postservice.GetAll().Data.Where(d => d.WUserId == HttpUtil.CurrentUser.UserId).ToList();
+            List<RatingOwner> ratings = _ratingOwnerService.GetAll().Data.Where(d => d.UserId == HttpUtil.CurrentUser.UserId).ToList();
             var profileVM = new Profile();
             profileVM = profileVM.creation(user.Data, ownerInfo.Data, ratings, posedtProjects);
             //string s1 = " ~/Files/1SignIn.PNG";
@@ -154,8 +155,8 @@ namespace ATP2.FMS.Controllers
 
         public ActionResult Edit()
         {
-            var user = _userservice.GetByID(1);
-            var ownerInfo = _ownerService.GetByID(1);
+            var user = _userservice.GetByID(HttpUtil.CurrentUser.UserId);
+            var ownerInfo = _ownerService.GetByID(HttpUtil.CurrentUser.UserId);
             var profileVM = new Profile();
             profileVM = profileVM.creation(user.Data,ownerInfo.Data,new List<RatingOwner>(), new List<PostAProject>());
             return View(profileVM);
@@ -163,10 +164,10 @@ namespace ATP2.FMS.Controllers
         [HttpPost]
         public ActionResult Edit(Profile profile)
         {
-            var user = _userservice.GetByID(1);
+            var user = _userservice.GetByID(HttpUtil.CurrentUser.UserId);
             var obj = profile.EditUserInfo(profile, user.Data);
             var u = _userservice.Save(obj);
-            var ownerInfo = _ownerService.GetByID(1);
+            var ownerInfo = _ownerService.GetByID(HttpUtil.CurrentUser.UserId);
             var obj1 = profile.EditOwnerInfo(profile, ownerInfo.Data);
             var owner = _ownerService.Save(obj1);
             if (u.HasError || owner.HasError)

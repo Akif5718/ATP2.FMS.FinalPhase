@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using ATP2.FMS.ViewModel;
+using ATP2.FMS.Web.Framework;
 using FMS.Core.Entities;
 using FMS.Core.Service.Interfaces;
 
@@ -63,10 +64,10 @@ namespace ATP2.FMS.Controllers
             return View(projectListModel);
         }
 
-        public ActionResult ProjectDetails()
+        public ActionResult ProjectDetails(int id)
         {
             //postid
-            var result = _postservice.GetByID(1);
+            var result = _postservice.GetByID(id);
             PostProjectModel postProjectModel = new PostProjectModel();
 
             postProjectModel.ProjectName = result.Data.ProjectName;
@@ -107,7 +108,7 @@ namespace ATP2.FMS.Controllers
                 ResponseToaJob responseto = new ResponseToaJob();
                 responseto.PostId = PostProjectModel.PostId;
                 //responseto.WUserId = CurrentUser.User.UserId;
-                responseto.WUserId = 9;
+                responseto.WUserId =HttpUtil.CurrentUser.UserId;
                 var result = _responseservice.Save(responseto);
 
                 if (result.HasError)
@@ -120,8 +121,9 @@ namespace ATP2.FMS.Controllers
             {
                 Console.WriteLine(ex.Message);
             }
-            return RedirectToAction("CreateProject", "Project");
+            return RedirectToAction("ProjectList", "Worker");
         }
+       
         public ActionResult Profile()
         {
             var user = _userservice.GetByID(2);
@@ -147,6 +149,7 @@ namespace ATP2.FMS.Controllers
             profileVM = profileVM.creation(user.Data, workerInfo.Data, new List<RatingWorker>(), new List<PostAProject>());
             return View(profileVM);
         }
+       
         [HttpPost]
         public ActionResult Edit(ProfileWorker profile)
         {

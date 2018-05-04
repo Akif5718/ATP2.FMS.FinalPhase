@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Routing;
 using ATP2.FMS.ViewModel;
 using FMS.Core.Entities;
 using FMS.Core.Service.Interfaces;
 using FMS.FrameWork;
+using Microsoft.Ajax.Utilities;
 
 namespace ATP2.FMS.Controllers
 {
@@ -49,10 +51,14 @@ namespace ATP2.FMS.Controllers
 
                 var result = _postservice.Save(p.Insert(PostProjectModel));
 
+                var last = _postservice.GetLastId();
+
                 foreach (var x in PostProjectModel.SectionName)
                 {
                     var projectsection = new ProjectSection();
+
                     projectsection.SectionName = x;
+                    projectsection.PostId =last.Data.PostId ;
                     var result1 = _sectionservice.Save(projectsection);
                 }
 
@@ -60,11 +66,12 @@ namespace ATP2.FMS.Controllers
                 {
                     var projectskill = new ProjectSkills();
                     projectskill.SkillId = skillid;
+                    projectskill.PostId = last.Data.PostId;
                     var result2 = _proskillservice.Save(projectskill);
                 }
 
 
-
+                PostProjectModel.PostId = last.Data.PostId;
 
 
                 if (result.HasError)
@@ -77,18 +84,18 @@ namespace ATP2.FMS.Controllers
             {
                 Console.WriteLine(ex.Message);
             }
-            return RedirectToAction("ProjectDetails", "Project");
+            return RedirectToAction("ProjectDetails", "Owner", new { id = PostProjectModel.PostId });
         }
 
        
 
-        public ActionResult RequestedMember()
+        public ActionResult RequestedMember(int id)
         {
             RequestedMemberModel requested = new RequestedMemberModel();
             //postid
-            var result = _responseservice.GetAll(1+"");
+            var result = _responseservice.GetAll(id+"");
 
-            var result2 = _postservice.GetByID(1);
+            var result2 = _postservice.GetByID(id);
             requested.ProjectName = result2.Data.ProjectName;
             requested.Description = result2.Data.Description;
             requested.PostId = result2.Data.PostId;

@@ -1,4 +1,5 @@
-﻿@model ATP2.FMS.ViewModel.PostProjectModel
+﻿@using ATP2.FMS.Web.Framework
+@model ATP2.FMS.ViewModel.PostProjectModel
 @{
     ViewBag.Title = "ProjectDetails";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -44,11 +45,11 @@
 
                         </div>
                         <div class="col-md-5"></div>
-                        @using (Html.BeginForm("ProjectList", "Worker"))
+                        @using (Html.BeginForm("ProjectDetails", "Worker"))
                         {
 
                             @*<input type="hidden" value="@CurrentUser.User.UserId" name="WUserId" />*@
-                            <input type="hidden" value="1" name="WUserId" />
+                            <input type="hidden" value="@HttpUtil.CurrentUser.UserId" name="WUserId" />
                             @Html.HiddenFor(m => m.PostId, new { @class = "form-control" })
                             <div class="col-md-3">
                                 <input type="submit" value="Interested Bid" class="btn btn-primary btn-block" />

@@ -47,11 +47,11 @@ namespace ATP2.FMS.Controllers
            // CurrentUser.User = obj.Data;
 
             if (obj.Data.UserType.Equals("Owner"))
-                return RedirectToAction("OwnerForm","User");
+                return RedirectToAction("Profile","Owner");
 
             else
             {
-                return RedirectToAction("Login");
+                return RedirectToAction("Profile", "Worker");
 
             }
         }

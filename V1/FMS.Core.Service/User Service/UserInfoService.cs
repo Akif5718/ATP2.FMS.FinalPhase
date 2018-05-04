@@ -125,6 +125,33 @@ namespace FMS.Core.Service
             return true;
         }
 
+         public Result<UserInfo> GetByEmail(string email)
+         {
+             var result = new Result<UserInfo>();
+
+             try
+             {
+                 var obj = _context.userInfos.FirstOrDefault(c => c.Email == email);
+                 if (obj == null)
+                 {
+                     result.HasError = true;
+                     result.Message = "Invalid UserID";
+                     return result;
+
+
+                 }
+                 result.Data = obj;
+             }
+             catch (Exception e)
+             {
+                 result.HasError = true;
+                 result.Message = e.Message;
+
+
+             }
+             return result;
+         }
+
         public Result<List<UserInfo>> GetAll(string key = "")
         {
             var result = new Result<List<UserInfo>>() { Data = new List<UserInfo>() };
@@ -135,7 +162,8 @@ namespace FMS.Core.Service
 
                 if (ValidationHelper.IsIntValid(key))
                 {
-                    query = query.Where(q => q.UserId == Int32.Parse(key));
+                    var a = Int32.Parse(key);
+                    query = query.Where(q => q.UserId ==a );
                 }
 
                 if (ValidationHelper.IsStringValid(key))
@@ -197,11 +225,7 @@ namespace FMS.Core.Service
                     query = query.Where(q => q.UserType.Contains(key));
 
                 }
-                if (ValidationHelper.IsStringValid(key))
-                {
-                    query = query.Where(q => q.Balance.Equals(Int32.Parse(key)));
-
-                }
+               
                 result.Data = query.ToList();
             }
             catch (Exception e)

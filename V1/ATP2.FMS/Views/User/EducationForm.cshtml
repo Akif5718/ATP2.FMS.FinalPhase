@@ -1,4 +1,5 @@
-﻿@model FMS.Core.Entities.EducationalBackground
+﻿@using ATP2.FMS.Web.Framework
+@model FMS.Core.Entities.EducationalBackground
 
 
 @{
@@ -27,7 +28,7 @@
                     <div class="form-group">
                         <label for="inputUserName" class="col-lg-4 control-label">UserId</label>
                         <div class="col-lg-8">
-                            <input class="form-control" name="UserId" id="inputUserName" placeholder="Id" type="text">
+                            <input class="form-control" name="UserId" value="@HttpUtil.CurrentUser.UserId" id="inputUserName" placeholder="Id" type="hidden">
                             @Html.ValidationMessageFor(m => m.UserId)
 
                         </div>

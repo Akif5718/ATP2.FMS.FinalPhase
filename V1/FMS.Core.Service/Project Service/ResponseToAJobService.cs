@@ -25,7 +25,7 @@ namespace FMS.Core.Service
            var result = new Result<ResponseToaJob>();
            try
            {
-               var objtosave = _context.responseToaJobs.FirstOrDefault(u => u.WUserId == userinfo.WUserId);
+               var objtosave = _context.responseToaJobs.FirstOrDefault(u => u.WUserId == userinfo.WUserId && u.PostId==userinfo.PostId);
                if (objtosave == null)
                {
                    objtosave = new ResponseToaJob();
