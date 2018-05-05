@@ -177,11 +177,14 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UnityDependencyResolver.cs" />
+    <Compile Include="ViewModel\PaymentModel.cs" />
+    <Compile Include="ViewModel\PostEditModel.cs" />
     <Compile Include="ViewModel\PostProjectModel.cs" />
     <Compile Include="ViewModel\Profile.cs" />
     <Compile Include="ViewModel\ProfileWorker.cs" />
     <Compile Include="ViewModel\ProjectListModel.cs" />
     <Compile Include="ViewModel\RequestedMemberModel.cs" />
+    <Compile Include="ViewModel\WorkerListModel.cs" />
     <Compile Include="ViewModel\WorkerProgress.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -245,6 +248,10 @@
     <Content Include="Views\Project\WorkProgressOwner.cshtml" />
     <Content Include="Views\User\Category.cshtml" />
     <Content Include="Views\User\Skills.cshtml" />
+    <Content Include="Views\Owner\WorkerList.cshtml" />
+    <Content Include="Views\Owner\WorkerRating.cshtml" />
+    <Content Include="Views\Owner\Payments.cshtml" />
+    <Content Include="Views\Project\CreateProjectEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

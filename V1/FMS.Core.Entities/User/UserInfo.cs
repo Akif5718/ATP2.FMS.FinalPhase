@@ -6,6 +6,7 @@ using System.Data.Odbc;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FrameWork;
 
 namespace FMS.Core.Entities
 {
@@ -15,6 +16,7 @@ namespace FMS.Core.Entities
         public int  UserId { get; set; }
       
         [Required]
+       
         public string FristName { get; set; }
         
         [Required]
@@ -24,6 +26,7 @@ namespace FMS.Core.Entities
         public string Email { get; set; }
 
         [Required]
+       
         public string Password { get; set; }
         
         [Required]
@@ -45,6 +48,8 @@ namespace FMS.Core.Entities
         public string UserType { get; set; }
       
         public double Balance { get; set; }
+
+        
 
     }
 }

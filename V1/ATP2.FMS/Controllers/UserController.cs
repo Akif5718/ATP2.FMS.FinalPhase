@@ -45,6 +45,7 @@ namespace ATP2.FMS.Controllers
         {
             if (!ModelState.IsValid)
             {
+
                 return View(userInfo);
             }
 
@@ -54,7 +55,7 @@ namespace ATP2.FMS.Controllers
                 if (result.HasError)
                 {
                     ViewBag.Message = result.Message;
-                    return View("RegisterForm", userInfo);
+                    return View("RegisterForm");
                 }
             }
             catch (Exception ex)

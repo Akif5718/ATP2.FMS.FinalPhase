@@ -34,6 +34,7 @@ namespace FMS.Core.Service
                 objtosave.OUserId = Payment.OUserId;
                 objtosave.WUserId = Payment.WUserId;
                 objtosave.Balance = Payment.Balance;
+                objtosave.PostId = Payment.PostId;
 
 
 
@@ -176,5 +177,7 @@ namespace FMS.Core.Service
             }
             return result;
         }
+
+      
     }
 }

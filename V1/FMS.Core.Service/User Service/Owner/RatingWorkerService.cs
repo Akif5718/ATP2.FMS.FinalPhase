@@ -26,7 +26,7 @@ namespace FMS.Core.Service
           var result = new Result<RatingWorker>();
           try
           {
-              var objtosave = _context.ratingWorkers.FirstOrDefault(u => u.UserId == userinfo.UserId);
+              var objtosave = _context.ratingWorkers.FirstOrDefault(u => u.RatingWorkerId == userinfo.RatingWorkerId);
               if (objtosave == null)
               {
                   objtosave = new RatingWorker();
@@ -38,6 +38,7 @@ namespace FMS.Core.Service
               objtosave.Behaviour = userinfo.Behaviour;
               objtosave.Completeness = userinfo.Completeness;
               objtosave.UserId = userinfo.UserId;
+              objtosave.PostId = userinfo.PostId;
 
 
               if (!IsValid(objtosave, result))

@@ -31,7 +31,8 @@ namespace FMS.Core.Service
                    objtosave = new ProjectSkills();
                    _context.projectSkillses.Add(objtosave);
                }
-               objtosave.SkillId = userinfo.SkillId;
+               objtosave.SkillName = userinfo.SkillName;
+               objtosave.PostId = userinfo.PostId;
 
 
                if (!IsValid(objtosave, result))
@@ -50,7 +51,7 @@ namespace FMS.Core.Service
 
        public bool IsValid(ProjectSkills obj, Result<ProjectSkills> result)
        {
-           if (!ValidationHelper.IsStringValid(obj.SkillId.ToString()))
+           if (!ValidationHelper.IsStringValid(obj.SkillName))
            {
                result.HasError = true;
                result.Message = "Invalid SkillID";
@@ -77,7 +78,7 @@ namespace FMS.Core.Service
 
                if (ValidationHelper.IsStringValid(key))
                {
-                   query = query.Where(q => q.SkillId.Equals(Int32.Parse(key)));
+                   query = query.Where(q => q.SkillName.Contains(key));
 
                }
 
@@ -102,7 +103,34 @@ namespace FMS.Core.Service
 
            try
            {
-               var obj = _context.projectSkillses.FirstOrDefault(c => c.SkillId == id);
+               var obj = _context.projectSkillses.FirstOrDefault(c => c.PostId == id);
+               if (obj == null)
+               {
+                   result.HasError = true;
+                   result.Message = "Invalid PostID";
+                   return result;
+
+
+               }
+               result.Data = obj;
+           }
+           catch (Exception e)
+           {
+               result.HasError = true;
+               result.Message = e.Message;
+
+
+           }
+           return result;
+       }
+
+       public Result<ProjectSkills> GetByName(string name)
+       {
+           var result = new Result<ProjectSkills>();
+
+           try
+           {
+               var obj = _context.projectSkillses.FirstOrDefault(c => c.SkillName == name);
                if (obj == null)
                {
                    result.HasError = true;

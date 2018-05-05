@@ -324,7 +324,11 @@
         </div>
     </div>
 </div>*@
-<a href="WorkerList.html" class="btn btn-success">Approve</a><br /><br/>
+@if (HttpUtil.CurrentUser.UserType.Equals("Owner"))
+{
+    <a href='@Url.Action("WorkerList","Owner")/@Model.PostID' class="btn btn-success">Approve</a><br /><br />
+
+}
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>

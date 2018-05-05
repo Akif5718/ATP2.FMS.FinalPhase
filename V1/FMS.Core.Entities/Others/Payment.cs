@@ -23,6 +23,12 @@ namespace FMS.Core.Entities
        [ForeignKey("WUserId,OUserId")]
        public UserInfo UserInfo;
 
+       [Required]
+       public int PostId { get; set; }
+
+       [ForeignKey("PostId")]
+       public PostAProject PostAProject;
+
        public double Balance { get; set; }
     }
 }

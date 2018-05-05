@@ -7,7 +7,6 @@
 
     $scope.Init = function(pid) {
 
-        alert(pid);
         $scope.PID = pid;
         $scope.LoadComments();
     };
@@ -17,11 +16,9 @@
             method: "GET",
             url: "http://localhost:64944//api/Comments/" + $scope.PID
         }).then(function mySuccess(response) {
-            alert("Success");
             console.log(response.data);
             $scope.Comments = response.data;
         }, function myError(response) {
-            alert(response.statusText);
         });
 
     }
@@ -32,13 +29,11 @@
 
         $http.post("http://localhost:64944//api/Comments/", com).then(
             function (response) {
-                alert('success');
 
                 if (response.data)
                     $scope.Comments.push(response.data);
 
             }, function (response) {
-                alert('error');
             });
 
     };

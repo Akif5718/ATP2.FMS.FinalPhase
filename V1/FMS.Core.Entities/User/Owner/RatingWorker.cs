@@ -19,6 +19,12 @@ namespace FMS.Core.Entities
         [ForeignKey("UserId")]
         public UserInfo UserInfo;
 
+        [Required]
+        public int PostId { get; set; }
+
+        [ForeignKey("PostId")]
+        public PostAProject PostAProject;
+
        
 
         [Required]

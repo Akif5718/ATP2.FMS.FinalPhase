@@ -21,9 +21,9 @@ namespace FMS.Core.Entities
        [ForeignKey("PostId")]
        public PostAProject PostAProject;
 
-       public int SkillId { get; set; }
+       public string SkillName { get; set; }
 
-       [ForeignKey("SkillId")]
+       [ForeignKey("SkillName")]
        public Skill Skill;
     }
 }

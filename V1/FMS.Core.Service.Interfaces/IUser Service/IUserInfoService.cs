@@ -12,5 +12,10 @@ namespace FMS.Core.Service.Interfaces
     public interface IUserInfoService : IService<UserInfo>
     {
         Result<UserInfo> GetByEmail(string email);
+
+        void Deposit(double balance, int id);
+
+        void Withdraw(double balance, int id);
+
     }
 }

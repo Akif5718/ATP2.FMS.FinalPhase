@@ -330,5 +330,80 @@ namespace FMS.Core.Service
 
         }
 
+      public void Deposit(double balance, int id)
+      {
+          var result = new Result<UserInfo>();
+
+          try
+          {
+              var obj = _context.userInfos.FirstOrDefault(c => c.UserId == id);
+              if (obj == null)
+              {
+                  result.HasError = true;
+                  result.Message = "Invalid UserID";
+                 
+
+
+              }
+              if (balance > 0)
+              {
+                  balance = balance + obj.Balance;
+              }
+              else
+              {
+                  result.HasError = true;
+                  result.Message = "Invalid Balance";
+                 
+              }
+              obj.Balance = balance;
+              _context.SaveChanges();
+
+          }
+          catch (Exception e)
+          {
+              result.HasError = true;
+              result.Message = e.Message;
+
+
+          }
+         
+      }
+
+      public void Withdraw(double balance, int id)
+      {
+          var result = new Result<UserInfo>();
+
+          try
+          {
+              var obj = _context.userInfos.FirstOrDefault(c => c.UserId == id);
+              if (obj == null)
+              {
+                  result.HasError = true;
+                  result.Message = "Invalid UserID";
+
+              }
+              if (balance > 0 && obj.Balance>balance)
+              {
+                  balance = obj.Balance-balance;
+              }
+              else
+              {
+                  result.HasError = true;
+                  result.Message = "Invalid Balance";
+              }
+              obj.Balance = balance;
+              _context.SaveChanges();
+
+          }
+          catch (Exception e)
+          {
+              result.HasError = true;
+              result.Message = e.Message;
+
+
+          }
+         
+      }
+
     }
 }

@@ -51,7 +51,6 @@ namespace ATP2.FMS.ViewModel
         public PostAProject Insert(PostProjectModel postProjectModel)
         {
             var postAProject = new PostAProject();
-            //postAProject.WUserId = CurrentUser.User.UserId;
             postAProject.WUserId = HttpUtil.CurrentUser.UserId;
             postAProject.ProjectName = postProjectModel.ProjectName;
             postAProject.Description = postProjectModel.Description;
@@ -62,5 +61,7 @@ namespace ATP2.FMS.ViewModel
 
             return postAProject;
         }
+
+       
     }
 }

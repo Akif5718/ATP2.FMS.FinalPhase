@@ -75,6 +75,12 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FMS.FrameWork\FrameWork.csproj">
+      <Project>{63C4AA56-1200-443D-8B86-3A41CF08F35A}</Project>
+      <Name>FrameWork</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

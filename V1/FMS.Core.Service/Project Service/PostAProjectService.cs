@@ -283,5 +283,10 @@ namespace FMS.Core.Service
            return true;
 
        }
+
+       //public int CountMember(int id)
+       //{
+           
+       //}
     }
 }

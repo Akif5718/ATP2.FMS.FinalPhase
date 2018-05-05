@@ -68,10 +68,10 @@ namespace ATP2.FMS.Controllers
                     var result1 = _sectionservice.Save(projectsection);
                 }
 
-                foreach (var skillid in PostProjectModel.SkillId)
+                foreach (var skillid in PostProjectModel.SkillName)
                 {
                     var projectskill = new ProjectSkills();
-                    projectskill.SkillId = skillid;
+                    projectskill.SkillName = skillid;
                     projectskill.PostId = last.Data.PostId;
                     var result2 = _proskillservice.Save(projectskill);
                 }
@@ -92,6 +92,23 @@ namespace ATP2.FMS.Controllers
             }
             return RedirectToAction("ProjectDetails", "Owner", new { id = PostProjectModel.PostId });
         }
+
+        public ActionResult CreateProjectEdit(int id)
+        {
+            PostEditModel post = new PostEditModel();
+
+            var result = _postservice.GetByID(id);
+
+            post.PostAProject = result.Data;
+
+            var result2 = _proskillservice.GetAll().Data.Where(d => d.PostId == id).ToList();
+            var result3 = _sectionservice.GetAll().Data.Where(d => d.PostId == id).ToList();
+            post.ProjectSkills = result2;
+            post.ProjectSections = result3;
+            ViewBag.Categories = new MultiSelectList(result2, "ProjectSkillId", "SkillName");
+
+            return View(post);
+        }
      
         public ActionResult RequestedMember(int id)
         {
@@ -100,18 +117,27 @@ namespace ATP2.FMS.Controllers
             var result = _responseservice.GetAll(id+"");
 
             var result2 = _postservice.GetByID(id);
+            var select = _selectedWorkerService.GetAll().Data.Where(d => d.PostId == id).ToList();
+
+
             requested.ProjectName = result2.Data.ProjectName;
             requested.Description = result2.Data.Description;
             requested.PostId = result2.Data.PostId;
             var m = result.Data.Where(p => p.Flag == 0).ToList();
-            foreach (var user in m)
+            if (select.Count < result2.Data.Members)
             {
-                var result3 = _userservice.GetByID(user.WUserId);
-                requested.UserInfo.Add(result3.Data);
-               
+                foreach (var user in m)
+                {
+                    var result3 = _userservice.GetByID(user.WUserId);
+                    requested.UserInfo.Add(result3.Data);
 
+
+                }
             }
+           
+           
 
+           
            
             return View(requested);
         }
@@ -216,6 +242,7 @@ namespace ATP2.FMS.Controllers
                 return Content("Something went wrong");
             }
         }
+
         public ActionResult ZipDownload(int id)
         {
             var files = _savedFileService.GetAll().Data.Where(d => d.PostId == id).ToList();
@@ -227,6 +254,7 @@ namespace ATP2.FMS.Controllers
             SaveFiles(files);
             return null;
         }
+
         public void SaveFiles(List<SavedFile> files)
         {
             Response.ContentType = "application/zip";

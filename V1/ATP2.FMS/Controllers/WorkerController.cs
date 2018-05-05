@@ -53,7 +53,7 @@ namespace ATP2.FMS.Controllers
         {
             ProjectListModel projectListModel = new ProjectListModel();
 
-            var result = _proskillservice.GetAll(skill.SkillId+"");
+            var result = _proskillservice.GetAll(skill.SkillName+"");
             foreach (var projectSkillse in result.Data)
             {
                 var result2 = _postservice.GetByID(projectSkillse.PostId);
@@ -82,9 +82,7 @@ namespace ATP2.FMS.Controllers
             var result2 = _proskillservice.GetAll(result.Data.PostId + "");
             foreach (var skillid in result2.Data)
             {
-                var result3 = _skillservice.GetByID(skillid.SkillId);
-
-                postProjectModel.SkillName.Add(result3.Data.SkillName);
+                postProjectModel.SkillName.Add(skillid.SkillName);
 
             }
 

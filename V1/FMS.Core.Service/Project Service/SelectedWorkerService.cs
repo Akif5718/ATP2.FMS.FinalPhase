@@ -35,6 +35,33 @@ namespace FMS.Core.Service
                objtosave.UserId = userinfo.UserId;
                objtosave.PostId = userinfo.PostId;
                objtosave.Price = userinfo.Price;
+               objtosave.Flag = 0;
+
+
+
+               if (!IsValid(objtosave, result))
+               {
+                   return result;
+               }
+               _context.SaveChanges();
+           }
+           catch (Exception ex)
+           {
+               result.HasError = true;
+               result.Message = ex.Message;
+           }
+           return result;
+       }
+
+       public Result<SelectedWorker> Update(SelectedWorker userinfo)
+       {
+           var result = new Result<SelectedWorker>();
+           try
+           {
+               var objtosave = _context.selectedWorkers.FirstOrDefault(u => u.PostId == userinfo.PostId && u.UserId == userinfo.UserId);
+              
+              
+               objtosave.Flag = 1;
 
 
 
