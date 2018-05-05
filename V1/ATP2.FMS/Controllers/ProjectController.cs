@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using ATP2.FMS.ViewModel;
+using ATP2.FMS.Web.Framework;
 using FMS.Core.Entities;
 using FMS.Core.Service.Interfaces;
 using FMS.FrameWork;
@@ -180,6 +183,37 @@ namespace ATP2.FMS.Controllers
         public ActionResult WorkProgressOwner(object obj)
         {
             return null;
+        }
+
+      
+
+        [HttpPost]
+        public ActionResult SaveFile(HttpPostedFileBase file, string PostId, string ProjectSectionId)
+        {
+            try
+            {
+                if (file.ContentLength > 0)
+                {
+                    string filename = Path.GetFileName(file.FileName);
+                    string filepath = Path.Combine(Server.MapPath("~/Files"), filename);
+                    file.SaveAs(filepath);
+                    var objToSave = new SavedFile();
+                    objToSave.FileLink = filename;
+                    objToSave.PostId = Int32.Parse(PostId);
+                    objToSave.ProjectSectionId = Int32.Parse(ProjectSectionId);
+                    objToSave.UserId = HttpUtil.CurrentUser.UserId;
+                    var result = _savedFileService.Save(objToSave);
+                    if (result.HasError)
+                    {
+                        return Content("Something Went wrong");
+                    }
+                }
+                return RedirectToAction("WorkProgressOwner",new { id=PostId});
+            }
+            catch (Exception e)
+            {
+                return Content("Something went wrong");
+            }
         }
         
     }

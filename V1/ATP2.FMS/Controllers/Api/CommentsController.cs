@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -25,7 +26,12 @@ namespace ATP2.FMS.Api
         [HttpGet]
         public List<COMMENTSEC> Get(int id)
         {
-            return _context.commentsecs.Where(e => e.ProjectSectionId == id).ToList();
+            var list = _context.commentsecs.Where(e => e.ProjectSectionId == id).ToList();
+            foreach (var v in list)
+            {
+                v.UserInfo = _context.userInfos.FirstOrDefault(d => d.UserId == v.UserId);
+            }
+            return list;
         }
         [HttpPost]
         public COMMENTSEC Post(COMMENTSEC commentsec)

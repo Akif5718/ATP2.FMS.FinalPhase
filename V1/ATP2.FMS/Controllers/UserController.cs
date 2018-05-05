@@ -20,14 +20,19 @@ namespace ATP2.FMS.Controllers
         private IWorkerService _wservice;
         private IEducationalService _eservice;
         private IWorkHistoryService _whservice;
+        private ICategoryService _categoryService;
+        private IskillService _skillService;
 
-        public UserController(IUserInfoService service, IOwnerService oservice, IWorkerService wservice, IEducationalService eservice, IWorkHistoryService whservice)
+
+        public UserController(IUserInfoService service, IOwnerService oservice, IWorkerService wservice, IEducationalService eservice, IWorkHistoryService whservice, ICategoryService categoryService, IskillService skillService)
         {
             _uservice = service;
             _oservice = oservice;
             _wservice = wservice;
             _eservice = eservice;
             _whservice = whservice;
+            _categoryService = categoryService;
+            _skillService = skillService;
         }
 
         public ActionResult RegisterForm()
@@ -134,6 +139,32 @@ namespace ATP2.FMS.Controllers
 
         }
 
+        public ActionResult Category()
+        {
+            var result = _categoryService.GetAll();
+            var categories = new List<SkillCategory>();
+            categories = result.Data;
+            return View(categories);
+        }
+
+        public ActionResult Skills(int id)
+        {
+            var result = _skillService.GetAll().Data.Where(m => m.CategoryId == id).ToList();
+
+            var skills=new List<Skill>();
+            skills = result;
+            return View(skills);
+
+        }
+        [HttpPost]
+        public ActionResult Skills(List<string> skillNames)
+        {
+            //var objtosave=new WorkerSkill();
+            //objtosave.SkillId = model.SkillId;
+            //objtosave.UserId=model.
+            return null;
+
+        }
         public ActionResult EducationForm()
         {
             return View();

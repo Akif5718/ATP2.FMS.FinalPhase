@@ -1,0 +1,58 @@
+﻿@model List<FMS.Core.Entities.Skill>
+@{
+    ViewBag.Title = "Skills";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using (Html.BeginForm("Skills", "User"))
+{
+    <br/>
+    <ul class="breadcrumb">
+        <li><a href="#">Register</a></li>
+        <li><a href="#">Catagory</a></li>
+        <li class="active">Catagory Details</li>
+    </ul>
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <br/>
+            <div class="progress progress-striped active">
+                <div class="progress-bar" style="width: 50%"></div>
+            </div>
+            <form class="form-horizontal">
+                <fieldset>
+                    <legend>Catagory Details</legend>
+                    <div class="row">
+                        <div class="col-md-3"></div>
+                        <div class="col-md-6">
+                            @foreach (var s in Model)
+                            {
+                                <div class="checkbox">
+
+                                    <label>
+                                        <input type="checkbox" name="SkillName" value="@s.SkillName"> @s.SkillName
+                                    </label>
+
+                                </div>
+                            }
+                        </div>
+                        <div class="col-md-3"></div>
+
+
+                    </div><br/><br/><br/>
+                    <div align="center">
+                        <input type="Submit" value="Continue"/>
+                    </div>
+                </fieldset>
+            </form>
+
+
+
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+}
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="js/bootstrap.min.js"></script>
+

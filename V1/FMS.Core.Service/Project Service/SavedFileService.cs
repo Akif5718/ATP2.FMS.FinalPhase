@@ -33,6 +33,11 @@ namespace FMS.Core.Service
                   _context.savedFiles.Add(objtosave);
               }
 
+              objtosave.FileLink = Entity.FileLink;
+              objtosave.PostId = Entity.PostId;
+              objtosave.ProjectSectionId = Entity.ProjectSectionId;
+              objtosave.UserId = Entity.UserId;
+
               if (!IsValid(objtosave, result))
               {
                   return result;

@@ -243,9 +243,12 @@
     <Content Include="Views\Worker\Profile.cshtml" />
     <Content Include="Views\Worker\Edit.cshtml" />
     <Content Include="Views\Project\WorkProgressOwner.cshtml" />
+    <Content Include="Views\User\Category.cshtml" />
+    <Content Include="Views\User\Skills.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Files\" />
     <Folder Include="Models\" />
     <Folder Include="Views\Skill\" />
   </ItemGroup>
