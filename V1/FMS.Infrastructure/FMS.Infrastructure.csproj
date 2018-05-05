@@ -53,6 +53,14 @@
     <Compile Include="Migrations\201805011456112_init.Designer.cs">
       <DependentUpon>201805011456112_init.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201805042147117_remove_subdate_fromSelectedWorker.cs" />
+    <Compile Include="Migrations\201805042147117_remove_subdate_fromSelectedWorker.Designer.cs">
+      <DependentUpon>201805042147117_remove_subdate_fromSelectedWorker.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805042227191_add_flag_to_responsetoApro.cs" />
+    <Compile Include="Migrations\201805042227191_add_flag_to_responsetoApro.Designer.cs">
+      <DependentUpon>201805042227191_add_flag_to_responsetoApro.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -69,6 +77,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201805011456112_init.resx">
       <DependentUpon>201805011456112_init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805042147117_remove_subdate_fromSelectedWorker.resx">
+      <DependentUpon>201805042147117_remove_subdate_fromSelectedWorker.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805042227191_add_flag_to_responsetoApro.resx">
+      <DependentUpon>201805042227191_add_flag_to_responsetoApro.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

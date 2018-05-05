@@ -26,15 +26,15 @@ namespace FMS.Core.Service
            var result = new Result<SelectedWorker>();
            try
            {
-               var objtosave = _context.selectedWorkers.FirstOrDefault(u => u.PostId == userinfo.PostId);
+               var objtosave = _context.selectedWorkers.FirstOrDefault(u => u.PostId == userinfo.PostId && u.UserId==userinfo.UserId);
                if (objtosave == null)
                {
                    objtosave = new SelectedWorker();
                    _context.selectedWorkers.Add(objtosave);
                }
                objtosave.UserId = userinfo.UserId;
+               objtosave.PostId = userinfo.PostId;
                objtosave.Price = userinfo.Price;
-               objtosave.SubmissionDate = userinfo.SubmissionDate;
 
 
 
@@ -68,12 +68,7 @@ namespace FMS.Core.Service
                result.Message = "Invalid Price";
                return false;
            }
-           if (!ValidationHelper.IsStringValid(obj.SubmissionDate.ToString()))
-           {
-               result.HasError = true;
-               result.Message = "Invalid SubmissionDate";
-               return false;
-           }
+          
 
            return true;
        }
@@ -103,12 +98,7 @@ namespace FMS.Core.Service
 
                }
 
-               if (ValidationHelper.IsStringValid(key))
-               {
-                   query = query.Where(q => q.SubmissionDate.ToString().Contains(key));
-
-               }
-
+              
 
                result.Data = query.ToList();
            }

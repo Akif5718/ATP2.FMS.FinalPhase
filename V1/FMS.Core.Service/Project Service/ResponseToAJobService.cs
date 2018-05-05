@@ -32,7 +32,9 @@ namespace FMS.Core.Service
                    _context.responseToaJobs.Add(objtosave);
                }
                objtosave.WUserId = userinfo.WUserId;
+               objtosave.PostId = userinfo.PostId;
                objtosave.FixedPrice = userinfo.FixedPrice;
+               objtosave.Flag = 0;
               
 
 
@@ -48,6 +50,37 @@ namespace FMS.Core.Service
                result.Message = ex.Message;
            }
            return result;
+       }
+
+       public Result<ResponseToaJob> Update(ResponseToaJob userinfo)
+       {
+           var result = new Result<ResponseToaJob>();
+           try
+           {
+               var objtosave = _context.responseToaJobs.FirstOrDefault(u => u.WUserId == userinfo.WUserId && u.PostId == userinfo.PostId);
+        
+            
+               objtosave.Flag =1;
+
+
+
+               if (!IsValid(objtosave, result))
+               {
+                   return result;
+               }
+               _context.SaveChanges();
+           }
+           catch (Exception ex)
+           {
+               result.HasError = true;
+               result.Message = ex.Message;
+           }
+           return result;
+       }
+
+       public Result<bool> Delete(int Id)
+       {
+           throw new NotImplementedException();
        }
 
        public bool IsValid(ResponseToaJob obj, Result<ResponseToaJob> result)
@@ -136,13 +169,40 @@ namespace FMS.Core.Service
            return result;
        }
 
-       public Result<bool> Delete(int id)
+       public Result<ResponseToaJob> GetByID(int id,int id2)
+       {
+           var result = new Result<ResponseToaJob>();
+
+           try
+           {
+               var obj = _context.responseToaJobs.FirstOrDefault(c => c.PostId == id2 && c.WUserId==id);
+               if (obj == null)
+               {
+                   result.HasError = true;
+                   result.Message = "Invalid UserID";
+                   return null;
+
+
+               }
+               result.Data = obj;
+           }
+           catch (Exception e)
+           {
+               result.HasError = true;
+               result.Message = e.Message;
+
+
+           }
+           return result;
+       }
+
+       public Result<bool> Delete(int id,int id2)
        {
            var result = new Result<bool>();
 
            try
            {
-               var objtodelete = _context.responseToaJobs.FirstOrDefault(c => c.PostId == id);
+               var objtodelete = _context.responseToaJobs.FirstOrDefault(c => c.PostId == id && c.WUserId==id2);
                if (objtodelete == null)
                {
                    result.HasError = true;

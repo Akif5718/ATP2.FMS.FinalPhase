@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ATP2.FMS.ViewModel;
@@ -91,6 +92,15 @@ namespace ATP2.FMS.Controllers
             postProjectModel.UFirstName = result4.Data.FristName;
             postProjectModel.ULastName = result4.Data.LastName;
 
+            var a = _responseservice.GetByID(HttpUtil.CurrentUser.UserId,id);
+            if (a != null)
+            {
+                postProjectModel.Flag = 1;
+            }
+            else
+            {
+                postProjectModel.Flag = 0;
+            }
 
             return View(postProjectModel);
         }
@@ -126,15 +136,15 @@ namespace ATP2.FMS.Controllers
        
         public ActionResult Profile()
         {
-            var user = _userservice.GetByID(2);
-            var workerInfo = _workerService.GetByID(2);
-            var Selected = _selectedWorkerService.GetAll().Data.Where(d=>d.UserId == 2).ToList();
+            var user = _userservice.GetByID(HttpUtil.CurrentUser.UserId);
+            var workerInfo = _workerService.GetByID(HttpUtil.CurrentUser.UserId);
+            var Selected = _selectedWorkerService.GetAll().Data.Where(d => d.UserId == HttpUtil.CurrentUser.UserId).ToList();
             var projects = new List<PostAProject>();
             foreach (var v in Selected)
             {
                 projects.Add(_postservice.GetByID(v.PostId).Data);
             }
-            List<RatingWorker> ratings = _ratingWorkerService.GetAll().Data.Where(d => d.UserId == 2).ToList();
+            List<RatingWorker> ratings = _ratingWorkerService.GetAll().Data.Where(d => d.UserId == HttpUtil.CurrentUser.UserId).ToList();
             var profileVM = new ProfileWorker();
             profileVM = profileVM.creation(user.Data, workerInfo.Data, ratings, projects);
 
@@ -143,8 +153,8 @@ namespace ATP2.FMS.Controllers
 
         public ActionResult Edit()
         {
-            var user = _userservice.GetByID(2);
-            var workerInfo = _workerService.GetByID(2);
+            var user = _userservice.GetByID(HttpUtil.CurrentUser.UserId);
+            var workerInfo = _workerService.GetByID(HttpUtil.CurrentUser.UserId);
             var profileVM = new ProfileWorker();
             profileVM = profileVM.creation(user.Data, workerInfo.Data, new List<RatingWorker>(), new List<PostAProject>());
             return View(profileVM);
@@ -153,10 +163,10 @@ namespace ATP2.FMS.Controllers
         [HttpPost]
         public ActionResult Edit(ProfileWorker profile)
         {
-            var user = _userservice.GetByID(2);
+            var user = _userservice.GetByID(HttpUtil.CurrentUser.UserId);
             var obj = profile.EditUserInfo(profile, user.Data);
             var u = _userservice.Save(obj);
-            var ownerInfo = _workerService.GetByID(2);
+            var ownerInfo = _workerService.GetByID(HttpUtil.CurrentUser.UserId);
             var obj1 = profile.EditWorkerInfo(profile, ownerInfo.Data);
             var owner = _workerService.Save(obj1);
             if (u.HasError || owner.HasError)

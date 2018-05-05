@@ -40,6 +40,7 @@ namespace ATP2.FMS.ViewModel
         public int WUserId { get; set; }
 
         public int PostId { get; set; }
+        public int Flag { get; set; }
 
         [Required]
         public List<string> SectionName { get; set; }

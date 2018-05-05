@@ -23,8 +23,9 @@ namespace ATP2.FMS.Controllers
         private ISelectedWorkerService _selectedWorkerService;
         private IComentSectionService _comentSectionService;
         private ISavedFileService _savedFileService;
+        private ISelectedWorkerService _selectedService;
 
-        public ProjectController(IPostAProjectService postservice, IProjectSectionService sectionservice, IProjectSkillService proskillservice, IskillService skillservice, IUserInfoService userservice, IResponseToAJobService responseservice, ISelectedWorkerService selectedWorkerService, IComentSectionService comentSectionService, ISavedFileService savedFileService)
+        public ProjectController(IPostAProjectService postservice, IProjectSectionService sectionservice, IProjectSkillService proskillservice, IskillService skillservice, IUserInfoService userservice, IResponseToAJobService responseservice, ISelectedWorkerService selectedWorkerService, IComentSectionService comentSectionService, ISavedFileService savedFileService, ISelectedWorkerService selectedService)
         {
             _postservice = postservice;
             _sectionservice = sectionservice;
@@ -35,6 +36,7 @@ namespace ATP2.FMS.Controllers
             _selectedWorkerService = selectedWorkerService;
             _comentSectionService = comentSectionService;
             _savedFileService = savedFileService;
+            _selectedService = selectedService;
         }
 
         public ActionResult CreateProject()
@@ -86,9 +88,7 @@ namespace ATP2.FMS.Controllers
             }
             return RedirectToAction("ProjectDetails", "Owner", new { id = PostProjectModel.PostId });
         }
-
-       
-
+     
         public ActionResult RequestedMember(int id)
         {
             RequestedMemberModel requested = new RequestedMemberModel();
@@ -99,37 +99,46 @@ namespace ATP2.FMS.Controllers
             requested.ProjectName = result2.Data.ProjectName;
             requested.Description = result2.Data.Description;
             requested.PostId = result2.Data.PostId;
-            foreach (var user in result.Data)
+            var m = result.Data.Where(p => p.Flag == 0).ToList();
+            foreach (var user in m)
             {
                 var result3 = _userservice.GetByID(user.WUserId);
                 requested.UserInfo.Add(result3.Data);
+               
 
             }
+
+           
             return View(requested);
         }
 
-        //[HttpPost]
-        //public ActionResult RequestedMember(SelectedWorker selected)
-        //{
+        [HttpPost]
+        public ActionResult RequestedMember(SelectedWorker selected)
+        {
 
 
-        //    try
-        //    {
+            try
+            {
 
-        //        var result = selectedWorkerDao.Save(selected);
-        //        var result2 = response.Delete1(selected.UserId);
-        //        if (result.HasError)
-        //        {
-        //            ViewBag.Message = result.Message;
-        //            return View("RequestedMember");
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Console.WriteLine(ex.Message);
-        //    }
-        //    return RedirectToAction("OwnerProfile", "Owner");
-        //}
+                var result = _selectedService.Save(selected);
+                //var result2 = _responseservice.Delete(selected.PostId,selected.UserId);
+                var response = new ResponseToaJob();
+                response.WUserId = selected.UserId;
+                response.PostId = selected.PostId;
+                var r = _responseservice.Update(response);
+                if (result.HasError)
+                {
+                    ViewBag.Message = result.Message;
+                    return View("RequestedMember");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return RedirectToAction("Profile", "Owner");
+        }
+
         public ActionResult WorkProgressOwner(int id)
         {
             var post = _postservice.GetByID(id);
@@ -166,6 +175,7 @@ namespace ATP2.FMS.Controllers
             return View(VM);
 
         }
+
         [HttpPost]
         public ActionResult WorkProgressOwner(object obj)
         {

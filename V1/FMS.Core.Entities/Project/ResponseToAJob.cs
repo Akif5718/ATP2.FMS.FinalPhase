@@ -30,6 +30,8 @@ namespace FMS.Core.Entities
         [Required]
         public float FixedPrice { get; set; }
 
+       public int Flag { get; set; }
+
        
 
 

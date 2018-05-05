@@ -28,11 +28,12 @@ namespace ATP2.FMS.ViewModel
 
         public string Description { get; set; }
 
+        public List<ResponseToaJob> ResponseToaJob=new List<ResponseToaJob>();
         //public RequestedMemberModel getall(int id)
         //{
         //    RequestedMemberModel requested = new RequestedMemberModel();
         //    var result = _responseservice.GetAll(id);
-       
+
         //    var result2 = _postservice.GetByID(id);
         //    requested.ProjectName = result2.Data.ProjectName;
         //    requested.Description = result2.Data.Description;

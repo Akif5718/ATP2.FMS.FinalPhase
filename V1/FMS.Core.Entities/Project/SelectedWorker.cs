@@ -28,7 +28,6 @@ namespace FMS.Core.Entities
        [Required]
        public double Price { get; set; }
 
-       [Required]
-       public DateTime SubmissionDate { get; set; }
+      
     }
 }

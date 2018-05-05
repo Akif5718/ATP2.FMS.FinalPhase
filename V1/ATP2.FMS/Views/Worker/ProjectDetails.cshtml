@@ -51,10 +51,14 @@
                             @*<input type="hidden" value="@CurrentUser.User.UserId" name="WUserId" />*@
                             <input type="hidden" value="@HttpUtil.CurrentUser.UserId" name="WUserId" />
                             @Html.HiddenFor(m => m.PostId, new { @class = "form-control" })
-                            <div class="col-md-3">
-                                <input type="submit" value="Interested Bid" class="btn btn-primary btn-block" />
+                            if (@Model.Flag == 0)
+                            {
+                                <div class="col-md-3">
+                                    <input type="submit" onclick="func()" value="Interested Bid" id="ab" class="btn btn-primary btn-block" />
 
-                            </div>
+                                </div>
+                            }
+
                         }
 
                         &nbsp;
@@ -83,6 +87,18 @@
     </div>
 
 </div>
+
+@*@section scripts
+{
+    <script>
+        function func() {
+            document.getElementById("ab").hidden;
+        }
+</script>
+
+}*@
+
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 
 
