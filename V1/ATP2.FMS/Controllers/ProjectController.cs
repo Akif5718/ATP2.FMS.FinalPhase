@@ -11,6 +11,7 @@ using ATP2.FMS.Web.Framework;
 using FMS.Core.Entities;
 using FMS.Core.Service.Interfaces;
 using FMS.FrameWork;
+using Ionic.Zip;
 using Microsoft.Ajax.Utilities;
 
 namespace ATP2.FMS.Controllers
@@ -213,6 +214,30 @@ namespace ATP2.FMS.Controllers
             catch (Exception e)
             {
                 return Content("Something went wrong");
+            }
+        }
+        public ActionResult ZipDownload(int id)
+        {
+            var files = _savedFileService.GetAll().Data.Where(d => d.PostId == id).ToList();
+
+            foreach (var v in files)
+            {
+                v.FileLink = "~/Files/" + v.FileLink;
+            }
+            SaveFiles(files);
+            return null;
+        }
+        public void SaveFiles(List<SavedFile> files)
+        {
+            Response.ContentType = "application/zip";
+            Response.AddHeader("content-disposition", "attachment; filename=myZipFile.zip");
+            using (ZipFile zip = new ZipFile())
+            {
+                foreach (var v in files)
+                {
+                    zip.AddFile(Server.MapPath(v.FileLink), String.Empty);
+                }
+                zip.Save(Response.OutputStream);
             }
         }
         
