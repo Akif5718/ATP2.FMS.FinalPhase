@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using FMS.Core.Entities;
+using FMS.Core.Entities.User;
 
 namespace FMS.Infrastructure
 {
@@ -35,5 +36,6 @@ namespace FMS.Infrastructure
         public DbSet<SavedFile> savedFiles { get; set; }
         public DbSet<WorkerSkill> workerSkills { get; set; }
         public DbSet<WorkReport> WorkReports { get; set; } 
+        public DbSet<AverageRating> AverageRatings { get; set; } 
     }
 }

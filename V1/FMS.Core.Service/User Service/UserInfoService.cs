@@ -38,7 +38,7 @@ namespace FMS.Core.Service
                 objtosave.Email = userinfo.Email;
                 objtosave.Password = userinfo.Password;
                 objtosave.DateofBrith = userinfo.DateofBrith;
-                objtosave.JoinDate = userinfo.JoinDate;
+                objtosave.JoinDate = DateTime.Now;
                 objtosave.ProPic = userinfo.ProPic;
                 objtosave.City = userinfo.City;
                 objtosave.State = userinfo.State;

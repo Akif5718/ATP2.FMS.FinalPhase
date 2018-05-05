@@ -61,6 +61,10 @@
     <Compile Include="Migrations\201805042227191_add_flag_to_responsetoApro.Designer.cs">
       <DependentUpon>201805042227191_add_flag_to_responsetoApro.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201805050731195_AverageRatingTable.cs" />
+    <Compile Include="Migrations\201805050731195_AverageRatingTable.Designer.cs">
+      <DependentUpon>201805050731195_AverageRatingTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -83,6 +87,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201805042227191_add_flag_to_responsetoApro.resx">
       <DependentUpon>201805042227191_add_flag_to_responsetoApro.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805050731195_AverageRatingTable.resx">
+      <DependentUpon>201805050731195_AverageRatingTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

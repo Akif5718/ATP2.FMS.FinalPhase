@@ -51,6 +51,7 @@
     <Compile Include="AuthenticationService.cs" />
     <Compile Include="Skill Service\CategoryService.cs" />
     <Compile Include="Project Service\ComentSectionService.cs" />
+    <Compile Include="User Service\AverageRatingService.cs" />
     <Compile Include="User Service\EducationalService.cs" />
     <Compile Include="User Service\Owner\OwnerService.cs" />
     <Compile Include="Other Service\PaymentService.cs" />

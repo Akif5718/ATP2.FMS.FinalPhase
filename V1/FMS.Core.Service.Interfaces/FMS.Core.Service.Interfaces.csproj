@@ -52,6 +52,7 @@
     <Compile Include="IReportService.cs" />
     <Compile Include="ISkill Service\ICategoryService.cs" />
     <Compile Include="IProject Service\IComentSectionService.cs" />
+    <Compile Include="IUser Service\IAverageRatingService.cs" />
     <Compile Include="IUser Service\IEducationalService.cs" />
     <Compile Include="IUser Service\IOwner Service\IOwnerService.cs" />
     <Compile Include="IOtherService\IPaymentService.cs" />

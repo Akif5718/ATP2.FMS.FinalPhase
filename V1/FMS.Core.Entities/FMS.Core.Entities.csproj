@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Project\COMMENTSEC.cs" />
+    <Compile Include="User\AverageRating.cs" />
     <Compile Include="User\EducationalBackground.cs" />
     <Compile Include="User\Owner\OwnerInfo.cs" />
     <Compile Include="Others\Payment.cs" />
