@@ -45,7 +45,7 @@ namespace ATP2.FMS.Controllers
 
             var result2 = _skillservice.GetAll();
             ProjectListModel projectListModel = new ProjectListModel();
-            projectListModel.PostAProjects = result.Data.ToList();
+            projectListModel.PostAProjects = result.Data.OrderByDescending(m=>m.PostId).ToList();
             projectListModel.Skills = result2.Data;
 
             return View(projectListModel);

@@ -57,7 +57,7 @@ namespace ATP2.FMS.Controllers
         public ActionResult ProjectList()
         {
             var result = _postservice.GetAll();
-            var result3 = _postservice.GetAll();
+            var result3 = result;
             //var a = result.Where(d => d.Flag == 0);
 
             var result2 = _skillservice.GetAll();
@@ -71,7 +71,7 @@ namespace ATP2.FMS.Controllers
                 } 
             }
             result = result3;
-            projectListModel.PostAProjects = result.Data.ToList();
+            projectListModel.PostAProjects = result.Data.OrderByDescending(m=>m.PostId).ToList();
             projectListModel.Skills = result2.Data;
 
             return View(projectListModel);
