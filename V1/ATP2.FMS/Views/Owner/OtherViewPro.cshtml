@@ -1,0 +1,286 @@
+﻿@model ATP2.FMS.ViewModel.Profile
+
+@{
+    ViewBag.Title = "OtherViewPro";
+    Layout = "~/Views/Shared/AfterLoginWorker.cshtml";
+}
+
+
+<div class="container">
+
+    <br />
+
+    <div class="row" id="bgimage">
+
+        <div class="col-md-3" style="">
+            <div class="Container" style="box-shadow: 0 15px 40px rgba(80,138,255,0.5); ">
+                <br />
+                <div class="row">
+                    <div class="col-md-2" style=""></div>
+                    <div class="col-md-8" style="">
+                        <div style=" border-width: 0px; height: 200px; width: 200px; left: 37px; top: 20px; overflow: hidden; " align="Center">
+
+                            <img src="man.jpg" alt="Paris" style="border-radius: 50%;height: 200px; width: 200px; ">
+
+                            <input class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp" type="file">
+                        </div>
+                    </div>
+                    <div class="col-md-2" style=""></div>
+
+
+
+                </div>
+
+                <br /><br />
+
+
+                <div style=" border-width: 0px; height: 900px; width: 250px; overflow: hidden; color:white;">
+
+                    <br /><br />
+
+
+
+                    &nbsp;&nbsp;
+                    FirstName
+                    :
+                    @Model.FristName
+
+
+                    <hr>
+                    &nbsp;&nbsp;
+                    LastName
+                    :
+                    @Model.LastName
+
+                    <hr>
+                    &nbsp;&nbsp;
+                    Role
+                    :
+                    @Model.UserType
+
+                    <hr>
+                    &nbsp;&nbsp;
+                    Email
+                    :
+                    @Model.Email
+
+
+
+
+                    <hr>
+                    &nbsp;&nbsp;
+                    Date of Birth
+                    :
+                    @Model.DateofBrith
+
+
+                    <hr>
+                    &nbsp;&nbsp;
+                    Join Date
+                    :
+                    @Model.JoinDate
+
+                    <hr>
+                    &nbsp;&nbsp;
+                    City
+                    :
+                    @Model.City
+
+                    <hr>
+                    &nbsp;&nbsp;
+                    State
+                    :
+                    @Model.State
+
+                    <hr>
+                    &nbsp;&nbsp;
+                    Country
+                    :
+                    @Model.Country
+
+
+                    <hr>
+                    &nbsp;&nbsp;
+                    Company Name
+                    :
+                    @Model.CompanyName
+
+                    <hr>
+                    &nbsp;&nbsp;
+                    Company Address
+                    :
+                    @Model.CompanyAddress
+
+                    <hr>
+                    &nbsp;&nbsp;
+                    Company Code
+                    :
+                    @Model.CompanyCode
+
+                    <hr>
+                    &nbsp;&nbsp;
+                    Possition
+                    :
+                    @Model.Position
+
+                    <hr>
+                    &nbsp;&nbsp;
+                    Status
+                    :
+                    Active
+
+
+
+
+                </div>
+                <div style=" border-width: 0px;  height: 40px; width: 110px; overflow: hidden;">
+                    &nbsp;&nbsp;
+                    @*<a href="@Url.Action("Edit", "Owner")" class="btn btn-success" type="button">
+                        <i class="fa fa-edit"></i>
+
+                        <font color="White">Edit</font>
+                    </a>*@
+
+                    <br /><br />
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6" style="">
+            <div class="row">
+                <div class="col-md-12">
+
+                    @*<div style=" border-width: 0px; overflow: hidden; ">
+
+
+                        <p class="lead">
+                            <a class="btn btn-primary btn-lg" href="@Url.Action("CreateProject","Project")" role=" button">Create Job</a>
+                        </p>
+                    </div>*@
+                    @*<div style=" border-width: 0px;  overflow: hidden;">
+                        <fieldset>
+                            <legend><h3>Posted Jobs:</h3></legend>
+                            <div class="list-group">
+                                @foreach (var p in Model.PostAProject)
+                                {
+                                    <a href='@Url.Action("WorkProgressOwner","Project")/@p.PostId' class="list-group-item list-group-item-action flex-column align-items-start active">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <h5 class="mb-1">@p.ProjectName</h5>
+                                            <small>@p.StartTime</small>
+                                        </div>
+                                        <p class="mb-1">@p.Description</p>
+
+                                    </a>
+                                    @Html.ActionLink("Requests", "RequestedMember", new { Controller = "Project", id = @p.PostId }, new { @class = "btn btn-info" })<br />
+                                }
+
+
+                            </div>
+
+                        </fieldset>
+                    </div>*@
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-3" style="">
+            <div class="container-fluid" style="box-shadow: 0 15px 40px rgba(39,40,43,1); color:white;">
+
+
+                <h1 align="center"></h1><hr>
+                <div style=" border-width: 0px;  ">
+                    &nbsp; &nbsp;Ratings:
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star"></span>
+                    @Model.tot
+                    <div>
+                        &nbsp; &nbsp;&nbsp;  &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;
+                        <a class="btn  btn-success" data-toggle="modal" data-target=".bootstrapmodal">view</a>
+
+                        <div class="modal fade bootstrapmodal">
+                            <div class="modal-dialog">
+
+
+                                <div class="modal-content">
+
+
+                                    <div class="modal-header">
+                                        <button data-dismiss="modal" class="close">
+                                            <span>&times;</span>
+                                        </button>
+                                        <h3>Rating Chart</h3>
+
+                                    </div>
+                                    <div class="modal-title">
+
+                                    </div>
+
+                                    <div class="modal-body">
+                                        <div id="piechart"></div>
+                                    </div>
+                                    <div class="modal-footer">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br><hr><br>
+                    &nbsp; &nbsp;<font color="#00ff40">@Model.CcommunicationSkill%</font>&nbsp; &nbsp; &nbsp; Communication Skill<br><br><br>
+                    &nbsp; &nbsp;<font color="#00ff40">@Model.Oonword%</font>&nbsp; &nbsp; &nbsp; On Word <br><br><br>
+                    &nbsp; &nbsp;<font color="#00ff40">@Model.Rreliability%</font>&nbsp; &nbsp; &nbsp; Reliability<br><br><br>
+                    &nbsp; &nbsp;<font color="#00ff40">@Model.Bbehaviour%</font>&nbsp; &nbsp; &nbsp; Behaviour<br><br><br>
+
+                </div><br /><br />
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="js/bootstrap.min.js"></script>
+<script type="text/javascript">
+    function ShowHideDiv(chkPassport) {
+        var dvPassport = document.getElementById("dvPassport");
+        dvPassport.style.display = chkPassport.checked ? "block" : "none";
+    }
+    function ShowHideDiv1(chkPassport1) {
+        var dvPassport = document.getElementById("dvPassport1");
+        dvPassport.style.display = chkPassport1.checked ? "block" : "none";
+    }
+</script>
+@section scripts
+{
+    <script type="text/javascript">
+        // Load google charts
+        google.charts.load('current', { 'packages': ['corechart'] });
+        google.charts.setOnLoadCallback(drawChart);
+
+        // Draw the chart and set the chart values
+        function drawChart() {
+            var data = google.visualization.arrayToDataTable([
+                ['Task', 'Hours per Day'],
+                ['Reliability', @Model.Rreliability],
+                ['Behavior', @Model.Bbehaviour],
+                ['On word', @Model.Oonword],
+                ['Comunicaton Skill', @Model.CcommunicationSkill],
+
+            ]);
+            // Optional; add a title and set the width and height of the chart
+            var options = { 'title': '', 'width': 550, 'height': 400 };
+
+            // Display the chart inside the <div> element with id="piechart"
+            var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+            chart.draw(data, options);
+        }
+    </script>
+}
+
+

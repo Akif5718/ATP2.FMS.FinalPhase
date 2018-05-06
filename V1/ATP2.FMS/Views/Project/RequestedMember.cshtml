@@ -64,7 +64,7 @@
                                             <div class="row">
 
                                                 <th>
-                                                    <a href="ProfileWorker.html"><h5>@p.FristName @p.LastName</h5></a>
+                                                    <a href='@Url.Action("OtherViewPro", "Worker", new { id =@p.UserId , id2=@Model.PostId})'><h5>@p.FristName @p.LastName</h5></a>
                                                     <h6>Hi, I am so interest to your job. </h6>
                                                 </th>
 

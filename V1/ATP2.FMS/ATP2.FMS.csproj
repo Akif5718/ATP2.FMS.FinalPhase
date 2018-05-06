@@ -253,6 +253,9 @@
     <Content Include="Views\Owner\WorkerRating.cshtml" />
     <Content Include="Views\Owner\Payments.cshtml" />
     <Content Include="Views\Project\CreateProjectEdit.cshtml" />
+    <Content Include="Views\Worker\OtherViewPro.cshtml" />
+    <Content Include="Views\Worker\OtherViewPro2.cshtml" />
+    <Content Include="Views\Owner\OtherViewPro.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

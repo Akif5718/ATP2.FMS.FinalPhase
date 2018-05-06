@@ -32,7 +32,7 @@
                         {
                             foreach (var v in Model.workers)
                              {
-                                 <h5><a href="ProfileView.html">@v.FristName @v.LastName</a></h5>
+                                 <h5><a href='@Url.Action("OtherViewPro2", "Worker", new { id =@v.UserId , id2=@Model.PostID})'>@v.FristName @v.LastName</a></h5>
                              }
                         }
 

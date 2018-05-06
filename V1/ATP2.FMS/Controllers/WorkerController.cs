@@ -202,5 +202,72 @@ namespace ATP2.FMS.Controllers
 
         }
 
+        public ActionResult OtherViewPro(int id,int id2)
+        {
+
+            var user = _userservice.GetByID(id);
+            var workerInfo = _workerService.GetByID(id);
+          //  var Selected = _selectedWorkerService.GetAll().Data.Where(d => d.UserId == HttpUtil.CurrentUser.UserId).ToList();
+            var projects = new List<PostAProject>();
+            //foreach (var v in Selected)
+            //{
+            //    projects.Add(_postservice.GetByID(v.PostId).Data);
+            //}
+            List<RatingWorker> ratings = _ratingWorkerService.GetAll().Data.Where(d => d.UserId == id).ToList();
+            var profileVM = new ProfileWorker();
+            profileVM = profileVM.creation(user.Data, workerInfo.Data, ratings, projects);
+            var wSkills = _workerSkillService.GetAll().Data.Where(d => d.UserId == id).ToList();
+            var skillsWorker = new List<Skill>();
+            foreach (var v in wSkills)
+            {
+                skillsWorker.Add(_skillservice.GetAll().Data.FirstOrDefault(d => d.SkillId == v.SkillId));
+            }
+
+
+            profileVM.Skills = skillsWorker;
+            profileVM.PostId = id2;
+
+            return View(profileVM);
+        }
+
+        public ActionResult OtherViewPro2(int id, int id2)
+        {
+
+            var user = _userservice.GetByID(id);
+            var workerInfo = _workerService.GetByID(id);
+            //  var Selected = _selectedWorkerService.GetAll().Data.Where(d => d.UserId == HttpUtil.CurrentUser.UserId).ToList();
+            var projects = new List<PostAProject>();
+            //foreach (var v in Selected)
+            //{
+            //    projects.Add(_postservice.GetByID(v.PostId).Data);
+            //}
+            List<RatingWorker> ratings = _ratingWorkerService.GetAll().Data.Where(d => d.UserId == id).ToList();
+            var profileVM = new ProfileWorker();
+            profileVM = profileVM.creation(user.Data, workerInfo.Data, ratings, projects);
+            var wSkills = _workerSkillService.GetAll().Data.Where(d => d.UserId == id).ToList();
+            var skillsWorker = new List<Skill>();
+            foreach (var v in wSkills)
+            {
+                skillsWorker.Add(_skillservice.GetAll().Data.FirstOrDefault(d => d.SkillId == v.SkillId));
+            }
+
+
+            profileVM.Skills = skillsWorker;
+            profileVM.PostId = id2;
+
+            if (id == HttpUtil.CurrentUser.UserId)
+            {
+                return RedirectToAction("Profile", "Worker");
+
+            }
+            else
+            {
+                return View(profileVM);
+
+            }
+
+        }
+
+
     }
 }

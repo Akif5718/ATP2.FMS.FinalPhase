@@ -344,6 +344,38 @@ namespace ATP2.FMS.Controllers
             return RedirectToAction("Payments", "Owner");
 
         }
+
+        public ActionResult OtherViewPro(int id)
+        {
+
+            var user = _userservice.GetByID(id);
+            var ownerInfo = _ownerService.GetByID(id);
+            var posedtProjects = _postservice.GetAll().Data.Where(d => d.WUserId == id).ToList();
+            List<RatingOwner> ratings = _ratingOwnerService.GetAll().Data.Where(d => d.UserId == id).ToList();
+            var profileVM = new Profile();
+            profileVM = profileVM.creation(user.Data, ownerInfo.Data, ratings, posedtProjects);
+            var avg = new AverageRating();
+            avg.UserId = user.Data.UserId;
+            avg.Average = profileVM.tot;
+            avg.UserType = user.Data.UserType;
+            _averageRatingService.Save(avg);
+            //string s1 = " ~/Files/1SignIn.PNG";
+            //string s2 = " ~/Files/2SignUp.PNG";
+            //string s3 = " ~/Files/3AfterSignUp.PNG";
+            //var file1 = new SavedFile();
+            //file1.FileLink = s1;
+            //var file2 = new SavedFile();
+            //file2.FileLink = s2;
+            //var file3 = new SavedFile();
+            //file3.FileLink = s3;
+            //var files = new List<SavedFile>();
+            //files.Add(file1);
+            //files.Add(file2);
+            //files.Add(file3);
+            //SaveFiles(files);
+
+            return View(profileVM);
+        }
         
     }
 }

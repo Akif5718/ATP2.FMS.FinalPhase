@@ -10,6 +10,8 @@ namespace ATP2.FMS.ViewModel
     {
         public int UserId { get; set; }
 
+        public int PostId { get; set; }
+
         public string FristName { get; set; }
 
         public string LastName { get; set; }
