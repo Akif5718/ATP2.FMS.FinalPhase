@@ -15,29 +15,41 @@
             <div class="row">
                 <div class="col-md-3"></div>
                 <div class="col-md-6" style="box-shadow: 0 15px 40px rgba(80, 138, 255, 0.5);">
-                    <fieldset>
-                        <legend>Creating Job</legend>
-                        <div class="form-group">
-                            <label for="inputEmail" class="col-lg-2 control-label">Project Name</label>
-                            <div class="col-lg-10">
-                                <input class="form-control" name="ProjectName" id="inputEmail" placeholder="e.g Design a web page for a website" type="text">
-                            </div>
-                        </div>
+    <fieldset>
+        <legend>Creating Job</legend>
+        <div class="form-group">
+            <label for="inputEmail" class="col-lg-2 control-label">Project Name</label>
+            <div class="col-lg-10">
+                <input class="form-control" name="ProjectName" id="inputEmail" placeholder="e.g Design a web page for a website" type="text">
+            </div>
+        </div>
 
-                        <div class="form-group">
-                            <label for="textArea" class="col-lg-2 control-label">Description</label>
-                            <div class="col-lg-10">
-                                <textarea class="form-control" name="Description" rows="3" id="textArea" placeholder="Describe your Project"></textarea>
-                                <span class="help-block">A longer block of help text that breaks onto a new line and may extend beyond one line.</span>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="inputEmail" class="col-lg-2 control-label">Write skills</label>
-                            <div class="col-lg-10">
-                                <input class="form-control" name="SkillName" id="inputEmail" placeholder="Skills" type="text">
+        <div class="form-group">
+            <label for="textArea" class="col-lg-2 control-label">Description</label>
+            <div class="col-lg-10">
+                <textarea class="form-control" name="Description" rows="3" id="textArea" placeholder="Describe your Project"></textarea>
+                <span class="help-block">A longer block of help text that breaks onto a new line and may extend beyond one line.</span>
+            </div>
+        </div>
+        <div class="form-group">
+            @*<label for="inputEmail" class="col-lg-2 control-label">Write skills</label>
+                @*<div class="col-lg-10">
+                    <input class="form-control" name="SkillName" id="inputEmail" placeholder="Skills" type="text">
 
-                            </div>
-                        </div>
+                </div>*@
+         
+                <input type="text" class="form-control" name="Skillsearch" oninput='onInput()' id="Skillsearch" placeholder="Search your Skills:" list="datalist1">
+            <datalist id="datalist1">
+
+                @foreach (var v in Model.SkillName)
+                {
+                    <option value='@v'>@v</option>
+                }
+            </datalist>
+         
+            <input type="text" class="form-control" name="Selectskills" id="Selectskills" placeholder="Your Skills:" />
+                                                                                                                                 
+                    </div>
                         <div class="form-group">
                             <label for="inputEmail" class="col-lg-2 control-label">Budget</label>
                             <div class="col-lg-10">
@@ -99,8 +111,8 @@
                                 </a>
                             </div>
                         </div>
-                    </fieldset>
-                </div>
+                </fieldset>
+            </div>
                 <div class="col-md-3"></div>
             </div>
 
@@ -125,6 +137,30 @@
                 document.getElementById("text" + i).innerHTML = "<input class='form-control' id='inputEmail' name='SectionName' placeholder='Section Name' type='text'><br/>";
             }
 
+        }
+        function onInput() {
+            var parent = document.getElementById('datalist1');
+            var val = document.getElementById("Skillsearch").value;
+            var change = document.getElementById("Skillsearch");
+            var opts = document.getElementById('datalist1').childNodes;
+            var text = document.getElementById('Selectskills');
+            for (var i = 0; i < opts.length; i++) {
+                if (opts[i].value === val) {
+                    // An item was selected from the list!
+                    // yourCallbackHere()
+                    //text.innerHTML = opts[i].value;
+                    //alert(opts[i].value);
+                    if (text.value != "")
+                        text.value = text.value + "," + opts[i].value;
+                    else
+                        text.value = opts[i].value;
+                    change.value = "";
+                    parent.removeChild(opts[i]);
+
+                    //alert();
+                    break;
+                }
+            }
         }
 </script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>

@@ -28,8 +28,9 @@ namespace ATP2.FMS.Controllers
         private IComentSectionService _comentSectionService;
         private ISavedFileService _savedFileService;
         private ISelectedWorkerService _selectedService;
+        private IProjectSkillService _projectSkillService;
 
-        public ProjectController(IPostAProjectService postservice, IProjectSectionService sectionservice, IProjectSkillService proskillservice, IskillService skillservice, IUserInfoService userservice, IResponseToAJobService responseservice, ISelectedWorkerService selectedWorkerService, IComentSectionService comentSectionService, ISavedFileService savedFileService, ISelectedWorkerService selectedService)
+        public ProjectController(IPostAProjectService postservice, IProjectSectionService sectionservice, IProjectSkillService proskillservice, IskillService skillservice, IUserInfoService userservice, IResponseToAJobService responseservice, ISelectedWorkerService selectedWorkerService, IComentSectionService comentSectionService, ISavedFileService savedFileService, ISelectedWorkerService selectedService, IProjectSkillService projectSkillService)
         {
             _postservice = postservice;
             _sectionservice = sectionservice;
@@ -41,18 +42,23 @@ namespace ATP2.FMS.Controllers
             _comentSectionService = comentSectionService;
             _savedFileService = savedFileService;
             _selectedService = selectedService;
+            _projectSkillService = projectSkillService;
         }
 
         public ActionResult CreateProject()
         {
-            return View();
+            var VM = new PostProjectModel();
+            VM.SkillName = _skillservice.GetAll().Data.Select(v => v.SkillName).ToList();
+            return View(VM);
         }
 
         [HttpPost]
-        public ActionResult CreateProject(PostProjectModel PostProjectModel)
+        public ActionResult CreateProject(PostProjectModel PostProjectModel, string Selectskills)
         {
             try
             {
+                string[] tokens = Selectskills.Split(',');
+                
                 PostProjectModel p=new PostProjectModel();
 
                 var result = _postservice.Save(p.Insert(PostProjectModel));
@@ -78,7 +84,13 @@ namespace ATP2.FMS.Controllers
 
 
                 PostProjectModel.PostId = last.Data.PostId;
-
+                foreach (var str in tokens)
+                {
+                    var objToSave = new ProjectSkills();
+                    objToSave.SkillName = str;
+                    objToSave.PostId = PostProjectModel.PostId;
+                    _projectSkillService.Save(objToSave);
+                }
 
                 if (result.HasError)
                 {

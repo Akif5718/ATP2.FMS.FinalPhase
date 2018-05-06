@@ -71,17 +71,17 @@ function drawChart() {
             <div class="navbar-collapse collapse" id=".navbar-collapse">
                 <ul class="nav navbar-nav">
 
-                    <li><a href=" @Url.Action("Index", "Home") "><span class=" glyphicon glyphicon-home"></span></a></li>
+                    <li><a href="@Url.Action("ProjectList", "Owner") "><span class=" glyphicon glyphicon-home"></span></a></li>
 
                     <li class="nav-item dropdown">
-                    <li>@Html.ActionLink("LanceBucket", "Index", "Home")</li>
-                    <li>@Html.ActionLink("JobTImeLine", "About", "Home")</li>
+                    <li>@Html.ActionLink("LanceBucket", "ProjectList", "Worker")</li>
+                    <li>@Html.ActionLink("JobTImeLine", "ProjectList", "Worker")</li>
 
 
                 </ul>
                 <ul class="nav navbar-nav navbar-right " style="right: 30px">
 
-                    <li><a href="#"><span class="glyphicon glyphicon-user"> Profile </span></a></li>
+                    <li><a href="@Url.Action("Profile","Worker")"><span class="glyphicon glyphicon-user"> Profile </span></a></li>
                     <li style=""><a href="@Url.Action("Logout","User")"><span class="glyphicon glyphicon-log-in"> LogOut</span></a></li>
 
 

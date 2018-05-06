@@ -1,7 +1,7 @@
 ﻿@model ATP2.FMS.ViewModel.ProjectListModel
 @{
     ViewBag.Title = "ProjectList";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/AfterLoginWorker.cshtml";
 }
 
 <div class="container">
@@ -44,7 +44,7 @@
             <div class="col-md-5">
                 <div class="form-group">
 
-                    @using (Html.BeginForm("ProjectList", "Owner"))
+                    @using (Html.BeginForm("ProjectList", "Worker"))
                     {
                         <select class="form-control" name="SkillId">
                             @foreach (var s in Model.Skills)

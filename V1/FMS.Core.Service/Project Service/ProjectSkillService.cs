@@ -25,7 +25,7 @@ namespace FMS.Core.Service
            var result = new Result<ProjectSkills>();
            try
            {
-               var objtosave = _context.projectSkillses.FirstOrDefault(u => u.PostId == userinfo.PostId);
+               var objtosave = _context.projectSkillses.FirstOrDefault(u => u.ProjectSkillId == userinfo.ProjectSkillId);
                if (objtosave == null)
                {
                    objtosave = new ProjectSkills();

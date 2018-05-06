@@ -4,10 +4,12 @@
     $scope.Message = "";
     $scope.Comments = [];
     $scope.PID = 0;
+    $scope.UserId = 0;
 
-    $scope.Init = function(pid) {
+    $scope.Init = function(pid,uId) {
 
         $scope.PID = pid;
+        $scope.UserId = uId;
         $scope.LoadComments();
     };
     $scope.LoadComments = function () {
@@ -24,7 +26,7 @@
     }
 
     $scope.NewComment = function() {
-        var com = { UserId: 1, ProjectSectionId: $scope.PID, Commt: $scope.Message };
+        var com = { UserId: $scope.UserId, ProjectSectionId: $scope.PID, Commt: $scope.Message };
 
         $http.post("http://localhost:64944//api/Comments/", com).then(
             function (response) {

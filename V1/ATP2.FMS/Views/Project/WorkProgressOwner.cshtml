@@ -28,7 +28,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <h4>Name</h4>
-                        @if (Model.workers[0] != null)
+                        @if (Model.workers != null)
                         {
                             foreach (var v in Model.workers)
                              {
@@ -84,7 +84,7 @@
 </div><br />
 @foreach (var v in Model.ProjectSections)
 {
-    <div class="container" ng-controller="CommentController" ng-init="Init(@v.ProjectSectionId)">
+    <div class="container" ng-controller="CommentController" ng-init="Init(@v.ProjectSectionId,@HttpUtil.CurrentUser.UserId)">
         <div class="panel-group">
             <div class="panel panel-default">
                 <div class="panel-heading">
