@@ -168,12 +168,49 @@ namespace FMS.Core.Service
 
        public Result<bool> Delete(int id)
        {
+           var result2 = new List<SelectedWorker>();
            var result = new Result<bool>();
 
            try
            {
-               var objtodelete = _context.selectedWorkers.FirstOrDefault(c => c.PostId == id);
-               if (objtodelete == null)
+               result2 = _context.selectedWorkers.Where(c => c.PostId == id).ToList();
+               if (result2 == null)
+               {
+                   result.HasError = true;
+                   result.Message = "Invalid PostId";
+                   return null;
+
+
+               }
+               foreach (var selectedWorker in result2)
+               {
+                   _context.selectedWorkers.Remove(selectedWorker);
+                   _context.SaveChanges();
+
+               }
+              
+
+           }
+           catch (Exception e)
+           {
+               result.HasError = true;
+               result.Message = e.Message;
+
+
+           }
+           return result;
+       }
+
+       public Result<bool> DeleteByuser(int id)
+       {
+           var result2 = new List<SelectedWorker>();
+
+           var result = new Result<bool>();
+
+           try
+           {
+               result2 = _context.selectedWorkers.Where(c => c.UserId == id).ToList();
+               if (result2 == null)
                {
                    result.HasError = true;
                    result.Message = "Invalid PostId";
@@ -182,8 +219,12 @@ namespace FMS.Core.Service
 
                }
 
-               _context.selectedWorkers.Remove(objtodelete);
-               _context.SaveChanges();
+               foreach (var selectedWorker in result2)
+               {
+                   _context.selectedWorkers.Remove(selectedWorker);
+                   _context.SaveChanges();
+
+               }
 
            }
            catch (Exception e)

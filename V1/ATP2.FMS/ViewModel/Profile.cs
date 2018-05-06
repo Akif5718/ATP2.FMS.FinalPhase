@@ -142,6 +142,7 @@ namespace ATP2.FMS.ViewModel
         public int Rreliability { get; set; }
         public int Bbehaviour { get; set; }
         public double tot { get; set; }
+       
         public Profile creation(UserInfo userInfo, OwnerInfo ownerInfo, List<RatingOwner> ratingOwner, List<PostAProject> postAProject)
         {
             var profile = new Profile();
@@ -192,6 +193,7 @@ namespace ATP2.FMS.ViewModel
 
             return userInfo;
         }
+       
         public OwnerInfo EditOwnerInfo(Profile profile, OwnerInfo ownerInfo)
         {
             ownerInfo.CompanyName = profile.CompanyName;
@@ -202,5 +204,7 @@ namespace ATP2.FMS.ViewModel
 
             return ownerInfo;
         }
+
+       
     }
 }

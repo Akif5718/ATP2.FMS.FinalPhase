@@ -189,5 +189,18 @@ namespace ATP2.FMS.Controllers
             }
         }
 
+        public ActionResult Deleteacount()
+        {
+            _selectedWorkerService.DeleteByuser(HttpUtil.CurrentUser.UserId);
+            _responseservice.Delete(HttpUtil.CurrentUser.UserId);
+            _workerService.Delete(HttpUtil.CurrentUser.UserId);
+            _userservice.Delete(HttpUtil.CurrentUser.UserId);
+           
+         
+          
+            return RedirectToAction("LogIn", "LogIn");
+
+        }
+
     }
 }

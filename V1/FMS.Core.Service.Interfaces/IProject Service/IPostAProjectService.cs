@@ -12,5 +12,7 @@ namespace FMS.Core.Service.Interfaces
     public interface IPostAProjectService:IService<PostAProject>
     {
         Result<PostAProject> GetLastId();
+        Result<bool> DeletebyUser(int id);
+
     }
 }

@@ -123,22 +123,27 @@
                         <fieldset>
                             <legend><h3>Current Jobs:</h3></legend>
                             <div class="list-group">
-                                @foreach (var p in Model.PostAProject)
+                                @if (Model.PostAProject != null)
                                 {
-                                    <a href='@Url.Action("WorkProgressOwner","Project")/@p.PostId' class="list-group-item list-group-item-action flex-column align-items-start active">
-                                        <div class="d-flex w-100 justify-content-between">
-                                            <h5 class="mb-1">@p.ProjectName</h5>
-                                            <small>@p.StartTime</small>
-                                        </div>
-                                        <p class="mb-1">@p.Description</p>
+                                    foreach (var p in Model.PostAProject)
+                                    {
+                                        <a href='@Url.Action("WorkProgressOwner","Project")/@p.PostId' class="list-group-item list-group-item-action flex-column align-items-start active">
+                                            <div class="d-flex w-100 justify-content-between">
+                                                <h5 class="mb-1">@p.ProjectName</h5>
+                                                <small>@p.StartTime</small>
+                                            </div>
+                                            <p class="mb-1">@p.Description</p>
 
-                                    </a>
+                                        </a>
+                                    }
                                 }
+
 
 
                             </div>
 
                         </fieldset>
+
                     </div>
                     <div style=" border-width: 0px; overflow: hidden; ">
                         <h1 class="display-3" style="text-shadow: 2px 2px #FF0000;;">About Me</h1>

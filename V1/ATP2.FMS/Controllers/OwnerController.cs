@@ -34,9 +34,10 @@ namespace ATP2.FMS.Controllers
         private IRatingWorkerService _ratingWorkerService;
         private ISelectedWorkerService _selectedWorkerService;
         private IPaymentService _paymentService;
+        private IEducationalService _educationService;
 
 
-        public OwnerController(IPostAProjectService postservice, IskillService skillservice, IProjectSkillService proskillservice, IResponseToAJobService responseservice, IUserInfoService userservice, IOwnerService ownerService, IRatingOwnerService ratingOwnerService,IAverageRatingService averageRatingService, ISelectedWorkerService selectedWorkerService, IRatingWorkerService ratingWorkerService, IPaymentService paymentService)
+        public OwnerController(IPostAProjectService postservice, IskillService skillservice, IProjectSkillService proskillservice, IResponseToAJobService responseservice, IUserInfoService userservice, IOwnerService ownerService, IRatingOwnerService ratingOwnerService, IAverageRatingService averageRatingService, ISelectedWorkerService selectedWorkerService, IRatingWorkerService ratingWorkerService, IPaymentService paymentService, IEducationalService educationService)
         {
             _postservice = postservice;
             _skillservice = skillservice;
@@ -49,6 +50,7 @@ namespace ATP2.FMS.Controllers
             _selectedWorkerService = selectedWorkerService;
             _ratingWorkerService = ratingWorkerService;
             _paymentService = paymentService;
+            _educationService = educationService;
 
         }
 
@@ -207,6 +209,23 @@ namespace ATP2.FMS.Controllers
             {
                 return Redirect("Profile");
             }
+        }
+
+       
+
+        public ActionResult Deleteacount(int id)
+        {
+            var result = _postservice.GetAll().Data.Where(d => d.WUserId == id).ToList();
+            foreach (var po in result)
+            {
+                _selectedWorkerService.Delete(po.PostId);
+            }
+            _postservice.DeletebyUser(id);
+            _ownerService.Delete(id);
+
+                _userservice.Delete(id);
+            return RedirectToAction("Index", "Home");
+
         }
 
         public void SaveFiles(List<SavedFile> files)

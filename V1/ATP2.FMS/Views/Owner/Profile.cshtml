@@ -41,7 +41,7 @@
                     &nbsp;&nbsp;
                     FirstName
                     :
-                    @Model.FristName 
+                    @Model.FristName
 
 
                     <hr>
@@ -49,13 +49,13 @@
                     LastName
                     :
                     @Model.LastName
-                    
+
                     <hr>
                     &nbsp;&nbsp;
                     Role
                     :
                     @Model.UserType
-                     
+
                     <hr>
                     &nbsp;&nbsp;
                     Email
@@ -77,26 +77,26 @@
                     Join Date
                     :
                     @Model.JoinDate
-                    
+
                     <hr>
                     &nbsp;&nbsp;
                     City
                     :
                     @Model.City
-                    
+
                     <hr>
                     &nbsp;&nbsp;
                     State
                     :
                     @Model.State
-                    
+
                     <hr>
                     &nbsp;&nbsp;
                     Country
                     :
                     @Model.Country
 
-                    
+
                     <hr>
                     &nbsp;&nbsp;
                     Company Name
@@ -108,13 +108,13 @@
                     Company Address
                     :
                     @Model.CompanyAddress
-                    
+
                     <hr>
                     &nbsp;&nbsp;
                     Company Code
                     :
                     @Model.CompanyCode
-                    
+
                     <hr>
                     &nbsp;&nbsp;
                     Possition
@@ -127,7 +127,7 @@
                     :
                     Active
 
-                   
+
 
 
                 </div>
@@ -146,14 +146,12 @@
         <div class="col-md-6" style="">
             <div class="row">
                 <div class="col-md-12">
-                    
+
                     <div style=" border-width: 0px; overflow: hidden; ">
-                        <h1 class="display-3" style="text-shadow: 2px 2px #FF0000;;">About Me</h1>
-                        <p class="lead" style="color:white">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-                        <hr class="my-4">
-                        <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+                       
+                       
                         <p class="lead">
-                            <a class="btn btn-primary btn-lg"  href="@Url.Action("CreateProject","Project")" role=" button">Create Job</a>
+                            <a class="btn btn-primary btn-lg" href="@Url.Action("CreateProject","Project")" role=" button">Create Job</a>
                         </p>
                     </div>
                     <div style=" border-width: 0px;  overflow: hidden;">
@@ -170,7 +168,7 @@
                                         <p class="mb-1">@p.Description</p>
 
                                     </a>
-                                    @Html.ActionLink("Requests", "RequestedMember", new { Controller = "Project", id = @p.PostId }, new { @class = "btn btn-info" })<br/>
+                                    @Html.ActionLink("Requests", "RequestedMember", new { Controller = "Project", id = @p.PostId }, new { @class = "btn btn-info" })<br />
                                 }
 
 
@@ -251,11 +249,10 @@
         var dvPassport = document.getElementById("dvPassport");
         dvPassport.style.display = chkPassport.checked ? "block" : "none";
     }
-	function ShowHideDiv1(chkPassport1) {
+    function ShowHideDiv1(chkPassport1) {
         var dvPassport = document.getElementById("dvPassport1");
         dvPassport.style.display = chkPassport1.checked ? "block" : "none";
     }
 </script>
-
 
 

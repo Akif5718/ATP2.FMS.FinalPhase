@@ -80,7 +80,32 @@ namespace FMS.Core.Service
 
        public Result<bool> Delete(int Id)
        {
-           throw new NotImplementedException();
+           var result = new Result<bool>();
+
+           try
+           {
+               var objtodelete = _context.responseToaJobs.FirstOrDefault(c => c.WUserId == Id);
+               if (objtodelete == null)
+               {
+                   result.HasError = true;
+                   result.Message = "Invalid UserID";
+                   return result;
+
+
+               }
+
+               _context.responseToaJobs.Remove(objtodelete);
+               _context.SaveChanges();
+
+           }
+           catch (Exception e)
+           {
+               result.HasError = true;
+               result.Message = e.Message;
+
+
+           }
+           return result;
        }
 
        public bool IsValid(ResponseToaJob obj, Result<ResponseToaJob> result)

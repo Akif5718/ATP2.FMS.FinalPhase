@@ -261,6 +261,36 @@ namespace FMS.Core.Service
            return result;
        }
 
+       public Result<bool> DeletebyUser(int id)
+       {
+           var result = new Result<bool>();
+
+           try
+           {
+               var objtodelete = _context.postAProjects.FirstOrDefault(c => c.WUserId == id);
+               if (objtodelete == null)
+               {
+                   result.HasError = true;
+                   result.Message = "Invalid PostId";
+                   return result;
+
+
+               }
+
+               _context.postAProjects.Remove(objtodelete);
+               _context.SaveChanges();
+
+           }
+           catch (Exception e)
+           {
+               result.HasError = true;
+               result.Message = e.Message;
+
+
+           }
+           return result;
+       }
+
        private bool IsValidToSave(PostAProject obj, Result<PostAProject> result)
        {
            if (!ValidationHelper.IsIntValid(obj.PostId.ToString()))
