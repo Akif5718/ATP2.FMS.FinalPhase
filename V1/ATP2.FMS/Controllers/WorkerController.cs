@@ -21,9 +21,11 @@ namespace ATP2.FMS.Controllers
         private IWorkerService _workerService;
         private ISelectedWorkerService _selectedWorkerService;
         private IRatingWorkerService _ratingWorkerService;
+        private IWorkerSkillService _workerSkillService;
+        
 
 
-        public WorkerController(IPostAProjectService postservice, IskillService skillservice, IProjectSkillService proskillservice, IResponseToAJobService responseservice, IUserInfoService userservice, IWorkerService workerService, ISelectedWorkerService selectedWorkerService, IRatingWorkerService ratingWorkerService)
+        public WorkerController(IPostAProjectService postservice, IskillService skillservice, IProjectSkillService proskillservice, IResponseToAJobService responseservice, IUserInfoService userservice, IWorkerService workerService, ISelectedWorkerService selectedWorkerService, IRatingWorkerService ratingWorkerService, IWorkerSkillService workerSkillService)
         {
             _postservice = postservice;
             _skillservice = skillservice;
@@ -33,6 +35,7 @@ namespace ATP2.FMS.Controllers
             _workerService = workerService;
             _selectedWorkerService = selectedWorkerService;
             _ratingWorkerService = ratingWorkerService;
+            _workerSkillService = workerSkillService;
         }
 
         public ActionResult ProjectList()
@@ -145,6 +148,15 @@ namespace ATP2.FMS.Controllers
             List<RatingWorker> ratings = _ratingWorkerService.GetAll().Data.Where(d => d.UserId == HttpUtil.CurrentUser.UserId).ToList();
             var profileVM = new ProfileWorker();
             profileVM = profileVM.creation(user.Data, workerInfo.Data, ratings, projects);
+            var wSkills = _workerSkillService.GetAll().Data.Where(d => d.UserId == HttpUtil.CurrentUser.UserId).ToList();
+            var skillsWorker = new List<Skill>();
+            foreach (var v in wSkills)
+            {
+                skillsWorker.Add(_skillservice.GetAll().Data.FirstOrDefault(d=>d.SkillId == v.SkillId));
+            }
+         
+            
+            profileVM.Skills = skillsWorker;
 
             return View(profileVM);
         }

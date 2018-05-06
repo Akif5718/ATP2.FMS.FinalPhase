@@ -157,25 +157,21 @@
                         </label>
                         <div id="dvPassport1" style="display: none">
                             <p class="lead" style="color:white">
-                                <ul>
-                                    <li>
-                                        IT
-                                        <ol>
-                                            <li>C</li>
-                                            <li>C++</li>
-                                            <li>.Net</li>
-                                            <li>MySql</li>
-                                        </ol>
-                                    </li>
-                                    <li>
-                                        Writing and Content
-                                        <ol>
-                                            <li>Translating</li>
-
-                                        </ol>
+                               
+                                    
+                                <ol>
+                                    @foreach (var v in Model.Skills)
+                                    {
+                                        <li>@v.SkillName</li>
+                                    }
+                                    
+                                 
+                                </ol>
+                                  
+                                       
 
 
-                                </ul>
+                             
 
                             </p>
                             <hr class="my-4">
