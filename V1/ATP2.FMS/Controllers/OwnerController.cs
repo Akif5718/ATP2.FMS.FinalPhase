@@ -9,7 +9,9 @@ using System.Web.UI;
 using ATP2.FMS.ViewModel;
 using ATP2.FMS.Web.Framework;
 using FMS.Core.Entities;
+using FMS.Core.Entities.User;
 using FMS.Core.Service.Interfaces;
+using FMS.Core.Service.Interfaces.IUser_Service;
 using FMS.FrameWork;
 using FMS.Infrastructure.Migrations;
 using Ionic.Zip;
@@ -28,12 +30,13 @@ namespace ATP2.FMS.Controllers
         private IUserInfoService _userservice;
         private IOwnerService _ownerService;
         private IRatingOwnerService _ratingOwnerService;
+        private IAverageRatingService _averageRatingService;
         private IRatingWorkerService _ratingWorkerService;
         private ISelectedWorkerService _selectedWorkerService;
         private IPaymentService _paymentService;
 
 
-        public OwnerController(IPostAProjectService postservice, IskillService skillservice, IProjectSkillService proskillservice, IResponseToAJobService responseservice, IUserInfoService userservice, IOwnerService ownerService, IRatingOwnerService ratingOwnerService, ISelectedWorkerService selectedWorkerService, IRatingWorkerService ratingWorkerService, IPaymentService paymentService)
+        public OwnerController(IPostAProjectService postservice, IskillService skillservice, IProjectSkillService proskillservice, IResponseToAJobService responseservice, IUserInfoService userservice, IOwnerService ownerService, IRatingOwnerService ratingOwnerService,IAverageRatingService averageRatingService, ISelectedWorkerService selectedWorkerService, IRatingWorkerService ratingWorkerService, IPaymentService paymentService)
         {
             _postservice = postservice;
             _skillservice = skillservice;
@@ -42,6 +45,7 @@ namespace ATP2.FMS.Controllers
             _userservice = userservice;
             _ownerService = ownerService;
             _ratingOwnerService = ratingOwnerService;
+            _averageRatingService = averageRatingService;
             _selectedWorkerService = selectedWorkerService;
             _ratingWorkerService = ratingWorkerService;
             _paymentService = paymentService;
@@ -155,6 +159,11 @@ namespace ATP2.FMS.Controllers
             List<RatingOwner> ratings = _ratingOwnerService.GetAll().Data.Where(d => d.UserId == HttpUtil.CurrentUser.UserId).ToList();
             var profileVM = new Profile();
             profileVM = profileVM.creation(user.Data, ownerInfo.Data, ratings, posedtProjects);
+            var avg = new AverageRating();
+            avg.UserId = user.Data.UserId;
+            avg.Average = profileVM.tot;
+            avg.UserType = user.Data.UserType;
+            _averageRatingService.Save(avg);
             //string s1 = " ~/Files/1SignIn.PNG";
             //string s2 = " ~/Files/2SignUp.PNG";
             //string s3 = " ~/Files/3AfterSignUp.PNG";
