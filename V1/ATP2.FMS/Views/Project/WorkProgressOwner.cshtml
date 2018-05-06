@@ -28,11 +28,13 @@
                 <div class="row">
                     <div class="col-md-12">
                         <h4>Name</h4>
-                        @foreach (var v in Model.workers)
+                        @if (Model.workers[0] != null)
                         {
-                            <h5><a href="ProfileView.html">@v.FristName @v.LastName</a></h5>
+                            foreach (var v in Model.workers)
+                             {
+                                 <h5><a href="ProfileView.html">@v.FristName @v.LastName</a></h5>
+                             }
                         }
-
 
                     </div>
 

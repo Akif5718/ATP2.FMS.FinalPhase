@@ -38,10 +38,6 @@ namespace FMS.Core.Service
 
 
 
-                if (!IsValid(objtosave, result))
-                {
-                    return result;
-                }
                 _context.SaveChanges();
             }
             catch (Exception ex)

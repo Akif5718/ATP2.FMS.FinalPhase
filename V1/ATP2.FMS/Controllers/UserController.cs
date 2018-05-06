@@ -22,9 +22,10 @@ namespace ATP2.FMS.Controllers
         private IWorkHistoryService _whservice;
         private ICategoryService _categoryService;
         private IskillService _skillService;
+        private IWorkerSkillService _workerSkillService;
 
 
-        public UserController(IUserInfoService service, IOwnerService oservice, IWorkerService wservice, IEducationalService eservice, IWorkHistoryService whservice, ICategoryService categoryService, IskillService skillService)
+        public UserController(IUserInfoService service, IOwnerService oservice, IWorkerService wservice, IEducationalService eservice, IWorkHistoryService whservice, ICategoryService categoryService, IskillService skillService, IWorkerSkillService workerSkillService)
         {
             _uservice = service;
             _oservice = oservice;
@@ -33,6 +34,7 @@ namespace ATP2.FMS.Controllers
             _whservice = whservice;
             _categoryService = categoryService;
             _skillService = skillService;
+            _workerSkillService = workerSkillService;
         }
 
         public ActionResult RegisterForm()
@@ -136,7 +138,7 @@ namespace ATP2.FMS.Controllers
             {
                 Console.WriteLine(ex.Message);
             }
-            return RedirectToAction("ProjectList", "Worker");
+            return RedirectToAction("Category", "User");
 
         }
 
@@ -158,12 +160,24 @@ namespace ATP2.FMS.Controllers
 
         }
         [HttpPost]
-        public ActionResult Skills(List<string> skillNames)
+        public ActionResult Skills(string[] SkillName)
         {
+            for (int i = 0; i<SkillName.Length;i++)
+            {
+                var skillTbl = _skillService.GetAll().Data.FirstOrDefault(d => d.SkillName.Equals(SkillName[i]));
+                if (skillTbl != null)
+                {
+                    var objToSave = new WorkerSkill();
+                    objToSave.UserId = HttpUtil.CurrentUser.UserId;
+                    objToSave.SkillId = skillTbl.SkillId;
+                    _workerSkillService.Save(objToSave);
+                }
+            }
+            
             //var objtosave=new WorkerSkill();
             //objtosave.SkillId = model.SkillId;
             //objtosave.UserId=model.
-            return null;
+            return RedirectToAction("ProjectList", "Worker");
 
         }
         public ActionResult EducationForm()

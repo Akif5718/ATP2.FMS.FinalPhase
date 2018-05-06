@@ -11,6 +11,8 @@ using Unity;
 using FMS.Core.Entities;
 using FMS.Core.Service.Interfaces;
 using FMS.Core.Service;
+using FMS.Core.Service.Interfaces.IUser_Service;
+using FMS.Core.Service.User_Service;
 
 namespace ATP2.FMS
 {
@@ -45,6 +47,7 @@ namespace ATP2.FMS
             container.RegisterType<ISavedFileService, SavedFileService>();
             container.RegisterType<ISelectedWorkerService, SelectedWorkerService>();
             container.RegisterType<IPaymentService, PaymentService>();
+            container.RegisterType<IAverageRatingService, AverageRatingService>();
 
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));
         }
