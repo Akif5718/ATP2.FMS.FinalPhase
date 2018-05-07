@@ -73,7 +73,8 @@ namespace FMS.Core.Service
 
                if (ValidationHelper.IsIntValid(key))
                {
-                   query = query.Where(q => q.PostId == Int32.Parse(key));
+                   var m = Int32.Parse(key);
+                   query = query.Where(q => q.PostId == m);
                }
 
                if (ValidationHelper.IsStringValid(key))

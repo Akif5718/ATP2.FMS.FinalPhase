@@ -43,11 +43,25 @@ namespace ATP2.FMS.Controllers
         public ActionResult ProjectList()
         {
             var result = _postservice.GetAll();
+            var result3 = _postservice.GetAll();
             //var a = result.Where(d => d.Flag == 0);
 
             var result2 = _skillservice.GetAll();
             ProjectListModel projectListModel = new ProjectListModel();
-            projectListModel.PostAProjects = result.Data.OrderByDescending(m=>m.PostId).ToList();
+            if (result != null)
+            {
+                foreach (var p in result.Data)
+                {
+                    var select = _selectedWorkerService.GetAll().Data.Where(d => d.PostId == p.PostId).ToList();
+                    if (select.Count == p.Members)
+                    {
+                        result3.Data.Remove(p);
+                    }
+                }
+            }
+
+            result = result3;
+            projectListModel.PostAProjects = result.Data.OrderByDescending(m => m.PostId).ToList();
             projectListModel.Skills = result2.Data;
 
             return View(projectListModel);
@@ -58,11 +72,16 @@ namespace ATP2.FMS.Controllers
         {
             ProjectListModel projectListModel = new ProjectListModel();
 
-            var result = _proskillservice.GetAll(skill.SkillName+"");
-            foreach (var projectSkillse in result.Data)
+            var result = _proskillservice.GetAll().Data.Where(d => d.SkillName.Contains(skill.SkillName)).ToList();
+            foreach (var projectSkillse in result)
             {
                 var result2 = _postservice.GetByID(projectSkillse.PostId);
-                projectListModel.PostAProjects.Add(result2.Data);
+                var select = _selectedWorkerService.GetAll().Data.Where(d => d.PostId == result2.Data.PostId).ToList();
+                if (select.Count != result2.Data.Members)
+                {
+                    projectListModel.PostAProjects.Add(result2.Data);
+
+                }
 
             }
             var result3 = _skillservice.GetAll();
@@ -84,8 +103,8 @@ namespace ATP2.FMS.Controllers
             postProjectModel.WUserId = result.Data.WUserId;
             postProjectModel.PostId = result.Data.PostId;
 
-            var result2 = _proskillservice.GetAll(result.Data.PostId + "");
-            foreach (var skillid in result2.Data)
+            var result2 = _proskillservice.GetAll().Data.Where(d=>d.PostId==id).ToList();
+            foreach (var skillid in result2)
             {
                 postProjectModel.SkillName.Add(skillid.SkillName);
 
@@ -309,6 +328,7 @@ namespace ATP2.FMS.Controllers
             ratingOwner.CommunicationSkill = model.CommunicationSkill;
             ratingOwner.OnWord = model.Onword;
             ratingOwner.Reliability = model.Reliability;
+            ratingOwner.UserId = model.OwnerId;
             _ratingOwnerService.Save(ratingOwner);
             var selWorker = _selectedWorkerService.GetAll().Data.FirstOrDefault(d=>d.PostId==model.PostId && d.UserId==HttpUtil.CurrentUser.UserId);
             _selectedWorkerService.UpdateApprove(selWorker, 3);

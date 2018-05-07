@@ -1,8 +1,10 @@
 ﻿@model ATP2.FMS.ViewModel.Profile
+
 @{
-    ViewBag.Title = "Profile";
+    ViewBag.Title = "OtherViewPro";
     Layout = "~/Views/Shared/AfterLoginOwner.cshtml";
 }
+
 
 <div class="container">
 
@@ -17,8 +19,10 @@
                     <div class="col-md-2" style=""></div>
                     <div class="col-md-8" style="">
                         <div style=" border-width: 0px; height: 200px; width: 200px; left: 37px; top: 20px; overflow: hidden; " align="Center">
-                            <img src="~/DP/@Model.ProPic" alt="Paris" style="border-radius: 50%;height: 200px; width: 200px; ">
-                            
+
+                            <img src="man.jpg" alt="Paris" style="border-radius: 50%;height: 200px; width: 200px; ">
+
+                            <input class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp" type="file">
                         </div>
                     </div>
                     <div class="col-md-2" style=""></div>
@@ -31,12 +35,7 @@
 
 
                 <div style=" border-width: 0px; height: 900px; width: 250px; overflow: hidden; color:white;">
-                    @using (Html.BeginForm("Propic", "Owner", FormMethod.Post, new { enctype = "multipart/form-data" }))
-                    {  
-                        <label for="file">Upload Image:</label> 
-                        <input type="file" name="file" id="file" style="width: 100%;" />
-    <input type="submit" value="Upload" class="btn btn-success" />
-                    }
+
                     <br /><br />
 
 
@@ -136,11 +135,11 @@
                 </div>
                 <div style=" border-width: 0px;  height: 40px; width: 110px; overflow: hidden;">
                     &nbsp;&nbsp;
-                    <a href="@Url.Action("Edit", "Owner")" class="btn btn-success" type="button">
-                        <i class="fa fa-edit"></i>
+                    @*<a href="@Url.Action("Edit", "Owner")" class="btn btn-success" type="button">
+                            <i class="fa fa-edit"></i>
 
-                        <font color="White">Edit</font>
-                    </a>
+                            <font color="White">Edit</font>
+                        </a>*@
 
                     <br /><br />
                 </div>
@@ -150,37 +149,35 @@
             <div class="row">
                 <div class="col-md-12">
 
-                    <div style=" border-width: 0px; overflow: hidden; ">
+                    @*<div style=" border-width: 0px; overflow: hidden; ">
 
 
-                        <p class="lead">
-                            <a class="btn btn-primary btn-lg" href="@Url.Action("CreateProject","Project")" role=" button">Create Job</a>
-                            <a class="btn btn-primary btn-lg" href="@Url.Action("DepositeForm","Owner")" role=" button">Deposite</a>
-                        </p>
-                    </div>
-                    <div style=" border-width: 0px;  overflow: hidden;">
-                        <fieldset>
-                            <legend><h3>Posted Jobs:</h3></legend>
-                            <div class="list-group">
-                                @foreach (var p in Model.PostAProject)
-                                {
-                                    <a href='@Url.Action("WorkProgressOwner","Project")/@p.PostId' class="list-group-item list-group-item-action flex-column align-items-start active">
-                                        <div class="d-flex w-100 justify-content-between">
-                                            <h5 class="mb-1">@p.ProjectName</h5>
-                                            <small>@p.StartTime</small>
-                                        </div>
-                                        <p class="mb-1">@p.Description</p>
+                            <p class="lead">
+                                <a class="btn btn-primary btn-lg" href="@Url.Action("CreateProject","Project")" role=" button">Create Job</a>
+                            </p>
+                        </div>*@
+                    @*<div style=" border-width: 0px;  overflow: hidden;">
+                            <fieldset>
+                                <legend><h3>Posted Jobs:</h3></legend>
+                                <div class="list-group">
+                                    @foreach (var p in Model.PostAProject)
+                                    {
+                                        <a href='@Url.Action("WorkProgressOwner","Project")/@p.PostId' class="list-group-item list-group-item-action flex-column align-items-start active">
+                                            <div class="d-flex w-100 justify-content-between">
+                                                <h5 class="mb-1">@p.ProjectName</h5>
+                                                <small>@p.StartTime</small>
+                                            </div>
+                                            <p class="mb-1">@p.Description</p>
 
-                                    </a>
-                                    @Html.ActionLink("Requests", "RequestedMember", new { Controller = "Project", id = @p.PostId }, new { @class = "btn btn-info" })<br />
-                                    @Html.ActionLink("Edit", "CreateProjectEdit", new { Controller = "Project", id = @p.PostId }, new { @class = "btn btn-default" })<br />
-                                }
+                                        </a>
+                                        @Html.ActionLink("Requests", "RequestedMember", new { Controller = "Project", id = @p.PostId }, new { @class = "btn btn-info" })<br />
+                                    }
 
 
-                            </div>
+                                </div>
 
-                        </fieldset>
-                    </div>
+                            </fieldset>
+                        </div>*@
                 </div>
             </div>
 
@@ -285,4 +282,5 @@
         }
     </script>
 }
+
 

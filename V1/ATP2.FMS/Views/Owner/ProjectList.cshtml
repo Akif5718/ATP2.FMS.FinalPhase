@@ -20,7 +20,7 @@
                 Search
             </label>
         </div>
-        <div class="row">
+        @*<div class="row">
             <form class="form-inline ">
                 <div class="col-md-5">
                     <div class="form-group has-feedback">
@@ -30,7 +30,7 @@
                     </div>
                 </div>
             </form>
-        </div>
+        </div>*@
     </div>
     <hr />
     <div>
@@ -46,10 +46,10 @@
 
                     @using (Html.BeginForm("ProjectList", "Owner"))
                     {
-                        <select class="form-control" name="SkillId">
+                        <select class="form-control" name="SkillName">
                             @foreach (var s in Model.Skills)
                             {
-                                <option value="@s.SkillId" name="SkillName">@s.SkillName</option>
+                                <option value="@s.SkillName" name="SkillName">@s.SkillName</option>
                             }
 
                         </select>
@@ -73,7 +73,7 @@
     </div>
 
     <hr />
-    <div>
+    @*<div>
         <div class="col-md-2">
             <label class="control-label" for="focusedInput">
                 Job Type
@@ -128,19 +128,19 @@
 
 
 
-    </div>
+    </div>*@
     <hr />
     <div>
-        @using (Html.BeginForm("ProjectList", "Owner"))
-        {
+       
             <div class="col-md-9">
-                <input type="submit" value="Clear Filter" class="btn btn-primary" />
-            </div>
-        }
+                <a href="@Url.Action("ProjectList","Owner")">
+                    <input type="submit" value="Clear Filter" class="btn btn-primary" />
+                </a>             </div>
+       
 
 
 
-        <div class="col-md-3">
+        @*<div class="col-md-3">
             <ul class="pagination ">
                 <li class="disabled"><a href="#">&laquo;</a></li>
                 <li class="active"><a href="#">1</a></li>
@@ -150,7 +150,7 @@
                 <li><a href="#">5</a></li>
                 <li><a href="#">&raquo;</a></li>
             </ul>
-        </div>
+        </div>*@
 
     </div>
 
@@ -198,7 +198,7 @@
     <hr />
     <div class="col-md-9">
     </div>
-    <div class="col-md-3">
+    @*<div class="col-md-3">
         <ul class="pagination ">
             <li class="disabled"><a href="#">&laquo;</a></li>
             <li class="active"><a href="#">1</a></li>
@@ -208,7 +208,7 @@
             <li><a href="#">5</a></li>
             <li><a href="#">&raquo;</a></li>
         </ul>
-    </div>
+    </div>*@
 
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>

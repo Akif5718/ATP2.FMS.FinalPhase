@@ -139,18 +139,21 @@ namespace FMS.Core.Service
 
                if (ValidationHelper.IsIntValid(key))
                {
-                   query = query.Where(q => q.PostId == Int32.Parse(key));
+                   var m = Int32.Parse(key);
+                   query = query.Where(q => q.PostId ==m );
                }
 
                if (ValidationHelper.IsStringValid(key))
                {
-                   query = query.Where(q => q.UserId.Equals(Int32.Parse(key)));
+                   var m = Int32.Parse(key);
+                   query = query.Where(q => q.UserId==m);
 
                }
 
                if (ValidationHelper.IsStringValid(key))
                {
-                   query = query.Where(q => q.Price.Equals(Int32.Parse(key)));
+                   var m = Int32.Parse(key);
+                   query = query.Where(q => q.Price==m);
 
                }
 

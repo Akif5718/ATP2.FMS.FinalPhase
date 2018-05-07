@@ -177,7 +177,7 @@ namespace ATP2.FMS.Controllers
             //var objtosave=new WorkerSkill();
             //objtosave.SkillId = model.SkillId;
             //objtosave.UserId=model.
-            return RedirectToAction("ProjectList", "Worker");
+            return RedirectToAction("Category", "User");
 
         }
         public ActionResult EducationForm()

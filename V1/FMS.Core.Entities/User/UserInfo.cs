@@ -6,7 +6,6 @@ using System.Data.Odbc;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using FrameWork;
 
 namespace FMS.Core.Entities
 {

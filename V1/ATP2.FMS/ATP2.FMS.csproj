@@ -265,6 +265,7 @@
     <Content Include="Views\Owner\OtherViewPro.cshtml" />
     <Content Include="Views\Owner\DepositeForm.cshtml" />
     <Content Include="Views\Worker\OwnerRating.cshtml" />
+    <Content Include="Views\Owner\OtherViewPro2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -27,7 +27,7 @@ namespace FMS.Core.Service
           var result = new Result<RatingOwner>();
           try
           {
-              var objtosave = _context.ratingOwners.FirstOrDefault(u => u.UserId == userinfo.UserId);
+              var objtosave = _context.ratingOwners.FirstOrDefault(u => u.RatingOwnerId == userinfo.RatingOwnerId);
               if (objtosave == null)
               {
                   objtosave = new RatingOwner();

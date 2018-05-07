@@ -10,6 +10,10 @@ namespace ATP2.FMS.ViewModel
     {
         public List<PostAProject> PostAProjects = new List<PostAProject>();
 
-        public List<Skill> Skills = new List<Skill>(); 
+        public List<Skill> Skills = new List<Skill>();
+
+        public int SkillId { get; set; }
+
+        public string SkillName { get; set; }
     }
 }

@@ -20,7 +20,7 @@
                 Search
             </label>
         </div>
-        <div class="row">
+        @*<div class="row">
             <form class="form-inline ">
                 <div class="col-md-5">
                     <div class="form-group has-feedback">
@@ -30,7 +30,7 @@
                     </div>
                 </div>
             </form>
-        </div>
+        </div>*@
     </div>
     <hr />
     <div>
@@ -46,10 +46,10 @@
 
                     @using (Html.BeginForm("ProjectList", "Worker"))
                     {
-                        <select class="form-control" name="SkillId">
+                        <select class="form-control" name="SkillName">
                             @foreach (var s in Model.Skills)
                             {
-                                <option value="@s.SkillId" name="SkillName">@s.SkillName</option>
+                                <option value="@s.SkillName" name="SkillName">@s.SkillName</option>
                             }
 
                         </select>
@@ -73,7 +73,7 @@
     </div>
 
     <hr />
-    <div>
+    @*<div>
         <div class="col-md-2">
             <label class="control-label" for="focusedInput">
                 Job Type
@@ -128,15 +128,16 @@
 
 
 
-    </div>
+    </div>*@
     <hr />
     <div>
-        @using (Html.BeginForm("ProjectList", "Owner"))
-        {
+       
             <div class="col-md-9">
-                <input type="submit" value="Clear Filter" class="btn btn-primary" />
+                <a href="@Url.Action("ProjectList","Worker")">
+                    <input type="submit" value="Clear Filter" class="btn btn-primary" />
+                </a> 
             </div>
-        }
+        
 
 
 

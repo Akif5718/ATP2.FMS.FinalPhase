@@ -1,4 +1,5 @@
-﻿@model ATP2.FMS.ViewModel.PostProjectModel
+﻿@using System.Resources
+@model ATP2.FMS.ViewModel.PostProjectModel
 @{
     ViewBag.Title = "CreateProject";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -28,29 +29,32 @@
             <label for="textArea" class="col-lg-3 control-label">Description</label>
             <div class="col-lg-9">
                 <textarea class="form-control" name="Description" rows="3" id="textArea" placeholder="Describe your Project"></textarea>
-                <span class="help-block">A longer block of help text that breaks onto a new line and may extend beyond one line.</span>
             </div>
         </div>
         <div class="form-group">
             @*<label for="inputEmail" class="col-lg-2 control-label">Write skills</label>
-                @*<div class="col-lg-10">
-                    <input class="form-control" name="SkillName" id="inputEmail" placeholder="Skills" type="text">
+            @*<div class="col-lg-10">
+                <input class="form-control" name="SkillName" id="inputEmail" placeholder="Skills" type="text">
 
-                </div>*@
-           
+            </div>*@
+
             <label for="Skills" class="col-lg-3 control-label">Skills</label>
-                <input type="text" class="col-lg-9 form-control" name="Skillsearch" oninput='onInput()' id="Skillsearch" placeholder="Search your Skills:" list="datalist1">
-            <datalist id="datalist1">
+            <div class="col-lg-9">
+                <input type="text" class="form-control" name="Skillsearch" oninput='onInput()' id="Skillsearch" placeholder="Search your Skills:" list="datalist1">
+                <datalist id="datalist1">
 
-                @foreach (var v in Model.SkillName)
-                {
-                    <option value='@v'>@v</option>
-                }
-            </datalist>
+                    @foreach (var v in Model.SkillName)
+                    {
+                        <option value='@v'>@v</option>
+                    }
+                </datalist>
+            </div>
             <label for="hidden" class="col-lg-3 control-label"></label>
-            <input type="text" class="col-lg-9 form-control" name="Selectskills" id="Selectskills" placeholder="Your Skills:" />
-                                                                                                                                 
-                    </div>
+            <div class="col-lg-9">
+                <input type="text" class="form-control" name="Selectskills" id="Selectskills" placeholder="Your Skills:" />
+
+            </div>
+        </div>
                         <div class="form-group">
                             <label for="inputEmail" class="col-lg-3 control-label">Budget</label>
                             <div class="col-lg-9">
@@ -99,14 +103,16 @@
                                 <div id="div1"></div>
                             </div>
                         </div>
-
+        <br/>
+        <br/>
+        <br/>
                         <div class="form-group">
-                            <div class="col-lg-4 col-lg-offset-2">
-                                <a href="JobHome.html">
+                            <div class="col-lg-3 ">
+                                <a href="@Url.Action("ProjectList","Owner")">
                                     <button type="button" class="btn btn-default " onclick="">Cancel</button>
                                 </a>
                             </div>
-                            <div class="col-lg-3 col-lg-offset-2">
+                            <div class="col-lg-3 ">
                                 <a href="">
                                     <button type="submit" class="btn btn-primary">Create</button>
                                 </a>
