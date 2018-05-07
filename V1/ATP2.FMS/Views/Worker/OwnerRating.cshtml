@@ -1,0 +1,93 @@
+﻿@model ATP2.FMS.ViewModel.RatingOwnerModel
+@{
+    ViewBag.Title = "OwnerRating";
+    Layout = "~/Views/Shared/AfterLoginWorker.cshtml";
+}
+
+<h2>Give Rating to the Owner</h2>
+
+@using (Html.BeginForm("OwnerRating", "Worker"))
+{  
+    <input type="hidden" name="UserId" value="@Model.OwnerId" />
+    <input type="hidden" name="PostId" value="@Model.PostId" />
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-4">
+            <h4>ONWORD</h4>
+        </div>
+        <div class="col-md-3">
+            <div class="rating">
+                <div class="form-group">
+                    <div class="input-group">
+                        <input class="form-control" name="Onword" type="text">
+                        <span class="input-group-addon">%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-4">
+            <h4>Reliability</h4>
+        </div>
+        <div class="col-md-3">
+            <div class="rating">
+                <div class="form-group">
+                    <div class="input-group">
+                        <input class="form-control" name="Reliability" type="text">
+                        <span class="input-group-addon">%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-4">
+            <h4>BEHAVIOUR</h4>
+        </div>
+        <div class="col-md-3">
+            <div class="rating">
+                <div class="form-group">
+                    <div class="input-group">
+                        <input class="form-control" name="Behaviour" type="text">
+                        <span class="input-group-addon">%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-4">
+            <h4>COMMUNICATIONSKILL</h4>
+        </div>
+        <div class="col-md-3">
+            <div class="rating">
+                <div class="form-group">
+                    <div class="input-group">
+                        <input class="form-control" name="Communicationskill" type="text">
+                        <span class="input-group-addon">%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+    <div class="row">
+        <div class="col-md-8"></div>
+        <div class="col-md-1">
+            <input type="submit" class="btn btn-primary" />
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+}
+
+
+
+
+

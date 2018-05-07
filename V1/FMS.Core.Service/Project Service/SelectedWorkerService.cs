@@ -31,11 +31,14 @@ namespace FMS.Core.Service
                {
                    objtosave = new SelectedWorker();
                    _context.selectedWorkers.Add(objtosave);
+                   objtosave.Approved = 0;
                }
                objtosave.UserId = userinfo.UserId;
                objtosave.PostId = userinfo.PostId;
                objtosave.Price = userinfo.Price;
                objtosave.Flag = 0;
+               
+               
 
 
 
@@ -53,7 +56,7 @@ namespace FMS.Core.Service
            return result;
        }
 
-       public Result<SelectedWorker> Update(SelectedWorker userinfo)
+        public Result<SelectedWorker> Update(SelectedWorker userinfo)
        {
            var result = new Result<SelectedWorker>();
            try
@@ -62,6 +65,7 @@ namespace FMS.Core.Service
               
               
                objtosave.Flag = 1;
+               
 
 
 
@@ -78,7 +82,32 @@ namespace FMS.Core.Service
            }
            return result;
        }
+        public Result<SelectedWorker> UpdateApprove(SelectedWorker userinfo, int app)
+        {
+            var result = new Result<SelectedWorker>();
+            try
+            {
+                var objtosave = _context.selectedWorkers.FirstOrDefault(u => u.PostId == userinfo.PostId && u.UserId == userinfo.UserId);
 
+
+                objtosave.Approved = app;
+
+
+
+
+                if (!IsValid(objtosave, result))
+                {
+                    return result;
+                }
+                _context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                result.HasError = true;
+                result.Message = ex.Message;
+            }
+            return result;
+        }
        public bool IsValid(SelectedWorker obj, Result<SelectedWorker> result)
        {
            if (!ValidationHelper.IsStringValid(obj.UserId.ToString()))

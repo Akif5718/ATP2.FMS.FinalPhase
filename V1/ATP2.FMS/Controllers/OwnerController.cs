@@ -282,6 +282,12 @@ namespace ATP2.FMS.Controllers
 
         public ActionResult Payments(int id)
         {
+            var selW = _selectedWorkerService.GetAll().Data.Where(p => p.PostId == id).ToList();
+            foreach (var v in selW)
+            {
+                _selectedWorkerService.UpdateApprove(v, 1);
+            }
+            
             PaymentModel pay=new PaymentModel();
             var result = _postservice.GetByID(id);
             pay.PostAProject = result.Data;
@@ -344,6 +350,17 @@ namespace ATP2.FMS.Controllers
             return RedirectToAction("Payments", "Owner");
 
         }
+        public ActionResult DepositeForm()
+        {
+            var user = _userservice.GetByID(HttpUtil.CurrentUser.UserId);
+            return View(user.Data);
+        }
+        [HttpPost]
+        public ActionResult DepositeForm(string balance)
+        {
+            _userservice.Deposit(double.Parse(balance), HttpUtil.CurrentUser.UserId);
+            return RedirectToAction("Profile", "Owner");
+        }
 
         public ActionResult OtherViewPro(int id)
         {
@@ -376,6 +393,23 @@ namespace ATP2.FMS.Controllers
 
             return View(profileVM);
         }
-        
+
+        public ActionResult Propic(HttpPostedFileBase file)
+        {
+            if (file != null)
+            {
+                string pic = System.IO.Path.GetFileName(file.FileName);
+                string path = System.IO.Path.Combine(
+                    Server.MapPath("~/DP"), pic);
+                // file is uploaded
+                file.SaveAs(path);
+                var user = _userservice.GetByID(HttpUtil.CurrentUser.UserId);
+                user.Data.ProPic = pic;
+                _userservice.Save(user.Data);
+
+            }
+            // after successfully uploading redirect the user
+            return RedirectToAction("Profile", "Owner");
+        }
     }
 }

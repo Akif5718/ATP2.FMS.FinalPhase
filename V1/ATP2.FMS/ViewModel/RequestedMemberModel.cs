@@ -21,6 +21,7 @@ namespace ATP2.FMS.ViewModel
         //}
 
         public List<UserInfo> UserInfo = new List<UserInfo>();
+        public List<ProfileWorker> totalAvg = new List<ProfileWorker>();
 
         public int PostId { get; set; }
 

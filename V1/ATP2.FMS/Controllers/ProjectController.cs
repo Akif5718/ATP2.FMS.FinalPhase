@@ -29,8 +29,9 @@ namespace ATP2.FMS.Controllers
         private ISavedFileService _savedFileService;
         private ISelectedWorkerService _selectedService;
         private IProjectSkillService _projectSkillService;
+        private IRatingWorkerService _ratingWorkerService;
 
-        public ProjectController(IPostAProjectService postservice, IProjectSectionService sectionservice, IProjectSkillService proskillservice, IskillService skillservice, IUserInfoService userservice, IResponseToAJobService responseservice, ISelectedWorkerService selectedWorkerService, IComentSectionService comentSectionService, ISavedFileService savedFileService, ISelectedWorkerService selectedService, IProjectSkillService projectSkillService)
+        public ProjectController(IPostAProjectService postservice, IProjectSectionService sectionservice, IProjectSkillService proskillservice, IskillService skillservice, IUserInfoService userservice, IResponseToAJobService responseservice, ISelectedWorkerService selectedWorkerService, IComentSectionService comentSectionService, ISavedFileService savedFileService, ISelectedWorkerService selectedService, IProjectSkillService projectSkillService, IRatingWorkerService ratingWorkerService)
         {
             _postservice = postservice;
             _sectionservice = sectionservice;
@@ -43,6 +44,7 @@ namespace ATP2.FMS.Controllers
             _savedFileService = savedFileService;
             _selectedService = selectedService;
             _projectSkillService = projectSkillService;
+            _ratingWorkerService = ratingWorkerService;
         }
 
         public ActionResult CreateProject()
@@ -74,13 +76,13 @@ namespace ATP2.FMS.Controllers
                     var result1 = _sectionservice.Save(projectsection);
                 }
 
-                foreach (var skillid in PostProjectModel.SkillName)
-                {
-                    var projectskill = new ProjectSkills();
-                    projectskill.SkillName = skillid;
-                    projectskill.PostId = last.Data.PostId;
-                    var result2 = _proskillservice.Save(projectskill);
-                }
+                //foreach (var skillid in PostProjectModel.SkillName)
+                //{
+                //    var projectskill = new ProjectSkills();
+                //    projectskill.SkillName = skillid;
+                //    projectskill.PostId = last.Data.PostId;
+                //    var result2 = _proskillservice.Save(projectskill);
+                //}
 
 
                 PostProjectModel.PostId = last.Data.PostId;
@@ -105,21 +107,65 @@ namespace ATP2.FMS.Controllers
             return RedirectToAction("ProjectDetails", "Owner", new { id = PostProjectModel.PostId });
         }
 
+        //public ActionResult CreateProjectEdit(int id)
+        //{
+        //    PostEditModel post = new PostEditModel();
+
+        //    var result = _postservice.GetByID(id);
+
+        //    post.PostAProject = result.Data;
+
+        //    var result2 = _proskillservice.GetAll().Data.Where(d => d.PostId == id).ToList();
+        //    var result3 = _sectionservice.GetAll().Data.Where(d => d.PostId == id).ToList();
+        //    post.ProjectSkills = result2;
+        //    post.ProjectSections = result3;
+        //    ViewBag.Categories = new MultiSelectList(result2, "ProjectSkillId", "SkillName");
+
+        //    return View(post);
+        //}
         public ActionResult CreateProjectEdit(int id)
         {
-            PostEditModel post = new PostEditModel();
+            var post = new PostProjectModel();
 
-            var result = _postservice.GetByID(id);
+            var result = _postservice.GetByID(id).Data;
 
-            post.PostAProject = result.Data;
+            var skills = _projectSkillService.GetAll().Data.Where(m => m.PostId == id).ToList();
+            var AllSkills = _skillservice.GetAll().Data.ToList();
+            post = post.creation(result, skills, AllSkills);
 
-            var result2 = _proskillservice.GetAll().Data.Where(d => d.PostId == id).ToList();
-            var result3 = _sectionservice.GetAll().Data.Where(d => d.PostId == id).ToList();
-            post.ProjectSkills = result2;
-            post.ProjectSections = result3;
-            ViewBag.Categories = new MultiSelectList(result2, "ProjectSkillId", "SkillName");
+           
 
             return View(post);
+        }
+
+        [HttpPost]
+        public ActionResult CreateProjectEdit(PostProjectModel PostProjectModel, string Selectskills)
+        {
+            var post = _postservice.GetByID(PostProjectModel.PostId);
+            post.Data.Description = PostProjectModel.Description;
+            post.Data.EndTime = PostProjectModel.EndTime;
+            post.Data.StartTime = PostProjectModel.StartTime;
+            post.Data.Members = PostProjectModel.Members;
+            post.Data.Price = PostProjectModel.Price;
+            post.Data.ProjectName = PostProjectModel.ProjectName;
+            _postservice.Save(post.Data);
+            var skills = _projectSkillService.GetAll().Data.Where(d => d.PostId == PostProjectModel.PostId).Select(m=>m.SkillName).ToList();
+            string[] tokens = Selectskills.Split(',');
+            String[] array = skills.ToArray();
+            
+            foreach (var t in tokens)
+            {
+                if (!array.Contains(t))
+                {
+                    var ongToSave = new ProjectSkills();
+                    ongToSave.PostId = PostProjectModel.PostId;
+                    ongToSave.SkillName = t;
+                    _projectSkillService.Save(ongToSave);
+                }
+                
+            }
+
+            return RedirectToAction("ProjectDetails", "Owner", new {id = PostProjectModel.PostId});
         }
      
         public ActionResult RequestedMember(int id)
@@ -147,10 +193,25 @@ namespace ATP2.FMS.Controllers
                 }
             }
            
-           
+            List<ProfileWorker> totList = new List<ProfileWorker>();
+            foreach (var v in requested.UserInfo)
+            {
+                var proWorkVM = new ProfileWorker();
+                var obj = proWorkVM.creation(v, new WorkerInfo(),
+                    _ratingWorkerService.GetAll().Data.Where(d => d.UserId == v.UserId).ToList(),
+                    new List<PostAProject>());
+                totList.Add(obj);
+            }
 
-           
-           
+            totList = totList.OrderByDescending(d => d.tot).ToList();
+            var uInfo = new List<UserInfo>();
+            foreach (var v in totList)
+            {
+                uInfo.Add(_userservice.GetByID(v.UserId).Data);
+            }
+
+            requested.UserInfo = uInfo;
+            requested.totalAvg = totList;
             return View(requested);
         }
 

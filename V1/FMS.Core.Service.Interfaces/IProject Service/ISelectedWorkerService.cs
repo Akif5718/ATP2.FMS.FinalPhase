@@ -14,5 +14,6 @@ namespace FMS.Core.Service.Interfaces
         Result<SelectedWorker> Update(SelectedWorker userinfo);
 
         Result<bool> DeleteByuser(int id);
+        Result<SelectedWorker> UpdateApprove(SelectedWorker userinfo, int app);
     }
 }

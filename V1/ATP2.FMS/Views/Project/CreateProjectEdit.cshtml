@@ -1,5 +1,5 @@
 ﻿@using System.Web.Mvc.Html
-@model ATP2.FMS.ViewModel.PostEditModel
+@model ATP2.FMS.ViewModel.PostProjectModel
 @{
     ViewBag.Title = "CreateProjectEdit";
     Layout = "~/Views/Shared/AfterLoginOwner.cshtml";
@@ -9,7 +9,7 @@
 <div class="container">
 
     <br />
-    @using (Html.BeginForm("CreateProject", "Project"))
+    @using (Html.BeginForm("CreateProjectEdit", "Project"))
     {
         <form class="form-horizontal">
             <br />
@@ -22,46 +22,48 @@
                         <div class="form-group">
                             <label for="inputEmail" class="col-lg-2 control-label">Project Name</label>
                             <div class="col-lg-10">
-                                <input class="form-control" value="@Model.PostAProject.ProjectName" name="ProjectName" id="inputEmail" placeholder="e.g Design a web page for a website" type="text">
+                                <input type="Hidden" name="PostId" value="@Model.PostId"/>
+                                <input class="form-control" value="@Model.ProjectName" name="ProjectName" id="inputEmail" placeholder="e.g Design a web page for a website" type="text">
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label for="textArea" class="col-lg-2 control-label">Description</label>
                             <div class="col-lg-10">
-                                <textarea class="form-control" value="" name="Description" rows="3" id="textArea" placeholder="Describe your Project">@Model.PostAProject.Description</textarea>
+                                <textarea class="form-control" value="" name="Description" rows="3" id="textArea" placeholder="Describe your Project">@Model.Description</textarea>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="inputEmail" class="col-lg-2 control-label">Write skills</label>
-                            
-                            <div class="col-lg-10">
-                                @Html.DropDownListFor(m => m.SkillName, new SelectList(Model.ProjectSkills, "SkillName", "SkillName"), "--Select--",  new { @class = "form-control" })
+                            @*<label for="inputEmail" class="col-lg-2 control-label">Write skills</label>
+                @*<div class="col-lg-10">
+                    <input class="form-control" name="SkillName" id="inputEmail" placeholder="Skills" type="text">
 
-                                @*@Html.DropDownList("SkillName", (MultiSelectList)ViewBag.Categories, new { multiple = "multiple" })*@
+                </div>*@
+           
+                            <label for="Skills" class="col-lg-3 control-label">Skills</label>
+                            <input type="text" class="col-lg-9 form-control" name="Skillsearch" oninput='onInput()' id="Skillsearch" placeholder="Search your Skills:" list="datalist1">
+                            <datalist id="datalist1">
 
-
-
-
-
-
-
-
-                            </div>
-                        
-
+                                @foreach (var v in Model.SkillName)
+                                {
+                                    <option value='@v'>@v</option>
+                                }
+                            </datalist>
+                            <label for="hidden" class="col-lg-3 control-label"></label>
+                            <input type="text" class="col-lg-9 form-control" value="@Model.Selectskills" name="Selectskills" id="Selectskills" placeholder="Your Skills:" />
+                                                                                                                                 
                         </div>
                         <div class="form-group">
                             <label for="inputEmail" class="col-lg-2 control-label">Budget</label>
                             <div class="col-lg-10">
-                                <input class="form-control" value="@Model.PostAProject.Price" name="Price" id="inputEmail" placeholder="Budget" type="text">
+                                <input class="form-control" value="@Model.Price" name="Price" id="inputEmail" placeholder="Budget" type="text">
 
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="inputName" class="col-lg-2 control-label"></label>
                             <div class="col-lg-10">
-                                <input class="form-control" id="inputName1" value="@Model.PostAProject.StartTime" name="StartTime" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" placeholder="Start Time">
+                                <input class="form-control" id="inputName1" value="@Model.StartTime" name="StartTime" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" placeholder="Start Time">
                             </div>
 
                         </div>
@@ -70,14 +72,14 @@
                         <div class="form-group">
                             <label for="inputName" class="col-lg-2 control-label"></label>
                             <div class="col-lg-10">
-                                <input class="form-control" id="inputName2" value="@Model.PostAProject.EndTime" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" name="EndTime" placeholder="End Time">
+                                <input class="form-control" id="inputName2" value="@Model.EndTime" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" name="EndTime" placeholder="End Time">
                             </div>
 
                         </div>
                         <div class="form-group">
                             <label for="inputEmail" class="col-lg-2 control-label">Required member</label>
                             <div class="col-lg-10">
-                                <input class="form-control" name="Members" value="@Model.PostAProject.Members" id="inputEmail" placeholder="Number of member" type="text">
+                                <input class="form-control" name="Members" value="@Model.Members" id="inputEmail" placeholder="Number of member" type="text">
 
                             </div>
                         </div>
@@ -87,13 +89,13 @@
                         <div class="form-group">
                             <div class="col-lg-4 col-lg-offset-2">
                                 <a href="JobHome.html">
-                                    <button type="button" class="btn btn-default " onclick="">Cancel</button>
+                                    @*<button type="button" class="btn btn-default " onclick="">Cancel</button>*@
                                 </a>
                             </div>
                             <div class="col-lg-3 col-lg-offset-2">
-                                <a href="">
-                                    <button type="submit" class="btn btn-primary">Save</button>
-                                </a>
+                               
+                                <input type="submit" class="btn btn-primary" value ="Save"/>
+                                
                             </div>
                         </div>
                     </fieldset>
@@ -122,6 +124,30 @@
                 document.getElementById("text" + i).innerHTML = "<input class='form-control' id='inputEmail' name='SectionName' placeholder='Section Name' type='text'><br/>";
             }
 
+        }
+        function onInput() {
+            var parent = document.getElementById('datalist1');
+            var val = document.getElementById("Skillsearch").value;
+            var change = document.getElementById("Skillsearch");
+            var opts = document.getElementById('datalist1').childNodes;
+            var text = document.getElementById('Selectskills');
+            for (var i = 0; i < opts.length; i++) {
+                if (opts[i].value === val) {
+                    // An item was selected from the list!
+                    // yourCallbackHere()
+                    //text.innerHTML = opts[i].value;
+                    //alert(opts[i].value);
+                    if (text.value != "")
+                        text.value = text.value + "," + opts[i].value;
+                    else
+                        text.value = opts[i].value;
+                    change.value = "";
+                    parent.removeChild(opts[i]);
+
+                    //alert();
+                    break;
+                }
+            }
         }
 </script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>

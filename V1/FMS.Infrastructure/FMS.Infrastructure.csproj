@@ -81,6 +81,10 @@
     <Compile Include="Migrations\201805052040104_postskill.Designer.cs">
       <DependentUpon>201805052040104_postskill.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201805062324110_approve.cs" />
+    <Compile Include="Migrations\201805062324110_approve.Designer.cs">
+      <DependentUpon>201805062324110_approve.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -118,6 +122,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201805052040104_postskill.resx">
       <DependentUpon>201805052040104_postskill.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805062324110_approve.resx">
+      <DependentUpon>201805062324110_approve.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

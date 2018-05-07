@@ -18,9 +18,9 @@
                     <div class="col-md-8" style="">
                         <div style=" border-width: 0px; height: 200px; width: 200px; left: 37px; top: 20px; overflow: hidden; " align="Center">
 
-                            <img src="man.jpg" alt="Paris" style="border-radius: 50%;height: 200px; width: 200px; ">
+                            <img src="~/DP/@Model.ProPic" alt="Paris" style="border-radius: 50%;height: 200px; width: 200px; ">
 
-                            <input class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp" type="file">
+                            
                         </div>
                     </div>
                     <div class="col-md-2" style=""></div>
@@ -33,7 +33,12 @@
 
 
                 <div style=" border-width: 0px; height: 600px; width: 250px; overflow: hidden; color:white;">
-
+                    @using (Html.BeginForm("Propic", "Worker", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {  
+                        <label for="file">Upload Image:</label> 
+                        <input type="file" name="file" id="file" style="width: 100%;" /> 
+                        <input type="submit" value="Upload" class="submit" /> 
+                    }
                     <br /><br />
 
 
@@ -125,16 +130,35 @@
                             <div class="list-group">
                                 @if (Model.PostAProject != null)
                                 {
+                                    var chk = 0;
                                     foreach (var p in Model.PostAProject)
                                     {
-                                        <a href='@Url.Action("WorkProgressOwner","Project")/@p.PostId' class="list-group-item list-group-item-action flex-column align-items-start active">
-                                            <div class="d-flex w-100 justify-content-between">
-                                                <h5 class="mb-1">@p.ProjectName</h5>
-                                                <small>@p.StartTime</small>
-                                            </div>
-                                            <p class="mb-1">@p.Description</p>
+                                        if (Model.check[chk] == 0)
+                                        {
+                                            <a href='@Url.Action("WorkProgressOwner","Project")/@p.PostId' class="list-group-item list-group-item-action flex-column align-items-start active">
+                                                <div class="d-flex w-100 justify-content-between">
+                                                    <h5 class="mb-1">@p.ProjectName</h5>
+                                                    <small>@p.StartTime</small>
+                                                </div>
+                                                <p class="mb-1">@p.Description</p>
 
-                                        </a>
+                                            </a>
+                                         }
+                                        else if (Model.check[chk] == 1)
+                                        {
+                                            <a href='@Url.Action("OwnerRating","Worker")/@p.PostId' class="list-group-item list-group-item-action flex-column align-items-start active">
+                                                <div class="d-flex w-100 justify-content-between">
+                                                    <h5 class="mb-1">@p.ProjectName</h5>
+                                                    <small>@p.StartTime</small>
+                                                </div>
+                                                <p class="mb-1">@p.Description</p>
+
+                                            </a>
+                                        }
+                                        chk++;
+
+
+
                                     }
                                 }
 
@@ -235,7 +259,8 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div><hr>
+                    <center> Current Balance : @Model.Balance $ </center>
                     <br><hr><br>
                     &nbsp; &nbsp;<font color="#00ff40">@Model.CcommunicationSkill%</font>&nbsp; &nbsp; &nbsp; Communication Skill<br><br><br>
                     &nbsp; &nbsp;<font color="#00ff40">@Model.OonTime%</font>&nbsp; &nbsp; &nbsp; On Time <br><br><br>

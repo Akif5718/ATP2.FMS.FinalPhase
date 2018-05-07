@@ -29,6 +29,7 @@ namespace FMS.Core.Entities
        public double Price { get; set; }
 
        public int Flag { get; set; }
+       public int Approved { get; set; }
 
       
     }

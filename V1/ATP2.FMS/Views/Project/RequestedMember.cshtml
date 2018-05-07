@@ -1,11 +1,12 @@
 ﻿@model ATP2.FMS.ViewModel.RequestedMemberModel
 @{
     ViewBag.Title = "RequestedMember";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/AfterLoginOwner.cshtml";
+    var chk = 0;
 }
 
 
-<div class="container"><h1>Requested Members  </h1></div>
+@*<div class="container"><h1>Requested Members  </h1></div>
 <div id="exTab1" class="container">
     <ul class="nav nav-pills">
         <li class="active">
@@ -22,8 +23,8 @@
         <li>
             <a class="tabLink" data-toggle="tab" onclick="TabClick('4a', displayDate3)"><h4>On Time</h4></a>
         </li>
-    </ul>
-
+    </ul>*@
+<h1>Requested Members  </h1>
     <div class="tab-content clearfix">
         <div class="tab-pane active tabLink" id="1a">
             <div class="container">
@@ -52,14 +53,14 @@
                                     <tr>
 
                                         <th>Name</th>
-                                        <th>Details</th>
+                                        <th>Ratings</th>
                                         <th>Response</th>
 
                                     </tr>
 
                                     @foreach (var p in Model.UserInfo)
                                     {
-                                        
+
                                         <tr>
                                             <div class="row">
 
@@ -69,14 +70,8 @@
                                                 </th>
 
                                                 <th>
+                                                    @Model.totalAvg[chk++].tot
 
-                                                    <h5>$300 USD in 3 days</h5>
-                                                    <span class="fa fa-star checked"></span>
-                                                    <span class="fa fa-star checked"></span>
-                                                    <span class="fa fa-star checked"></span>
-                                                    <span class="fa fa-star checked"></span>
-                                                    <span class="fa fa-star"></span>
-                                                    5.0
                                                 </th>
                                                 <th>
                                                     @using (Html.BeginForm("RequestedMember", "Project"))
@@ -107,9 +102,10 @@
 
 
             </div>
+        </div>
 
         </div>
-        <div class="tab-pane tabLink" id="2a">
+        @*<div class="tab-pane tabLink" id="2a">
             <div class="container">
 
                 <div class="page-header">
@@ -285,10 +281,10 @@
             </div>
         </div>
     </div>
-</div>
+</div>*@
 
 
-<link rel="stylesheet" type="text/css" href="http://www.shieldui.com/shared/components/latest/css/light/all.min.css" />
+@*<link rel="stylesheet" type="text/css" href="http://www.shieldui.com/shared/components/latest/css/light/all.min.css" />
 <script type="text/javascript" src="http://www.shieldui.com/shared/components/latest/js/shieldui-all.min.js"></script>
 
 
@@ -401,7 +397,7 @@
                 data: data4
             }]
         });
-    }
+    }*@
 
 
 

@@ -35,6 +35,7 @@ namespace ATP2.FMS.ViewModel
 
         public double Balance { get; set; }
         public List<PostAProject> PostAProject = new List<PostAProject>();
+        public List<int> check = new List<int>();
         public List<Skill> Skills = new List<Skill>();
         public string ratePerHour { get; set; }
 

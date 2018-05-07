@@ -22,10 +22,11 @@ namespace ATP2.FMS.Controllers
         private ISelectedWorkerService _selectedWorkerService;
         private IRatingWorkerService _ratingWorkerService;
         private IWorkerSkillService _workerSkillService;
-        
+        private IRatingOwnerService _ratingOwnerService;
 
 
-        public WorkerController(IPostAProjectService postservice, IskillService skillservice, IProjectSkillService proskillservice, IResponseToAJobService responseservice, IUserInfoService userservice, IWorkerService workerService, ISelectedWorkerService selectedWorkerService, IRatingWorkerService ratingWorkerService, IWorkerSkillService workerSkillService)
+
+        public WorkerController(IPostAProjectService postservice, IskillService skillservice, IProjectSkillService proskillservice, IResponseToAJobService responseservice, IUserInfoService userservice, IWorkerService workerService, ISelectedWorkerService selectedWorkerService, IRatingWorkerService ratingWorkerService, IWorkerSkillService workerSkillService, IRatingOwnerService ratingOwnerService)
         {
             _postservice = postservice;
             _skillservice = skillservice;
@@ -36,6 +37,7 @@ namespace ATP2.FMS.Controllers
             _selectedWorkerService = selectedWorkerService;
             _ratingWorkerService = ratingWorkerService;
             _workerSkillService = workerSkillService;
+            _ratingOwnerService = ratingOwnerService;
         }
 
         public ActionResult ProjectList()
@@ -141,9 +143,13 @@ namespace ATP2.FMS.Controllers
             var workerInfo = _workerService.GetByID(HttpUtil.CurrentUser.UserId);
             var Selected = _selectedWorkerService.GetAll().Data.Where(d => d.UserId == HttpUtil.CurrentUser.UserId).ToList();
             var projects = new List<PostAProject>();
+            var chk = new List<int>();
             foreach (var v in Selected)
             {
                 projects.Add(_postservice.GetByID(v.PostId).Data);
+                var obj = _selectedWorkerService.GetAll().Data.FirstOrDefault(d => d.PostId == v.PostId && d.UserId == v.UserId);
+                chk.Add(obj.Approved);
+                
             }
             List<RatingWorker> ratings = _ratingWorkerService.GetAll().Data.Where(d => d.UserId == HttpUtil.CurrentUser.UserId).ToList();
             var profileVM = new ProfileWorker();
@@ -154,8 +160,8 @@ namespace ATP2.FMS.Controllers
             {
                 skillsWorker.Add(_skillservice.GetAll().Data.FirstOrDefault(d=>d.SkillId == v.SkillId));
             }
-         
-            
+
+            profileVM.check = chk;
             profileVM.Skills = skillsWorker;
 
             return View(profileVM);
@@ -265,6 +271,50 @@ namespace ATP2.FMS.Controllers
                 return View(profileVM);
 
             }
+            
+
+        }
+        public ActionResult Propic(HttpPostedFileBase file)
+        {
+            if (file != null)
+            {
+                string pic = System.IO.Path.GetFileName(file.FileName);
+                if (pic.Contains(".jpg") || pic.Contains(".JPG") || pic.Contains(".png") || pic.Contains(".PNG"))
+                {
+                    string path = System.IO.Path.Combine(
+                        Server.MapPath("~/DP"), pic);
+                    // file is uploaded
+                    file.SaveAs(path);
+                    var user = _userservice.GetByID(HttpUtil.CurrentUser.UserId);
+                    user.Data.ProPic = pic;
+                    _userservice.Save(user.Data);
+                }
+            }
+            // after successfully uploading redirect the user
+            return RedirectToAction("Profile", "Worker");
+        }
+
+        public ActionResult OwnerRating(int id)
+        {
+            var VM = new RatingOwnerModel();
+            VM.PostId = id;
+            VM.OwnerId = _postservice.GetByID(id).Data.WUserId;
+            return View(VM);
+        }
+        [HttpPost]
+        public ActionResult OwnerRating(RatingOwnerModel model)
+        {
+            var ratingOwner = new RatingOwner();
+            ratingOwner.Behaviour = model.Behaviour;
+            ratingOwner.CommunicationSkill = model.CommunicationSkill;
+            ratingOwner.OnWord = model.Onword;
+            ratingOwner.Reliability = model.Reliability;
+            _ratingOwnerService.Save(ratingOwner);
+            var selWorker = _selectedWorkerService.GetAll().Data.FirstOrDefault(d=>d.PostId==model.PostId && d.UserId==HttpUtil.CurrentUser.UserId);
+            _selectedWorkerService.UpdateApprove(selWorker, 3);
+            return RedirectToAction("Profile", "Worker");
+
+
 
         }
 

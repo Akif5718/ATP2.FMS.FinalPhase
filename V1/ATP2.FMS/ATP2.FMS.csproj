@@ -184,6 +184,7 @@
     <Compile Include="ViewModel\Profile.cs" />
     <Compile Include="ViewModel\ProfileWorker.cs" />
     <Compile Include="ViewModel\ProjectListModel.cs" />
+    <Compile Include="ViewModel\RatingOwnerModel.cs" />
     <Compile Include="ViewModel\RequestedMemberModel.cs" />
     <Compile Include="ViewModel\WorkerListModel.cs" />
     <Compile Include="ViewModel\WorkerProgress.cs" />
@@ -256,9 +257,12 @@
     <Content Include="Views\Worker\OtherViewPro.cshtml" />
     <Content Include="Views\Worker\OtherViewPro2.cshtml" />
     <Content Include="Views\Owner\OtherViewPro.cshtml" />
+    <Content Include="Views\Owner\DepositeForm.cshtml" />
+    <Content Include="Views\Worker\OwnerRating.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="DP\" />
     <Folder Include="Files\" />
     <Folder Include="Models\" />
     <Folder Include="Views\Delete\" />

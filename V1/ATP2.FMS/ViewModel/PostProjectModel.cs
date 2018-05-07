@@ -41,6 +41,7 @@ namespace ATP2.FMS.ViewModel
 
         public int PostId { get; set; }
         public int Flag { get; set; }
+        public string Selectskills { get; set; }
 
         [Required]
         public List<string> SectionName { get; set; }
@@ -62,6 +63,39 @@ namespace ATP2.FMS.ViewModel
             return postAProject;
         }
 
-       
+
+        public PostProjectModel creation(PostAProject result, List<ProjectSkills> skills , List<Skill> Allskills)
+        {
+            var postModel = new PostProjectModel();
+            postModel.PostId = result.PostId;
+            postModel.Description = result.Description;
+            postModel.EndTime = result.EndTime;
+            postModel.StartTime = result.StartTime;
+            postModel.Members = result.Members;
+            postModel.Price = result.Price;
+            postModel.ProjectName = result.ProjectName;
+            var skillStr = skills.Select(m => m.SkillName).ToList();
+            string str = "";
+            int c = 0;
+            foreach (var v in skillStr)
+            {
+                if(c!=0)
+                    str = str + "," + v;
+                else
+                {
+                    str = v;
+                    c++;
+                }
+            }
+            List<string> Skills = new List<string>();
+            foreach (var v in Allskills)
+            {
+                if(!str.Contains(v.SkillName))
+                    Skills.Add(v.SkillName);
+            }
+            postModel.SkillName = Skills;
+            postModel.Selectskills = str;
+            return postModel;
+        }
     }
 }
