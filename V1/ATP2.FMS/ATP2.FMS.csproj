@@ -193,6 +193,12 @@
     <Content Include="Content\bootstrap-cyborg.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\images\AIUB.jpg" />
+    <Content Include="Content\images\blur.jpg" />
+    <Content Include="Content\images\image1.PGN.PNG" />
+    <Content Include="Content\images\image2.PGN.PNG" />
+    <Content Include="Content\images\image3.PGN.PNG" />
+    <Content Include="Content\images\S.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
