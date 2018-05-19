@@ -363,11 +363,13 @@ namespace ATP2.FMS.Controllers
             return RedirectToAction("Payments", "Owner");
 
         }
+
         public ActionResult DepositeForm()
         {
             var user = _userservice.GetByID(HttpUtil.CurrentUser.UserId);
             return View(user.Data);
         }
+
         [HttpPost]
         public ActionResult DepositeForm(string balance)
         {

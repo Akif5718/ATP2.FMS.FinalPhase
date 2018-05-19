@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using ATP2.FMS.Web.Framework;
 using FMS.Core.Entities;
 using FMS.Core.Service.Interfaces;
 using Newtonsoft.Json;
@@ -44,8 +45,8 @@ namespace ATP2.FMS.Controllers
 
             var jasonUserInfo = JsonConvert.SerializeObject(obj.Data);
             FormsAuthentication.SetAuthCookie(jasonUserInfo, false);
-           // CurrentUser.User = obj.Data;
-
+          
+            var m = HttpUtil.CurrentUser.UserId;
             if (obj.Data.UserType.Equals("Owner"))
                 return RedirectToAction("Profile","Owner");
 
